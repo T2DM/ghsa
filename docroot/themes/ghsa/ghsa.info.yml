@@ -1,0 +1,32 @@
+name: GHSA
+type: theme
+description: 'A custom theme for GHSA'
+package: Core
+# version: VERSION
+core: 8.x
+base theme: false
+screenshot: screenshot.jpg
+
+regions:
+  header_row_1_logo: Header Logo
+  header_row_1_menu_primary: Header Primary Menu
+  header_row_1_menu_secondary: Header Secondary Menu
+  header_row_1_search: Header Search
+  content: Main Content
+  footer_row_1_title: Footer Row 1, Title
+  footer_row_1_column_1: Footer Row 1, Column 1
+  footer_row_1_column_2: Footer Row 1, Column 2
+  footer_row_1_column_3: Footer Row 1, Column 3
+  footer_row_2_menu: Footer Row 2, Menu
+  footer_row_2_copyright: Footer Row 2, Copyright
+  hidden: Hidden
+  
+libraries:
+  - ghsa/global-css
+  - ghsa/global-js
+
+stylesheets-remove:
+  - core/assets/vendor/normalize-css/normalize.css
+  - core/modules/system/css/system.module.css
+  - core/modules/system/css/system.theme.css
+  - core/modules/views/css/views.module.css

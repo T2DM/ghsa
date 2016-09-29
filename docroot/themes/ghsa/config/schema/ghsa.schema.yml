@@ -1,0 +1,5 @@
+# Schema for the configuration files of the GHSA theme.
+
+ghsa.settings:
+  type: theme_settings
+  label: 'GHSA settings'

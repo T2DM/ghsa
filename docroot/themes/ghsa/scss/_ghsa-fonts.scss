@@ -1,0 +1,171 @@
+/* font styles only */
+@font-face { font-family: 'GHSA-Helvetica'; src: local('Helvetica'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'GHSA-Helvetica-Bold'; src: local('Helvetica'); font-weight: 700; font-style: normal; }
+
+@font-face { font-family: 'GHSA-Arial'; src: local('Arial'); font-weight: 400; font-style: normal; }
+@font-face { font-family: 'GHSA-Arial-Bold'; src: local('Arial'); font-weight: 700; font-style: normal; }
+
+
+/* stacks */
+$font-family-nunito: Nunito, 'GHSA-Helvetica', 'GHSA-Arial', Arial, sans-serif;
+
+
+/* font setup */
+$font-size-default: 16px;
+	
+.font_nunito_light {
+	font-family: $font-family-nunito;
+	font-weight: 300;
+	}
+.font_nunito_regular {
+	font-family: $font-family-nunito;
+	font-weight: 400;
+	}
+.font_nunito_bold {
+	font-family: $font-family-nunito;
+	font-weight: 700;
+	}
+	
+	
+.font_italic,
+main i,
+main em	{
+	font-style: italic;
+	}
+.font_bold,
+main b,
+main strong	{
+	@extend .font_nunito_bold;
+	}
+	
+main .font_bold .font_italic,
+main .font_bold i,
+main .font_bold em,
+main .font_italic .font_bold,
+main .font_italic b,
+main .font_italic strong,
+main .font_bold.font_italic,
+main b.font_italic,
+main strong.font_italic,
+main i.font_bold,
+main em.font_bold	{
+	@extend .font_italic;
+	}
+
+
+
+/* default site font */
+body	{
+	@extend .font_nunito_light;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: $font-size-default;
+	line-height: 1.45;
+	}
+	
+
+
+
+/* default headings */
+h1, h2, h3, h4, h5, h6	{
+	@extend .font_nunito_regular;
+	}
+h3, h4, h5, h6	{
+	line-height: 1.3;
+	color: #000;
+	}
+h1	{
+	font-size: 38px;
+	line-height: 1.2632;
+	color: #000;
+	}
+h2	{
+	font-size: 34px;
+	line-height: 1.2;
+	color: #000;
+	}
+h3	{
+	font-size: 22px;
+	}
+h4	{
+	font-size: 20px;
+	}
+h5	{
+	font-size: 18px;
+	}
+h6	{
+	font-size: 16px;
+	}
+		
+
+
+/* header */
+
+.header_logo	{
+	font-size: 14px;
+	}
+.header_logo_logotype	{
+	}
+.header_logo_logotype .header_logo_logotype_organization	{
+	font-size: 15px;
+	@extend .font_nunito_regular;
+	}
+.header_logo_logotype .header_logo_logotype_tagline	{
+	font-size: 14px;
+	}
+	
+.header_primary_menu	{
+	@extend .font_nunito_regular;
+	line-height: 1.2;
+	}
+.header_primary_menu > ul	{
+	font-size: 0;
+	}
+.header_primary_menu > ul > li	{
+	font-size: $font-size-default;
+	}
+	
+.header_secondary_menu	{
+	@extend .font_nunito_regular;
+	line-height: 1.2;
+	}
+.header_secondary_menu ul	{
+	font-size: 0;
+	}
+.header_secondary_menu li	{
+	font-size: $font-size-default;
+	}
+	
+
+.mobile_menu .header_primary_menu	{
+	}
+		
+
+
+/* main */
+
+.main_section_hero_left .hero_content,
+.main_section_hero_left .hero_content_text	{
+	font-size: 24px;
+	@extend .font_nunito_regular;
+	line-height: 1.2;
+	}
+.responsive_640 .main_section_hero_left .hero_content_text	{
+	@extend .font_nunito_light;
+	}
+.hero_content .button_1 a	{
+	font-size: 18px;
+	}
+		
+
+
+/* footer */
+
+.footer_primary_menu	{
+	font-size: 16px;
+	}
+.footer_primary_menu ul ul	{
+	font-size: 14px;
+	}
+
