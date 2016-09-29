@@ -105,7 +105,7 @@ $(document).ready(function(){
 	});
 	
 	// add wrapper around all buttons
-	$('a.button').each(function() {
+	$('a.button,main input.button').each(function() {
 		
 		// add outer and inner wrappers
 		$(this).wrap('<span class="button-container">');
