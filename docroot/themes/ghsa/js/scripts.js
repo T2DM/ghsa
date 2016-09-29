@@ -66,7 +66,7 @@ Available Browser Codes [browser]:
 
 
 
-$(document).ready(function(){
+(function ($, Drupal) {
 	
 	$(":text").addClass("text");
 	$(":image").addClass("image");
@@ -355,7 +355,7 @@ $(document).ready(function(){
 	});
 	
 
-});
+})(jQuery, Drupal);
 
 /*  create html elements so IE will display HTML5 properly  */
 document.createElement('header');

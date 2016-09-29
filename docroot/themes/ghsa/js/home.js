@@ -1,4 +1,4 @@
-$(document).ready(function(){
+(function ($, Drupal) {
 	
 	// twitter height is .main_columns height
 	function twitter_height()	{
@@ -49,4 +49,4 @@ $(document).ready(function(){
 	});
 	
 
-});
+})(jQuery, Drupal);

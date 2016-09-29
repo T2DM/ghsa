@@ -1,1 +1,3 @@
-$(document).foundation();
+(function ($, Drupal) {
+	$(document).foundation();
+})(jQuery, Drupal);
