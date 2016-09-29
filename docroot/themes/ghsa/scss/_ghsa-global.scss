@@ -725,11 +725,11 @@ header a:hover	{
 	min-width: 450px;
 	}
 .header_primary_menu > ul,
-.header_primary_menu .menu-wrapper > ul	{
+.header_primary_menu_container .header_primary_menu .menu-wrapper > ul	{
 	text-align: center;
 	}
 .header_primary_menu > ul > li,
-.header_primary_menu .menu-wrapper > ul > li	{
+.header_primary_menu_container .header_primary_menu .menu-wrapper > ul > li	{
 	text-align: center;
 	display: inline-block;
 	vertical-align: top;
@@ -741,8 +741,8 @@ header a:hover	{
 	}
 header .header_primary_menu > ul > li.active-trail > a,
 header .header_primary_menu > ul > li:hover a,
-header .header_primary_menu .menu-wrapper > ul > li.active-trail > a,
-header .header_primary_menu .menu-wrapper > ul > li:hover a	{
+header .header_primary_menu_container .header_primary_menu .menu-wrapper > ul > li.active-trail > a,
+header .header_primary_menu_container .header_primary_menu .menu-wrapper > ul > li:hover a	{
 	color: $color-blue;
 	}
 	
@@ -821,15 +821,19 @@ body.mobile_menu_is_open .mobile_menu	{
 	position: relative;
 	}
 .mobile_menu .header_primary_menu > ul,
-.mobile_menu .header_primary_menu > ul > li	{
+.mobile_menu .header_primary_menu > ul > li,
+.mobile_menu .header_primary_menu .menu-wrapper > ul,
+.mobile_menu .header_primary_menu .menu-wrapper > ul > li	{
 	text-align: left;
 	}
 	
-.mobile_menu .header_primary_menu > ul > li > a	{
+.mobile_menu .header_primary_menu > ul > li > a,
+.mobile_menu .header_primary_menu .menu-wrapper > ul > li > a	{
 	font-size: 28px;
 	text-transform: uppercase;
 	}
-.mobile_menu .header_primary_menu > ul > li	{
+.mobile_menu .header_primary_menu > ul > li,
+.mobile_menu .header_primary_menu .menu-wrapper > ul > li	{
 	font-size: inherit;
 	}
 .mobile_menu .header_primary_menu ul ul	{
@@ -1722,10 +1726,12 @@ footer .contact_email	{
 	.footer_primary_menu	{
 		display: block;
 		}
-	.footer_primary_menu > ul	{
+	.footer_primary_menu > ul,
+	.footer_primary_menu .menu-wrapper > ul	{
 		display: block;
 		}
-	.footer_primary_menu > ul > li	{
+	.footer_primary_menu > ul > li,
+	.footer_primary_menu .menu-wrapper > ul > li	{
 		display: inline-block;
 		width: 33%;
 		vertical-align: top;
@@ -1865,7 +1871,8 @@ footer .contact_email	{
 		width: 38%;
 		}
 		
-	.mobile_menu .header_primary_menu > ul > li > a	{
+	.mobile_menu .header_primary_menu > ul > li > a,
+	.mobile_menu .header_primary_menu .menu-wrapper > ul > li > a	{
 		font-size: 22px;
 		}
 	.mobile_menu .header_primary_menu ul ul	{
