@@ -724,10 +724,12 @@ header a:hover	{
 	padding-left: 6px;
 	min-width: 450px;
 	}
-.header_primary_menu > ul	{
+.header_primary_menu > ul,
+.header_primary_menu .menu-wrapper > ul	{
 	text-align: center;
 	}
-.header_primary_menu > ul > li	{
+.header_primary_menu > ul > li,
+.header_primary_menu .menu-wrapper > ul > li	{
 	text-align: center;
 	display: inline-block;
 	vertical-align: top;
@@ -738,7 +740,9 @@ header a:hover	{
 	padding-right: 12px;
 	}
 header .header_primary_menu > ul > li.active-trail > a,
-header .header_primary_menu > ul > li:hover a	{
+header .header_primary_menu > ul > li:hover a,
+header .header_primary_menu .menu-wrapper > ul > li.active-trail > a,
+header .header_primary_menu .menu-wrapper > ul > li:hover a	{
 	color: $color-blue;
 	}
 	
@@ -1336,15 +1340,15 @@ footer a.active:hover,
 .footer_contact_information .inner_column.region_contact_block_title	{
 	float: none;
 	}	
-footer .block.contact_address	{
+footer .contact_address	{
 	background: url(../images/icon-map-marker-1.png) 0 45% no-repeat;
 	padding-left: 40px;
 	}
-footer .block.contact_phone	{
+footer .contact_phone	{
 	background: url(../images/icon-phone-1.png) 0 0 no-repeat;
 	padding-left: 42px;
 	}
-footer .block.contact_email	{
+footer .contact_email	{
 	background: url(../images/icon-email-1.png) 0 4px no-repeat;
 	padding-left: 44px;
 	}
@@ -1362,11 +1366,13 @@ footer .block.contact_email	{
 	table-layout: fixed;
 	border-bottom: 1px solid #41454a;
 	}
-.footer_primary_menu > ul > li	{
+.footer_primary_menu > ul > li,
+.footer_primary_menu .menu-wrapper > ul > li	{
 	display: table-cell;
 	width: 1%;
 	}
-.footer_primary_menu > ul > li > a	{
+.footer_primary_menu > ul > li > a,
+.footer_primary_menu .menu-wrapper > ul > li > a	{
 	color: #96989a;
 	}
 	
