@@ -28,8 +28,8 @@ class YamlFormUiElementAddForm extends YamlFormUiElementFormBase {
     $this->element['#type'] = $type;
     $this->action = $this->t('created');
     $form = parent::buildForm($form, $form_state, $yamlform, NULL, $parent_key);
-    if (isset($form['properties']['general']['title'])) {
-      $form['properties']['general']['title']['#attributes']['autofocus'] = 'autofocus';
+    if (isset($form['properties']['element']['title'])) {
+      $form['properties']['element']['title']['#attributes']['autofocus'] = 'autofocus';
     }
     return $form;
   }

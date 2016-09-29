@@ -13,11 +13,11 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "color",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Color.php/class/Color",
  *   label = @Translation("Color"),
- *   category = @Translation("Advanced")
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class Color extends YamlFormElementBase {
-  
+
   /**
    * {@inheritdoc}
    */

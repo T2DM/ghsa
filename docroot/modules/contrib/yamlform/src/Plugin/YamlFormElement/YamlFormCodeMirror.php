@@ -12,8 +12,8 @@ use Drupal\yamlform\YamlFormInterface;
  * @YamlFormElement(
  *   id = "yamlform_codemirror",
  *   label = @Translation("CodeMirror"),
- *   category = @Translation("Advanced"),
- *   multiline = TRUE
+ *   category = @Translation("Advanced elements"),
+ *   multiline = TRUE,
  * )
  */
 class YamlFormCodeMirror extends YamlFormElementBase {
@@ -22,24 +22,8 @@ class YamlFormCodeMirror extends YamlFormElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return [
-      'title' => '',
-      'description' => '',
-
-      'required' => FALSE,
-      'required_error' => '',
-
-      'default_value' => '',
-
-      'title_display' => '',
-      'description_display' => '',
-
-      'private' => FALSE,
-
-      'format' => $this->getDefaultFormat(),
+    return parent::getDefaultProperties() + [
       'mode' => 'text',
-
-      'flex' => 1,
     ];
   }
 

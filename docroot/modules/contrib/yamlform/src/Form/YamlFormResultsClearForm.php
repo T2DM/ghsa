@@ -33,8 +33,8 @@ class YamlFormResultsClearForm extends YamlFormSubmissionsDeleteFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    $route_name = $this->yamlFormRequest->getRouteName($this->yamlform, $this->sourceEntity, 'yamlform.results_submissions');
-    $route_parameters = $this->yamlFormRequest->getRouteParameters($this->yamlform, $this->sourceEntity);
+    $route_name = $this->requestHandler->getRouteName($this->yamlform, $this->sourceEntity, 'yamlform.results_submissions');
+    $route_parameters = $this->requestHandler->getRouteParameters($this->yamlform, $this->sourceEntity);
     return new Url($route_name, $route_parameters);
   }
 

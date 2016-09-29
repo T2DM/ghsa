@@ -16,11 +16,11 @@ class YamlFormSubmissionNotesForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\yamlform\YamlFormRequestInterface $yamlform_request */
-    $yamlform_request = \Drupal::service('yamlform.request');
+    /** @var \Drupal\yamlform\YamlFormRequestInterface $request_handler */
+    $request_handler = \Drupal::service('yamlform.request');
     /** @var \Drupal\yamlform\YamlFormSubmissionInterface $yamlform_submission */
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
-    list($yamlform_submission, $source_entity) = $yamlform_request->getYamlFormSubmissionEntities();
+    list($yamlform_submission, $source_entity) = $request_handler->getYamlFormSubmissionEntities();
 
     $form['navigation'] = [
       '#theme' => 'yamlform_submission_navigation',

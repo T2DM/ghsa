@@ -52,6 +52,10 @@ function yamlform_token_info() {
     'name' => t('Source URL'),
     'description' => t('The URL the user submitted the YAML form submission.'),
   ];
+  $yamlform_submission['update-url'] = [
+    'name' => t('Update URL'),
+    'description' => t("The URL that can used to update the YAML form submission. The YAML form must be configurated to allow users to update a submission using a secure token."),
+  ];
   $yamlform_submission['url'] = [
     'name' => t('URL'),
     'description' => t("The URL of the YAML form submission. Replace the '?' with the link template. Defaults to 'canonical' which displays the submission's data."),
@@ -231,6 +235,10 @@ function yamlform_tokens($type, $tokens, array $data, array $options, Bubbleable
 
           case 'source-url':
             $replacements[$original] = $yamlform_submission->getSourceUrl()->toString();
+            break;
+
+          case 'update-url':
+            $replacements[$original] = $yamlform_submission->getTokenUrl()->toString();
             break;
 
           case 'source-entity':

@@ -15,7 +15,7 @@ use Drupal\yamlform\YamlFormInterface;
  * @YamlFormElement(
  *   id = "yamlform_likert",
  *   label = @Translation("Likert"),
- *   category = @Translation("Options"),
+ *   category = @Translation("Options elements"),
  *   multiline = TRUE,
  *   multiple = TRUE,
  *   composite = TRUE,
@@ -43,6 +43,7 @@ class YamlFormLikert extends YamlFormElementBase {
       'format' => $this->getDefaultFormat(),
 
       'flex' => 1,
+      'states' => [],
 
       'questions' => [],
       'questions_randomize' => FALSE,
@@ -182,7 +183,6 @@ class YamlFormLikert extends YamlFormElementBase {
    */
   public function getExportDefaultOptions() {
     return [
-      'likert_questions_format' => 'label',
       'likert_answers_format' => 'label',
     ];
   }
@@ -196,15 +196,6 @@ class YamlFormLikert extends YamlFormElementBase {
       '#title' => $this->t('Likert questions and answers'),
       '#open' => TRUE,
       '#weight' => -10,
-    ];
-    $form['likert']['likert_questions_format'] = [
-      '#type' => 'radios',
-      '#title' => $this->t('Questions format'),
-      '#options' => [
-        'label' => $this->t('Question labels, the human-readable value (label)'),
-        'key' => $this->t('Question keys, the raw value stored in the database (key)'),
-      ],
-      '#default_value' => $default_values['likert_questions_format'],
     ];
     $form['likert']['likert_answers_format'] = [
       '#type' => 'radios',
@@ -223,9 +214,9 @@ class YamlFormLikert extends YamlFormElementBase {
   public function buildExportHeader(array $element, array $options) {
     $header = [];
     foreach ($element['#questions'] as $key => $label) {
-      $header[] = ($options['likert_questions_format'] == 'key') ? $key : $label;
+      $header[] = ($options['header_format'] == 'key') ? $key : $label;
     }
-    return $header;
+    return $this->prefixExportHeader($header, $element, $options);
   }
 
   /**
@@ -315,6 +306,17 @@ class YamlFormLikert extends YamlFormElementBase {
       $value[$key] = $keys[array_rand($keys)];
     }
     return [$value];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getElementSelectorInputsOptions(array $element) {
+    $selectors = $element['#questions'];
+    foreach ($selectors as $value => &$text) {
+      $text .= ' [' . $this->t('Radios') . ']';
+    }
+    return $selectors;
   }
 
   /**

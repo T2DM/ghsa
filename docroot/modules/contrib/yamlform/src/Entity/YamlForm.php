@@ -444,6 +444,7 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
       'form_prepopulate_source_entity' => FALSE,
       'form_novalidate' => FALSE,
       'form_autofocus' => FALSE,
+      'form_details_toggle' => FALSE,
       'wizard_progress_bar' => TRUE,
       'wizard_progress_pages' => FALSE,
       'wizard_progress_percentage' => FALSE,
@@ -471,6 +472,7 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
       'entity_limit_total' => NULL,
       'entity_limit_user' => NULL,
       'results_disabled' => '',
+      'token_update' => FALSE,
     ];
   }
 
@@ -655,6 +657,22 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
   /**
    * {@inheritdoc}
    */
+  public function getElementsSelectorOptions() {
+    /** @var \Drupal\yamlform\YamlFormElementManagerInterface $element_manager */
+    $element_manager = \Drupal::service('plugin.manager.yamlform.element');
+
+    $selectors = [];
+    $elements = $this->getElementsInitializedAndFlattened();
+    foreach ($elements as $element) {
+      $element_handler = $element_manager->getElementInstance($element);
+      $selectors += $element_handler->getElementSelectorOptions($element);
+    }
+    return $selectors;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function setElements(array $elements) {
     $this->elements = Yaml::encode($elements);
     $this->resetElements();
@@ -715,11 +733,11 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
    *   The YAML form elements.
    */
   protected function initElementsRecursive(array &$elements, $parent = '', $depth = 0) {
-    /** @var \Drupal\yamlform\YamlFormElementManagerInterface $yamlform_element_manager */
-    $yamlform_element_manager = \Drupal::service('plugin.manager.yamlform.element');
+    /** @var \Drupal\yamlform\YamlFormElementManagerInterface $element_manager */
+    $element_manager = \Drupal::service('plugin.manager.yamlform.element');
 
-    /** @var \Drupal\Core\Render\ElementInfoManagerInterface $element_manager */
-    $element_manager = \Drupal::service('plugin.manager.element_info');
+    /** @var \Drupal\Core\Render\ElementInfoManagerInterface $element_info */
+    $element_info = \Drupal::service('plugin.manager.element_info');
 
     // Remove ignored properties.
     $elements = YamlFormElementHelper::removeIgnoredProperties($elements);
@@ -773,12 +791,12 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
 
         // Set yamlform_* prefix to #type that are using alias without yamlform_
         // namespace.
-        if (!$element_manager->hasDefinition($element['#type']) && $element_manager->hasDefinition('yamlform_' . $element['#type'])) {
+        if (!$element_info->hasDefinition($element['#type']) && $element_info->hasDefinition('yamlform_' . $element['#type'])) {
           $element['#type'] = 'yamlform_' . $element['#type'];
         }
 
         // Load the element's handler.
-        $element_handler = $yamlform_element_manager->createInstance($element['#type']);
+        $element_handler = $element_manager->createInstance($element['#type']);
 
         // Initialize the element.
         $element_handler->initialize($element);
@@ -789,7 +807,7 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
 
       // Check if element has value (aka can be exported) and add it to
       // flattened has value array.
-      if ($element_handler && $element_handler->hasValue($element)) {
+      if ($element_handler && $element_handler->isInput($element)) {
         $this->elementsFlattenedAndHasValue[$key] =& $this->elementsInitializedAndFlattened[$key];
       }
 
@@ -1376,6 +1394,15 @@ class YamlForm extends ConfigEntityBundleBase implements YamlFormInterface {
     // uninstalled and any YAML form implementing the YamlFormHandler
     // is deleted without an error being thrown.
     return $this;
+  }
+
+  /**
+   * Define empty array iterator.
+   *
+   * See: Issue #2759267: Undefined method YamlForm::getIterator().
+   */
+  public function getIterator() {
+    return new \ArrayIterator([]);
   }
 
 }

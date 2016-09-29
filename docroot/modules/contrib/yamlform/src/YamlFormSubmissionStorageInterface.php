@@ -63,21 +63,6 @@ interface YamlFormSubmissionStorageInterface extends ContentEntityStorageInterfa
   public function loadDraft(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
-   * Check if user has previous YAML form submission.
-   *
-   * @param \Drupal\yamlform\YamlFormInterface $yamlform
-   *   A YAML form.
-   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
-   *   A YAML form submission source entity.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   A user account.
-   *
-   * @return bool
-   *   TRUE if user has previous YAML form submission.
-   */
-  public function hasPrevious(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
-
-  /**
    * Get the total number of submissions.
    *
    * @param \Drupal\yamlform\YamlFormInterface|null $yamlform
@@ -108,6 +93,36 @@ interface YamlFormSubmissionStorageInterface extends ContentEntityStorageInterfa
    *   Total number of submissions.
    */
   public function getMaxSubmissionId(YamlFormInterface $yamlform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
+
+  /**
+   * Get a YAML form's first submission.
+   *
+   * @param \Drupal\yamlform\YamlFormInterface $yamlform
+   *   A YAML form.
+   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
+   *   (optional) A YAML form submission source entity.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user account.
+   *
+   * @return \Drupal\yamlform\YamlFormSubmissionInterface|null
+   *   The YAML form's first submission.
+   */
+  public function getFirstSubmission(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
+
+  /**
+   * Get a YAML form's last submission.
+   *
+   * @param \Drupal\yamlform\YamlFormInterface $yamlform
+   *   A YAML form.
+   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
+   *   (optional) A YAML form submission source entity.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The current user account.
+   *
+   * @return \Drupal\yamlform\YamlFormSubmissionInterface|null
+   *   The YAML form's last submission.
+   */
+  public function getLastSubmission(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
    * Get a YAML form submission's previous sibling.

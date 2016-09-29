@@ -5,6 +5,7 @@ settings:
   default_form_exception_message: 'Unable to display this form. Please contact the site administrator.'
   default_form_confidential_message: 'This form is confidential. You must <a href="[site:login-url]/logout?destination=[current-page:url:relative]">Log out</a> to submit it.'
   default_form_novalidate: false
+  default_form_details_toggle: true
   default_wizard_prev_button_label: '< Previous Page'
   default_wizard_next_button_label: 'Next Page >'
   default_preview_next_button_label: Preview
@@ -20,7 +21,10 @@ settings:
   default_limit_user_message: 'No more submissions are permitted.'
 export:
   delimiter: ','
-  header_keys: label
+  header_format: label
+  header_prefix: true
+  header_prefix_label_delimiter: ': '
+  header_prefix_key_delimiter: __
   entity_reference_format: link
   options_format: compact
   options_item_format: label

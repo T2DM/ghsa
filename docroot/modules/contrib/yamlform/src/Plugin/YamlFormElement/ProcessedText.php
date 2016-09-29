@@ -12,7 +12,8 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  * @YamlFormElement(
  *   id = "processed_text",
  *   label = @Translation("Processed text"),
- *   category = @Translation("Markup")
+ *   category = @Translation("Markup elements"),
+ *   states_wrapper = TRUE,
  * )
  */
 class ProcessedText extends YamlFormMarkup {
@@ -33,6 +34,8 @@ class ProcessedText extends YamlFormMarkup {
    * {@inheritdoc}
    */
   public function prepare(array &$element, YamlFormSubmissionInterface $yamlform_submission) {
+    parent::prepare($element, $yamlform_submission);
+
     // Hide markup element is it should be only displayed on 'view'.
     if (isset($element['#display_on']) && $element['#display_on'] == 'view') {
       $element['#access'] = FALSE;

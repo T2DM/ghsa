@@ -207,6 +207,41 @@ class YamlFormSubmissionFormSettingsTest extends YamlFormTestBase {
     $element = $this->cssSelect('form#yamlform-submission-test-form-novalidate-form[novalidate="novalidate"]');
     $this->assertTrue(!empty($element), t('Default client-side validation setting added form novalidate attribute.'));
 
+    /* Test form details toggle (form_details_toggle) */
+
+    $yamlform_form_details_toggle = YamlForm::load('test_form_details_toggle');
+
+    // Check form has .yamlform-details-toggle class.
+    $this->drupalGet('yamlform/test_form_details_toggle');
+    $this->assertCssSelect('form.yamlform-details-toggle', t('Form has the .yamlform-details-toggle class.'));
+
+    // Check details toggle checkbox is disabled.
+    $this->drupalGet('admin/structure/yamlform/manage/test_form_details_toggle/settings');
+    $this->assertRaw('<input data-drupal-selector="edit-form-details-toggle-disabled" aria-describedby="edit-form-details-toggle-disabled--description" disabled="disabled" type="checkbox" id="edit-form-details-toggle-disabled" name="form_details_toggle_disabled" value="1" checked="checked" class="form-checkbox" />');
+    $this->assertRaw('Expand/collapse all (details) is automatically added to all forms.');
+
+    // Disable default (global) details toggle on all forms.
+    \Drupal::configFactory()->getEditable('yamlform.settings')
+      ->set('settings.default_form_details_toggle', FALSE)
+      ->save();
+
+    // Check .yamlform-details-toggle class still added to form.
+    $this->drupalGet('yamlform/test_form_details_toggle');
+    $this->assertCssSelect('form.yamlform-details-toggle', t('Form has the .yamlform-details-toggle class.'));
+
+    // Check details toggle checkbox is enabled.
+    $this->drupalGet('admin/structure/yamlform/manage/test_form_details_toggle/settings');
+    $this->assertRaw('<input data-drupal-selector="edit-form-details-toggle" aria-describedby="edit-form-details-toggle--description" type="checkbox" id="edit-form-details-toggle" name="form_details_toggle" value checked="checked" class="form-checkbox" />');
+    $this->assertRaw('If checked, an expand/collapse all (details) link will be added to this forms when there are two or more details elements.');
+
+    // Disable YAML specific form details toggle setting.
+    $yamlform_form_details_toggle->setSetting('form_details_toggle', FALSE);
+    $yamlform_form_details_toggle->save();
+
+    // Check form does not hav .yamlform-details-toggle class.
+    $this->drupalGet('yamlform/test_form_details_toggle');
+    $this->assertNoCssSelect('form.yamlform-details-toggle', t('Form does not have the .yamlform-details-toggle class.'));
+
     /* Test autofocus (form_autofocus) */
 
     // Check form has autofocus class.
@@ -292,7 +327,31 @@ class YamlFormSubmissionFormSettingsTest extends YamlFormTestBase {
     $this->assertNoFieldByName('op', 'Submit');
     $this->assertRaw(t('Unable to display this form. Please contact the site administrator.'));
 
-    /* Test limits */
+    /* Test token update (form_token_update) */
+
+    // Post test submission.
+    $this->drupalLogin($this->adminFormUser);
+    $yamlform_token_update = YamlForm::load('test_token_update');
+    $sid = $this->postSubmissionTest($yamlform_token_update);
+    $yamlform_submission = YamlFormSubmission::load($sid);
+
+    // Check token update access allowed.
+    $this->drupalLogin($this->normalUser);
+    $this->drupalGet($yamlform_submission->getTokenUrl());
+    $this->assertResponse(200);
+    $this->assertRaw('Submission information');
+    $this->assertFieldByName('textfield', $yamlform_submission->getData('textfield'));
+
+    // Check token update access denied.
+    $yamlform_token_update->setSetting('token_update', FALSE)->save();
+    $this->drupalLogin($this->normalUser);
+    $this->drupalGet($yamlform_submission->getTokenUrl());
+    $this->assertResponse(200);
+    $this->assertNoRaw('Submission information');
+    $this->assertNoFieldByName('textfield', $yamlform_submission->getData('textfield'));
+
+    /* Test limits (test_submission_limit) */
+
     $yamlform_limit = YamlForm::load('test_submission_limit');
 
     // Check form available.

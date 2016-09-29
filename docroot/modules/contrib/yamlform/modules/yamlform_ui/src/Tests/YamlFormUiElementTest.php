@@ -147,37 +147,6 @@ class YamlFormUiElementTest extends YamlFormTestBase {
   }
 
   /**
-   * Tests element properties.
-   */
-  public function testElementProperties() {
-    $this->drupalLogin($this->adminFormUser);
-
-    // Loops through all the elements, edits them via the UI, and check that
-    // the element's render array has not be altered.
-    // This verifies that the edit element form it not expectedly altering
-    // an elements render array.
-    $yamlform_ids = ['example_elements', 'example_layout_basic', 'test_element_extras'];
-    foreach ($yamlform_ids as $yamlform_id) {
-      /** @var \Drupal\yamlform\YamlFormInterface $yamlform_elements */
-      $yamlform_elements = YamlForm::load($yamlform_id);
-      $original_elements = $yamlform_elements->getElementsDecodedAndFlattened();
-      foreach ($original_elements as $key => $original_element) {
-        $this->drupalPostForm('admin/structure/yamlform/manage/' . $yamlform_elements->id() . '/element/' . $key . '/edit', [], t('Save'));
-
-        // Must reset the YAML form entity cache so that the update elements can
-        // be loaded.
-        \Drupal::entityTypeManager()->getStorage('yamlform_submission')->resetCache();
-
-        /** @var \Drupal\yamlform\YamlFormInterface $yamlform_elements */
-        $yamlform_elements = YamlForm::load($yamlform_id);
-        $updated_element = $yamlform_elements->getElementsDecodedAndFlattened()[$key];
-
-        $this->assertEqual($original_element, $updated_element, "'$key'' properties is equal.");
-      }
-    }
-  }
-
-  /**
    * Tests permissions.
    */
   public function testPermissions() {

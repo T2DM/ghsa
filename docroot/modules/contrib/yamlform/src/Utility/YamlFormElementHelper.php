@@ -2,7 +2,9 @@
 
 namespace Drupal\yamlform\Utility;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\Xss;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Template\Attribute;
@@ -167,38 +169,28 @@ class YamlFormElementHelper {
   }
 
   /**
-   * Fix form element #states and #flex wrapper handling.
+   * Fix form element #states handling.
    *
    * @param array $element
    *   A form element that is missing the 'data-drupal-states' attribute.
-   * @param array $options
-   *   Options to be fixed, states and/or flexbox.
    */
-  public static function fixWrapper(array &$element, array $options = []) {
-    $options += [
-      'states' => TRUE,
-      'flexbox' => TRUE,
-    ];
+  public static function fixStatesWrapper(array &$element) {
+    if (empty($element['#states'])) {
+      return;
+    }
 
     $attributes = [];
-    if ($options['states'] && isset($element['#states'])) {
-      $attributes['class'][] = 'js-form-wrapper';
-      $attributes['data-drupal-states'] = Json::encode($element['#states']);
-    }
+    $attributes['class'][] = 'js-form-wrapper';
+    $attributes['data-drupal-states'] = Json::encode($element['#states']);
 
-    if ($options['states'] && !empty($element['#yamlform_parent_flexbox'])) {
-      $flex = (isset($element['#flex'])) ? $element['#flex'] : 1;
-      $attributes['class'][] = 'js-yamlform-flex';
-      $attributes['class'][] = 'yamlform-flex';
-      $attributes['class'][] = 'js-yamlform-flex--' . $flex;
-      $attributes['class'][] = 'yamlform-flex--' . $flex;
-    }
+    $element += ['#prefix' => '', '#suffix' => ''];
 
-    if ($attributes) {
-      $element += ['#prefix' => '', '#suffix' => ''];
-      $element['#prefix'] = '<div ' . new Attribute($attributes) . '>' . $element['#prefix'];
-      $element['#suffix'] = $element['#suffix'] . '</div>';
-    }
+    // ISSUE: JSON is being corrupted when the prefix is rendered.
+    // $element['#prefix'] = '<div ' . new Attribute($attributes) . '>' . $element['#prefix'];
+    // WORKAROUND: Safely set filtered #prefix to FormattableMarkup.
+    $allowed_tags = isset($element['#allowed_tags']) ? $element['#allowed_tags'] : Xss::getHtmlTagList();
+    $element['#prefix'] = new FormattableMarkup('<div' . new Attribute($attributes) . '>' . Xss::filter($element['#prefix'], $allowed_tags), []);
+    $element['#suffix'] = $element['#suffix'] . '</div>';
   }
 
   /**

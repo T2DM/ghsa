@@ -22,6 +22,43 @@
   };
 
   /**
+   * Prevent form autosubmit on wizard pages.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attaches the behavior for disabling form autosubmit.
+   */
+  Drupal.behaviors.yamlFormDisableAutoSubmit = {
+    attach: function (context) {
+      // @see http://stackoverflow.com/questions/11235622/jquery-disable-form-submit-on-enter
+      $(context).find('.yamlform-submission-form.js-yamlform-disable-autosubmit input').once().on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    }
+  };
+
+  /**
+   * Skip client-side validation when submit button is pressed.
+   *
+   * @type {Drupal~behavior}
+   *
+   * @prop {Drupal~behaviorAttach} attach
+   *   Attaches the behavior for the skipping client-side validation.
+   */
+  Drupal.behaviors.yamlFormSubmitNoValidate = {
+    attach: function (context) {
+      $(context).find(':button.js-yamlform-novalidate').once().on('click', function () {
+        $(this.form).attr('novalidate', 'novalidate');
+      });
+    }
+  };
+
+  /**
    * Disable validate when save draft submit button is clicked.
    *
    * @type {Drupal~behavior}

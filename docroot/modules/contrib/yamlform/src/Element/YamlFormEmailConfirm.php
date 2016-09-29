@@ -5,7 +5,6 @@ namespace Drupal\yamlform\Element;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\yamlform\Utility\YamlFormElementHelper;
 use Drupal\Core\Render\Element\CompositeFormElementTrait;
 
 /**
@@ -100,9 +99,6 @@ class YamlFormEmailConfirm extends FormElement {
     unset($element['#atributes']);
 
     $element['#element_validate'] = [[get_called_class(), 'validateEmailConfirm']];
-
-    // Wrap this $element in a <div> that handle #states.
-    YamlFormElementHelper::fixWrapper($element);
 
     return $element;
   }

@@ -105,7 +105,7 @@ class YamlFormHandlerTest extends YamlFormTestBase {
     // Check submit submission plugin invoking when saving results is disabled.
     $yamlform_handler_test->setSetting('results_disabled', TRUE);
     $yamlform_handler_test->save();
-    $sid = $this->postSubmission($yamlform_handler_test);
+    $this->postSubmission($yamlform_handler_test);
     $this->assertRaw('Invoked: Drupal\yamlform_test\Plugin\YamlFormHandler\TestYamlFormHandler:preCreate');
     $this->assertRaw('Invoked: Drupal\yamlform_test\Plugin\YamlFormHandler\TestYamlFormHandler:postCreate');
     $this->assertRaw('Invoked: Drupal\yamlform_test\Plugin\YamlFormHandler\TestYamlFormHandler:alterElements');

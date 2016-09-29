@@ -78,8 +78,8 @@ class YamlFormSubmissionListBuilderTest extends YamlFormTestBase {
 
     // Customize to results table.
     $edit = [
-      'columns[created][name]' => FALSE,
-      'columns[changed][name]' => TRUE,
+      'columns[created][checkbox]' => FALSE,
+      'columns[changed][checkbox]' => TRUE,
       'columns[element__first_name][weight]' => '8',
       'columns[element__last_name][weight]' => '7',
       'sort' => 'element__first_name',

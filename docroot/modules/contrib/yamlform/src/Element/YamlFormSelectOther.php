@@ -5,7 +5,6 @@ namespace Drupal\yamlform\Element;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Render\Element\FormElement;
-use Drupal\yamlform\Utility\YamlFormElementHelper;
 use Drupal\yamlform\Utility\YamlFormOptionsHelper;
 
 /**
@@ -121,9 +120,6 @@ class YamlFormSelectOther extends FormElement {
       $element['#element_validate'] = [[get_called_class(), 'validateYamlFormSelectOther']];
     }
     $element['#attached']['library'][] = 'yamlform/yamlform.element.other';
-
-    // Wrap this $element in a <div> that handle #states.
-    YamlFormElementHelper::fixWrapper($element);
 
     return $element;
 

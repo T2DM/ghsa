@@ -11,7 +11,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  * @YamlFormElement(
  *   id = "yamlform_autocomplete",
  *   label = @Translation("Autocomplete"),
- *   category = @Translation("Advanced"),
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class YamlFormAutocomplete extends TextField {

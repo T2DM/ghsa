@@ -21,16 +21,16 @@ class YamlFormSubmissionController extends ControllerBase implements ContainerIn
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * Constructs a new YamlFormSubmissionController object.
    *
-   * @param \Drupal\yamlform\YamlFormRequestInterface $yamlform_request
+   * @param \Drupal\yamlform\YamlFormRequestInterface $request_handler
    *   The YAML form request handler.
    */
-  public function __construct(YamlFormRequestInterface $yamlform_request) {
-    $this->yamlFormRequest = $yamlform_request;
+  public function __construct(YamlFormRequestInterface $request_handler) {
+    $this->requestHandler = $request_handler;
   }
 
   /**
@@ -60,7 +60,7 @@ class YamlFormSubmissionController extends ControllerBase implements ContainerIn
     }
 
     $build = [];
-    $source_entity = $this->yamlFormRequest->getCurrentSourceEntity('yamlform_submission');
+    $source_entity = $this->requestHandler->getCurrentSourceEntity('yamlform_submission');
     // Navigation.
     $build['navigation'] = [
       '#theme' => 'yamlform_submission_navigation',
@@ -133,7 +133,7 @@ class YamlFormSubmissionController extends ControllerBase implements ContainerIn
    *   The YAML form submission as a render array.
    */
   public function title(YamlFormSubmissionInterface $yamlform_submission) {
-    $source_entity = $this->yamlFormRequest->getCurrentSourceEntity('yamlform_submission');
+    $source_entity = $this->requestHandler->getCurrentSourceEntity('yamlform_submission');
     $t_args = [
       '@form' => ($source_entity) ? $source_entity->label() : $yamlform_submission->getYamlForm()->label(),
       '@id' => $yamlform_submission->id(),

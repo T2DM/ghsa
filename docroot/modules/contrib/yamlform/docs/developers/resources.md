@@ -24,8 +24,13 @@ Additional Resources
 
 - [Form API Reference](https://api.drupal.org/api/drupal/developer!topics!forms_api_reference.html/7.x)
 
-- [Form API #states](https://www.lullabot.com/articles/form-api-states)
+### Form \#states API (Conditionals)
 
+- [Form API \#states](https://www.lullabot.com/articles/form-api-states)
+
+- [drupal_process_states](https://api.drupal.org/api/drupal/core%21includes%21common.inc/function/drupal_process_states)
+
+- [Drupal 7 Form API: Using #states with multiple conditionals (AND, OR and XOR)](http://www.metaltoad.com/blog/drupal-7-form-api-using-states-multiple-conditionals-and-or-and-xor)
 
 ### Form Builders
 

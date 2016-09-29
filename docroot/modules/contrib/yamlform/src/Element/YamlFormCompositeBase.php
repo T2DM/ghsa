@@ -30,18 +30,84 @@ abstract class YamlFormCompositeBase extends FormElement {
       ],
       '#theme_wrappers' => ['container'],
       '#required' => FALSE,
+      '#flexbox' => TRUE,
     ];
   }
 
   /**
    * Get a renderable array of form elements.
    *
+   * @param bool $use_flexbox
+   *   Flag to enabled/disable Flexbox layouts.
+   *
    * @return array
    *   A renderable array of form elements, containing the base properties
    *   for the composite's form elements.
    */
-  public static function getCompositeElements() {
+  public static function getCompositeElements($use_flexbox = FALSE) {
     return [];
+  }
+
+  /**
+   * Get a renderable array of form elements using Flexbox layout.
+   *
+   * @param array $elements
+   *   A renderable array of form elements.
+   *
+   * @return array
+   *   A renderable array of form elements using Flexbox layout.
+   */
+  public static function getFlexboxLayout(array $elements) {
+    return $elements;
+  }
+
+  /**
+   * Set flex(box) class attributes.
+   *
+   * @param bool $use_flexbox
+   *   Flag to enabled/disable Flexbox layouts.
+   * @param int $flex
+   *   The flex property specifies the length of the item, relative to the rest
+   *   of the flexible items inside the same container.
+   *
+   * @return array
+   *   An associative array of wrapper attributes containing yamlform-flex
+   *   classes.
+   */
+  public static function setFlex($use_flexbox = FALSE, $flex = 1) {
+    return ($use_flexbox) ? [
+      '#prefix' => '<div class="yamlform-flex yamlform-flex--' . $flex . '"><div class="yamlform-flex--container">',
+      '#suffix' => '</div></div>',
+    ] : [];
+  }
+
+  /**
+   * Set flex(box) class attributes.
+   *
+   * @param bool $use_flexbox
+   *   Flag to enabled/disable Flexbox layouts.
+   * @param int $flex
+   *   The flex property specifies the length of the item, relative to the rest
+   *   of the flexible items inside the same container.
+   *
+   * @return array
+   *   An associative array of wrapper attributes containing yamlform-flex
+   *   classes.
+   */
+  public static function setFlexbox($use_flexbox = FALSE, $flex = 1) {
+    if (!$use_flexbox) {
+      return [];
+    }
+
+    $properties = [
+      '#prefix' => '<div class="yamlform-flexbox">',
+      '#suffix' => '</div>',
+    ];
+    if ($flex) {
+      $properties['#prefix'] .= '<div class="yamlform-flex yamlform-flex--' . $flex . '"><div class="yamlform-flex--container">';
+      $properties['#suffix'] .= '</div></div>';
+    }
+    return $properties;
   }
 
   /**
@@ -54,7 +120,8 @@ abstract class YamlFormCompositeBase extends FormElement {
 
     $element['#initialize'] = TRUE;
     $element['#tree'] = TRUE;
-    $composite_elements = static::getCompositeElements();
+    $element['#flexbox'] = (!empty($element['#flexbox'])) ? TRUE : FALSE;
+    $composite_elements = static::getCompositeElements($element['#flexbox']);
     foreach ($composite_elements as $composite_key => &$composite_element) {
       // Transfer '#{composite_key}_{property}' from main element to composite
       // element.
@@ -69,24 +136,49 @@ abstract class YamlFormCompositeBase extends FormElement {
         $composite_element['#value'] = $element['#value'][$composite_key];
       }
 
-      // If composite element does not specified #required see if the $element
-      // is required.
-      if (!isset($composite_element['#required']) && !empty($element['#required'])) {
-        $composite_element['#required'] = TRUE;
-      }
-
       // Never required hidden composite elements.
       if (isset($composite_element['#access']) && $composite_element['#access'] == FALSE) {
         unset($composite_element['#required']);
       }
 
+      // Load options.
       if (isset($composite_element['#options'])) {
         $composite_element['#options'] = YamlFormOptionsEntity::getElementOptions($composite_element);
+      }
+
+      // Handle #type specific customizations.
+      if (isset($composite_element['#type'])) {
+        switch ($composite_element['#type']) {
+          case 'select':
+          case 'yamlform_select_other':
+            // Always include an empty option, even if the composite element
+            // is not required.
+            // @see https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Select.php/class/Select/8.2.x
+            // Use placeholder as empty option.
+            if (!isset($composite_element['#empty_option'])) {
+              if (isset($composite_element['#placeholder'])) {
+                $composite_element['#empty_option'] = $composite_element['#placeholder'];
+              }
+              elseif (empty($composite_element['#required'])) {
+                $composite_element['#empty_option'] = t('- None -');
+              }
+            }
+            break;
+        }
       }
     }
 
     $element += $composite_elements;
     $element['#element_validate'] = [[get_called_class(), 'validateYamlFormComposite']];
+
+    if ($element['#flexbox']) {
+      $element += ['#prefix' => '', '#suffix' => ''];
+      $element['#prefix'] = $element['#prefix'] . '<div class="yamlform-flexbox">';
+      $element['#suffix'] = '</div>' . $element['#suffix'];
+
+      $element['#attached']['library'][] = 'yamlform/yamlform.element.flexbox';
+    }
+
     return $element;
   }
 

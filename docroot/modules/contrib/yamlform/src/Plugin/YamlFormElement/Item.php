@@ -12,7 +12,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "item",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Item.php/class/Item",
  *   label = @Translation("Item"),
- *   category = @Translation("Container")
+ *   category = @Translation("Containers"),
  * )
  */
 class Item extends ContainerBase {
@@ -34,6 +34,14 @@ class Item extends ContainerBase {
 
       'admin_title' => '',
       'private' => FALSE,
+
+      'wrapper_attributes__class' => '',
+      'wrapper_attributes__style' => '',
+      'attributes__class' => '',
+      'attributes__style' => '',
+
+      'flex' => 1,
+      'states' => [],
     ];
   }
 

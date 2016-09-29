@@ -6,7 +6,6 @@ use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\yamlform\Utility\YamlFormDialogHelper;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Controller for YAML form handlers.
@@ -19,32 +18,6 @@ class YamlFormEntityHandlersForm extends EntityForm {
    * @var \Drupal\yamlform\YamlFormInterface
    */
   protected $entity;
-
-  /**
-   * The YAML form handler manager service.
-   *
-   * @var \Drupal\yamlform\YamlFormHandlerManagerInterface
-   */
-  protected $yamlFormHandlerManager;
-
-  /**
-   * Constructs an YamlFormEntityHandlersForm object.
-   *
-   * @param \Drupal\yamlform\YamlFormHandlerManagerInterface $yamlform_handler_manager
-   *   The YAML form handler manager service.
-   */
-  public function __construct(YamlFormHandlerManagerInterface $yamlform_handler_manager) {
-    $this->yamlFormHandlerManager = $yamlform_handler_manager;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('plugin.manager.yamlform.handler')
-    );
-  }
 
   /**
    * {@inheritdoc}

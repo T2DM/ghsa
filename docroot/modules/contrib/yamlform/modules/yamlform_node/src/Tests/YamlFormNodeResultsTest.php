@@ -130,8 +130,8 @@ class YamlFormNodeResultsTest extends YamlFormTestBase {
 
     // Customize to main form's results table.
     $edit = [
-      'columns[created][name]' => FALSE,
-      'columns[changed][name]' => TRUE,
+      'columns[created][checkbox]' => FALSE,
+      'columns[changed][checkbox]' => TRUE,
       'direction' => 'asc',
       'limit' => 20,
       'default' => TRUE,

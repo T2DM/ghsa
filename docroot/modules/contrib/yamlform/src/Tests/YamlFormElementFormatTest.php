@@ -77,8 +77,8 @@ class YamlFormElementFormatTest extends YamlFormTestBase {
       'likert (raw)' => '<div class="item-list"><ul><li><b>q1:</b> 1</li><li><b>q2:</b> 2</li><li><b>q3:</b> 3</li></ul></div>',
       // Composite.
       'contact (value)' => 'John Smith<br />Acme<br />100 Main Street<br />PO BOX 999<br />Hill Valley, New Jersey. 11111-1111<br />United States of America<br /><a href="mailto:example@example.com">example@example.com</a><br />123-456-7890<br />',
-      'contact (list)' => '<div class="item-list"><ul><li><b>Name:</b> John Smith</li><li><b>Company:</b> Acme</li><li><b>Address:</b> 100 Main Street</li><li><b>Address 2:</b> PO BOX 999</li><li><b>City/Town:</b> Hill Valley</li><li><b>State/Province:</b> New Jersey</li><li><b>Country:</b> United States of America</li><li><b>Zip/Postal Code:</b> 11111-1111</li><li><b>Email:</b> example@example.com</li><li><b>Phone:</b> 123-456-7890</li></ul></div>',
-      'contact (raw)' => '<div class="item-list"><ul><li><b>name:</b> John Smith</li><li><b>company:</b> Acme</li><li><b>address:</b> 100 Main Street</li><li><b>address_2:</b> PO BOX 999</li><li><b>city:</b> Hill Valley</li><li><b>state_province:</b> New Jersey</li><li><b>country:</b> United States of America</li><li><b>postal_code:</b> 11111-1111</li><li><b>email:</b> example@example.com</li><li><b>phone:</b> 123-456-7890</li></ul></div>',
+      'contact (list)' => '<div class="item-list"><ul><li><b>Name:</b> John Smith</li><li><b>Company:</b> Acme</li><li><b>Email:</b> example@example.com</li><li><b>Phone:</b> 123-456-7890</li><li><b>Address:</b> 100 Main Street</li><li><b>Address 2:</b> PO BOX 999</li><li><b>City/Town:</b> Hill Valley</li><li><b>State/Province:</b> New Jersey</li><li><b>Zip/Postal Code:</b> 11111-1111</li><li><b>Country:</b> United States of America</li></ul></div>',
+      'contact (raw)' => '<div class="item-list"><ul><li><b>name:</b> John Smith</li><li><b>company:</b> Acme</li><li><b>email:</b> example@example.com</li><li><b>phone:</b> 123-456-7890</li><li><b>address:</b> 100 Main Street</li><li><b>address_2:</b> PO BOX 999</li><li><b>city:</b> Hill Valley</li><li><b>state_province:</b> New Jersey</li><li><b>postal_code:</b> 11111-1111</li><li><b>country:</b> United States of America</li></ul>',
     ];
     foreach ($elements as $label => $value) {
       $this->assertContains($body, '<b>' . $label . '</b><br/>' . $value, new FormattableMarkup('Found @label: @value', ['@label' => $label, '@value' => $value]));
@@ -136,8 +136,8 @@ class YamlFormElementFormatTest extends YamlFormTestBase {
       "likert (raw):\nq1: 1\nq2: 2\nq3: 3",
       // Composite.
       "contact (value):\nJohn Smith\nAcme\n100 Main Street\nPO BOX 999\nHill Valley, New Jersey. 11111-1111\nUnited States of America\nexample@example.com\n123-456-7890",
-      "contact (list):\nName: John Smith\nCompany: Acme\nAddress: 100 Main Street\nAddress 2: PO BOX 999\nCity/Town: Hill Valley\nState/Province: New Jersey\nCountry: United States of America\nZip/Postal Code: 11111-1111\nEmail: example@example.com\nPhone: 123-456-7890",
-      "contact (raw):\nname: John Smith\ncompany: Acme\naddress: 100 Main Street\naddress_2: PO BOX 999\ncity: Hill Valley\nstate_province: New Jersey\ncountry: United States of America\npostal_code: 11111-1111\nemail: example@example.com\nphone: 123-456-7890",
+      "contact (list):\nName: John Smith\nCompany: Acme\nEmail: example@example.com\nPhone: 123-456-7890\nAddress: 100 Main Street\nAddress 2: PO BOX 999\nCity/Town: Hill Valley\nState/Province: New Jersey\nZip/Postal Code: 11111-1111\nCountry: United States of America",
+      "contact (raw):\nname: John Smith\ncompany: Acme\nemail: example@example.com\nphone: 123-456-7890\naddress: 100 Main Street\naddress_2: PO BOX 999\ncity: Hill Valley\nstate_province: New Jersey\npostal_code: 11111-1111\ncountry: United States of America",
       // Table.
       "First Name | Last Name | Gender\n-------------------------------\nJohn | Smith | Male\nJane | Doe | Female",
     ];

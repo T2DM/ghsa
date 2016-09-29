@@ -69,7 +69,7 @@
           $input.show();
         }
 
-        $checkbox.on('click', function () {
+        $checkbox.on('change', function () {
           toggleOther(this.checked, $input);
         });
       });
@@ -91,7 +91,7 @@
           input.show();
         }
 
-        $radios.on('click', function () {
+        $radios.on('change', function () {
           toggleOther(($radios.filter(':checked').val() === '_other_'), input);
         });
       });

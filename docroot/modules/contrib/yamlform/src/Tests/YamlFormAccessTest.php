@@ -73,6 +73,8 @@ class YamlFormAccessTest extends YamlFormTestBase {
    * Tests YAML form access rules.
    */
   public function testAccessRules() {
+    global $base_path;
+
     /** @var \Drupal\yamlform\YamlFormInterface $yamlform */
     /** @var \Drupal\yamlform\YamlFormSubmissionInterface[] $submissions */
     list($yamlform, $submissions) = $this->createYamlFormWithSubmissions();
@@ -184,14 +186,21 @@ class YamlFormAccessTest extends YamlFormTestBase {
     // Check no view previous submission message.
     $this->drupalGet('yamlform/' . $yamlform->id());
     $this->assertNoRaw('You have already submitted this form.');
-    $this->assertNoRaw('View your previous submissions');
+    $this->assertNoRaw('View your previous submission');
 
     $sid = $this->postSubmission($yamlform);
 
     // Check view previous submission message.
     $this->drupalGet('yamlform/' . $yamlform->id());
     $this->assertRaw('You have already submitted this form.');
-    $this->assertRaw('View your previous submissions');
+    $this->assertRaw("<a href=\"{$base_path}yamlform/{$yamlform_id}/submissions/{$sid}\">View your previous submission</a>.");
+
+    $sid = $this->postSubmission($yamlform);
+
+    // Check view previous submissions message.
+    $this->drupalGet('yamlform/' . $yamlform->id());
+    $this->assertRaw('You have already submitted this form.');
+    $this->assertRaw("<a href=\"{$base_path}yamlform/{$yamlform_id}/submissions\">View your previous submissions</a>");
 
     // Check the new submission's view, update, and delete access for the user.
     $test_own = [

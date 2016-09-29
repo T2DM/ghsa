@@ -508,7 +508,7 @@ class EmailYamlFormHandler extends YamlFormHandlerBase implements YamlFormHandle
     // Log message.
     $context = [
       '@form' => $this->getYamlForm()->label(),
-      '@title' => $this->Label(),
+      '@title' => $this->label(),
     ];
     \Drupal::logger('yamlform.email')->notice('@form form sent @title email.', $context);
 

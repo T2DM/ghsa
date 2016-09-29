@@ -4,10 +4,10 @@ namespace Drupal\yamlform\Element;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Component\Utility\Unicode;
+use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Serialization\Yaml;
 use Drupal\yamlform\Utility\YamlFormElementHelper;
 
 /**
@@ -27,7 +27,6 @@ class YamlFormOptions extends FormElement {
     $class = get_class($this);
     return [
       '#input' => TRUE,
-      '#size' => 60,
       '#label' => t('option'),
       '#labels' => t('options'),
       '#empty_options' => 5,
@@ -60,16 +59,16 @@ class YamlFormOptions extends FormElement {
   }
 
   /**
-   * Expand an email confirm field into two HTML5 email elements.
+   * Process options and build options widget.
    */
   public static function processOptions(&$element, FormStateInterface $form_state, &$complete_form) {
     $element['#tree'] = TRUE;
 
     // Add validate callback that extracts the associative array of options.
-    $element['#element_validate'] = [[get_called_class(), 'validateYamlFormOptions']];
+    $element['#element_validate'] = [[get_called_class(), 'validateOptions']];
 
     // Wrap this $element in a <div> that handle #states.
-    YamlFormElementHelper::fixWrapper($element);
+    YamlFormElementHelper::fixStatesWrapper($element);
 
     // For options with optgroup display a CodeMirror YAML editor.
     if (isset($element['#default_value']) && is_array($element['#default_value']) && self::hasOptGroup($element['#default_value'])) {
@@ -211,6 +210,7 @@ class YamlFormOptions extends FormElement {
       '#title' => t('Option text'),
       '#title_display' => 'invisible',
       '#size' => 25,
+      '#maxlength' => NULL,
       '#placeholder' => t('Enter text'),
       '#default_value' => $text,
     ];
@@ -276,7 +276,7 @@ class YamlFormOptions extends FormElement {
   }
 
   /**
-   * Form submission handler for adding more options.
+   * Form submission handler for removing an option.
    *
    * @param array $form
    *   An associative array containing the structure of the form.
@@ -293,7 +293,7 @@ class YamlFormOptions extends FormElement {
     // Remove one option from the 'number of options'.
     $number_of_options_storage_key = self::getStorageKey($element, 'number_of_options');
     $number_of_options = $form_state->get($number_of_options_storage_key);
-    // Never allow the numbe of options to be less than 1.
+    // Never allow the number of options to be less than 1.
     if ($number_of_options != 1) {
       $form_state->set($number_of_options_storage_key, $number_of_options - 1);
     }
@@ -320,7 +320,7 @@ class YamlFormOptions extends FormElement {
   /**
    * Validates YAML form options element.
    */
-  public static function validateYamlFormOptions(&$element, FormStateInterface $form_state, &$complete_form) {
+  public static function validateOptions(&$element, FormStateInterface $form_state, &$complete_form) {
     if (isset($element['options']['#value']) && is_string($element['options']['#value'])) {
       $options = Yaml::decode($element['options']['#value']);
     }

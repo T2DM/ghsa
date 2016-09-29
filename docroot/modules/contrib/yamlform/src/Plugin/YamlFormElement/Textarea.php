@@ -3,6 +3,7 @@
 namespace Drupal\yamlform\Plugin\YamlFormElement;
 
 use Drupal\Component\Render\HtmlEscapedText;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Provides a 'textarea' element.
@@ -11,8 +12,8 @@ use Drupal\Component\Render\HtmlEscapedText;
  *   id = "textarea",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Textarea.php/class/Textarea",
  *   label = @Translation("Textarea"),
- *   category = @Translation("Basic"),
- *   multiline = TRUE
+ *   category = @Translation("Basic elements"),
+ *   multiline = TRUE,
  * )
  */
 class Textarea extends TextBase {
@@ -53,6 +54,7 @@ class Textarea extends TextBase {
       'attributes__style' => '',
 
       'flex' => 1,
+      'states' => [],
     ];
   }
 
@@ -64,6 +66,15 @@ class Textarea extends TextBase {
       '#markup' => nl2br(new HtmlEscapedText($value)),
     ];
     return \Drupal::service('renderer')->renderPlain($build);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function form(array $form, FormStateInterface $form_state) {
+    $form = parent::form($form, $form_state);
+    $form['general']['default_value']['#type'] = 'textarea';
+    return $form;
   }
 
 }

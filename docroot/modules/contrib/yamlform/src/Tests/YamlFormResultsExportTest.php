@@ -59,7 +59,7 @@ class YamlFormResultsExportTest extends YamlFormTestBase {
     /** @var \Drupal\yamlform\YamlFormSubmissionInterface[] $submissions */
     $submissions = YamlFormSubmission::loadMultiple($sids);
     foreach ($submissions as $sid => $submission) {
-      $fid = $submission->getData('file');
+      $fid = $submission->getData('managed_file_single');
       $filename = File::load($fid)->getFilename();
 
       $this->assert(isset($files["test_element_managed_file/$sid"]));
@@ -90,11 +90,11 @@ class YamlFormResultsExportTest extends YamlFormTestBase {
     $this->assertRaw('George|Washington');
 
     // Check header keys = label.
-    $this->getExport($yamlform, ['header_keys' => 'label']);
+    $this->getExport($yamlform, ['header_format' => 'label']);
     $this->assertRaw('"First name","Last name"');
 
     // Check header keys = key.
-    $this->getExport($yamlform, ['header_keys' => 'key']);
+    $this->getExport($yamlform, ['header_format' => 'key']);
     $this->assertRaw('first_name,last_name');
 
     // Check options format compact.
@@ -104,7 +104,7 @@ class YamlFormResultsExportTest extends YamlFormTestBase {
 
     // Check options format separate.
     $this->getExport($yamlform, ['options_format' => 'separate']);
-    $this->assertRaw("Red,White,Blue");
+    $this->assertRaw('"Flag colors: Red","Flag colors: White","Flag colors: Blue"');
     $this->assertNoRaw('"Flag colors"');
     $this->assertRaw('X,X,X');
     $this->assertNoRaw('"Red,White,Blue"');
@@ -121,7 +121,7 @@ class YamlFormResultsExportTest extends YamlFormTestBase {
     // Check entity reference format link.
     $nodes = $this->getNodes();
     $this->getExport($yamlform, ['entity_reference_format' => 'link']);
-    $this->assertRaw('"Favorite node ID","Favorite node Title","Favorite node URL"');
+    $this->assertRaw('"Favorite node: ID","Favorite node: Title","Favorite node: URL"');
     $this->assertRaw('' . $nodes[0]->id() . ',"' . $nodes[0]->label() . '",' . $nodes[0]->toUrl('canonical', ['absolute' => TRUE])->toString());
 
     // Check entity reference format id.
@@ -132,13 +132,13 @@ class YamlFormResultsExportTest extends YamlFormTestBase {
     $this->assertNoRaw('"' . $nodes[0]->label() . '",' . $nodes[0]->id() . ',' . $nodes[0]->toUrl('canonical', ['absolute' => TRUE])->toString());
 
     // Check likert questions format label.
-    $this->getExport($yamlform, ['likert_questions_format' => 'label']);
-    $this->assertRaw('"Question 1","Question 2","Question 3"');
+    $this->getExport($yamlform, ['header_format' => 'label']);
+    $this->assertRaw('"Likert: Question 1","Likert: Question 2","Likert: Question 3"');
 
     // Check likert questions format key.
-    $this->getExport($yamlform, ['likert_questions_format' => 'key']);
-    $this->assertNoRaw('"Question 1","Question 2","Question 3"');
-    $this->assertRaw('q1,q2,q3');
+    $this->getExport($yamlform, ['header_format' => 'key']);
+    $this->assertNoRaw('"Likert: Question 1","Likert: Question 2","Likert: Question 3"');
+    $this->assertRaw('likert__q1,likert__q2,likert__q3');
 
     // Check likert answers format label.
     $this->getExport($yamlform, ['likert_answers_format' => 'label']);
@@ -150,12 +150,12 @@ class YamlFormResultsExportTest extends YamlFormTestBase {
     $this->assertRaw('1,1,1');
 
     // Check composite w/o header prefix.
-    $this->getExport($yamlform, ['composite_header_prefix' => 1]);
-    $this->assertRaw('"Address: Address","Address: Address 2","Address: City/Town","Address: State/Province","Address: Country","Address: Zip/Postal Code"');
+    $this->getExport($yamlform, ['header_format' => 'label', 'header_prefix' => TRUE]);
+    $this->assertRaw('"Address: Address","Address: Address 2","Address: City/Town","Address: State/Province","Address: Zip/Postal Code","Address: Country"');
 
     // Check composite w header prefix.
-    $this->getExport($yamlform, ['composite_header_prefix' => 0]);
-    $this->assertRaw('Address,"Address 2",City/Town,State/Province,Country,"Zip/Postal Code"');
+    $this->getExport($yamlform, ['header_format' => 'label', 'header_prefix' => FALSE]);
+    $this->assertRaw('Address,"Address 2",City/Town,State/Province,"Zip/Postal Code",Country');
 
     // Check limit.
     $this->getExport($yamlform, ['range_type' => 'latest', 'range_latest' => 1]);

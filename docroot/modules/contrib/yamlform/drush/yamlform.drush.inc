@@ -243,7 +243,7 @@ function drush_yamlform_export($yamlform_id = NULL) {
  */
 function drush_yamlform_purge_validate($yamlform_id = NULL) {
   // If YAML form id is set to 'all' or  not included skip validation.
-  if (drush_get_option('all') || $yamlform_id = NULL) {
+  if (drush_get_option('all') || $yamlform_id == NULL) {
     return;
   }
 
@@ -273,8 +273,8 @@ function drush_yamlform_purge($yamlform_id = NULL) {
 
   /** @var \Drupal\yamlform\YamlFormSubmissionStorageInterface $submission_storage */
   $submission_storage = \Drupal::entityTypeManager()->getStorage('yamlform_submission');
-  /** @var \Drupal\yamlform\YamlFormRequestInterface $yamlform_request */
-  $yamlform_request = \Drupal::service('yamlform.request');
+  /** @var \Drupal\yamlform\YamlFormRequestInterface $request_handler */
+  $request_handler = \Drupal::service('yamlform.request');
 
   // Make sure there are submissions that need to be deleted.
   if (!$submission_storage->getTotal($yamlform)) {
@@ -293,7 +293,7 @@ function drush_yamlform_purge($yamlform_id = NULL) {
     if (!drush_confirm(dt('Are you sure you want to delete @submission_total @submissions in @form_total @forms?', $t_args))) {
       return drush_user_abort();
     }
-    $form = new YamlFormResultsClearForm($submission_storage, $yamlform_request);
+    $form = new YamlFormResultsClearForm($submission_storage, $request_handler);
     $form->batchSet();
     drush_backend_batch_process();
   }
@@ -312,7 +312,7 @@ function drush_yamlform_purge($yamlform_id = NULL) {
     if (!drush_confirm(dt("Are you sure you want to delete all submissions from '@title' form?", $t_args))) {
       return drush_user_abort();
     }
-    $form = new YamlFormSubmissionsPurgeForm($submission_storage, $yamlform_request);
+    $form = new YamlFormSubmissionsPurgeForm($submission_storage, $request_handler);
     $form->batchSet($yamlform, $source_entity);
     drush_backend_batch_process();
   }

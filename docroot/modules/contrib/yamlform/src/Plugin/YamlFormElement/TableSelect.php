@@ -11,8 +11,8 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "tableselect",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Tableselect.php/class/Tableselect",
  *   label = @Translation("Table select"),
- *   category = @Translation("Options"),
- *   multiple = TRUE
+ *   category = @Translation("Options elements"),
+ *   multiple = TRUE,
  * )
  */
 class TableSelect extends OptionsBase {
@@ -22,6 +22,9 @@ class TableSelect extends OptionsBase {
    */
   public function prepare(array &$element, YamlFormSubmissionInterface $yamlform_submission) {
     parent::prepare($element, $yamlform_submission);
+
+    // Add .js-form.wrapper to fix #states handling.
+    $element['#attributes']['class'][] = 'js-form-wrapper';
 
     // Add one column header is not #header is specified.
     if (!isset($element['#header'])) {
@@ -52,6 +55,17 @@ class TableSelect extends OptionsBase {
     if (isset($element['#default_value'])) {
       $element['#default_value'] = array_combine($element['#default_value'], $element['#default_value']);
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getElementSelectorInputsOptions(array $element) {
+    $selectors = $element['#options'];
+    foreach ($selectors as $value => &$text) {
+      $text .= ' [' . $this->t('Checkbox') . ']';
+    }
+    return $selectors;
   }
 
 }

@@ -10,6 +10,7 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Render\ElementInfoManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
@@ -47,6 +48,20 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
   protected $currentUser;
 
   /**
+   * A element info manager.
+   *
+   * @var \Drupal\Core\Render\ElementInfoManagerInterface
+   */
+  protected $elementInfo;
+
+  /**
+   * The element's properties without the initial hash (#) character.
+   *
+   * @var array
+   */
+  protected $properties;
+
+  /**
    * The YAML form element manager.
    *
    * @var \Drupal\yamlform\YamlFormElementManagerInterface
@@ -69,10 +84,11 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
    * @param \Drupal\yamlform\YamlFormElementManagerInterface $element_manager
    *   The YAML form element manager.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, AccountInterface $current_user, YamlFormElementManagerInterface $element_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, AccountInterface $current_user, ElementInfoManagerInterface $element_info, YamlFormElementManagerInterface $element_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->configFactory = $config_factory;
     $this->currentUser = $current_user;
+    $this->elementInfo = $element_info;
     $this->elementManager = $element_manager;
   }
 
@@ -86,6 +102,7 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
       $plugin_definition,
       $container->get('config.factory'),
       $container->get('current_user'),
+      $container->get('plugin.manager.element_info'),
       $container->get('plugin.manager.yamlform.element')
     );
   }
@@ -121,6 +138,7 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
       'attributes__style' => '',
 
       'flex' => 1,
+      'states' => [],
     ];
   }
 
@@ -157,7 +175,7 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
   /**
    * {@inheritdoc}
    */
-  public function hasValue(array $element) {
+  public function isInput(array $element) {
     return (!empty($element['#type'])) ? TRUE : FALSE;
   }
 
@@ -172,7 +190,7 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
    * {@inheritdoc}
    */
   public function isContainer(array $element) {
-    return FALSE;
+    return ($this->isInput($element)) ? FALSE : TRUE;
   }
 
   /**
@@ -208,6 +226,13 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
    */
   public function isHidden(array $element) {
     return $this->pluginDefinition['hidden'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getInfo() {
+    return $this->elementInfo->getInfo($this->getPluginId());
   }
 
   /**
@@ -291,6 +316,12 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
         break;
     }
 
+    // Add inline title display support.
+    if (isset($element['#title_display']) && $element['#title_display'] == 'inline') {
+      unset($element['#title_display']);
+      $element['#wrapper_attributes']['class'][] = 'yamlform-element--title-inline';
+    }
+
     // Add default description display.
     $default_description_display = $this->configFactory->get('yamlform.settings')->get('elements.default_description_display');
     if ($default_description_display && !isset($element['#description_display']) && $this->hasProperty('description_display')) {
@@ -303,15 +334,6 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
       $element[$attributes_property]['class'][] = 'js-yamlform-element-tooltip';
       $element[$attributes_property]['class'][] = 'yamlform-element-tooltip';
       $element['#attached']['library'][] = 'yamlform/yamlform.element.tooltip';
-    }
-
-    // Add flex(box) class.
-    if (!empty($element['#yamlform_parent_flexbox'])) {
-      $flex = (isset($element['#flex'])) ? $element['#flex'] : 1;
-      $element[$attributes_property]['class'][] = 'js-yamlform-flex';
-      $element[$attributes_property]['class'][] = 'yamlform-flex';
-      $element[$attributes_property]['class'][] = 'js-yamlform-flex--' . $flex;
-      $element[$attributes_property]['class'][] = 'yamlform-flex--' . $flex;
     }
 
     // Add .yamlform-has-field-prefix and .yamlform-has-field-suffix class.
@@ -329,6 +351,9 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
       $element['#yamlform_submission'] = $yamlform_submission->id();
     }
 
+    // Prepare Flexbox and #states wrapper.
+    $this->prepareWrapper($element);
+
     // Replace tokens for all properties.
     $token_data = [
       'yamlform' => $yamlform_submission->getYamlForm(),
@@ -336,6 +361,27 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
     ];
     $token_options = ['clear' => TRUE];
     YamlFormElementHelper::replaceTokens($element, $token_data, $token_options);
+  }
+
+  /**
+   * Set an elements Flexbox and #states wrapper.
+   *
+   * @param array $element
+   *   An element.
+   */
+  protected function prepareWrapper(array &$element) {
+    // Fix #states wrapper.
+    if ($this->pluginDefinition['states_wrapper']) {
+      YamlFormElementHelper::fixStatesWrapper($element);
+    }
+
+    // Add flex(box) wrapper.
+    if (!empty($element['#yamlform_parent_flexbox'])) {
+      $flex = (isset($element['#flex'])) ? $element['#flex'] : 1;
+      $element += ['#prefix' => '', '#suffix' => ''];
+      $element['#prefix'] = '<div class="yamlform-flex yamlform-flex--' . $flex . '"><div class="yamlform-flex--container">' . $element['#prefix'];
+      $element['#suffix'] = $element['#suffix'] . '</div></div>';
+    }
   }
 
   /**
@@ -539,12 +585,44 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
    * {@inheritdoc}
    */
   public function buildExportHeader(array $element, array $options) {
-    if ($options['header_keys'] == 'label') {
+    if ($options['header_format'] == 'label') {
       return [$this->getAdminLabel($element)];
     }
     else {
       return [$element['#yamlform_key']];
     }
+  }
+
+  /**
+   * Prefix an element's export header.
+   *
+   * @param array $header
+   *   An element's export header.
+   * @param array $element
+   *   An element.
+   * @param array $options
+   *   An associative array of export options.
+   *
+   * @return array
+   *   An element's export header with prefix.
+   */
+  protected function prefixExportHeader(array $header, array $element, array $options) {
+    if (empty($options['header_prefix'])) {
+      return $header;
+    }
+
+    if ($options['header_format'] == 'label') {
+      $prefix = $this->getAdminLabel($element) . $options['header_prefix_label_delimiter'];
+    }
+    else {
+      $prefix = $this->getKey($element) . $options['header_prefix_key_delimiter'];;
+    }
+
+    foreach ($header as $index => $column) {
+      $header[$index] = $prefix . $column;
+    }
+
+    return $header;
   }
 
   /**
@@ -588,6 +666,74 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
   /**
    * {@inheritdoc}
    */
+  public function getElementStateOptions() {
+    $states = [];
+
+    // Set default states that apply to the element/container and sub elements.
+    $states += [
+      'visible' => t('Visible'),
+      'invisible' => t('Invisible'),
+      'enabled' => t('Enabled'),
+      'disabled' => t('Disabled'),
+      'required' => t('Required'),
+      'optional' => t('Optional'),
+    ];
+
+    // Set element type specific states.
+    switch ($this->getPluginId()) {
+      case 'checkbox':
+        $states += [
+          'checked' => t('Checked'),
+          'unchecked' => t('Unchecked'),
+        ];
+        break;
+
+      case 'details':
+        $states += [
+          'expanded' => t('Expanded'),
+          'collapsed' => t('Collapsed'),
+        ];
+        break;
+    }
+
+    return $states;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getElementSelectorOptions(array $element) {
+    $title = $this->getAdminLabel($element) . ' [' . $this->getPluginLabel()  . ']';
+    $name = $element['#yamlform_key'];
+
+    if ($inputs = $this->getElementSelectorInputsOptions($element)) {
+      $selectors = [];
+      foreach ($inputs as $input_name => $input_title) {
+        $selectors[":input[name=\"{$name}[{$input_name}]\"]"] = $input_title;
+      }
+      return [$title => $selectors];
+    }
+    else {
+      return [":input[name=\"$name\"]" => $title];
+    }
+  }
+
+  /**
+   * Get an element's (sub)inputs selectors as options.
+   *
+   * @param array $element
+   *   An element.
+   *
+   * @return array
+   *   An array of element (sub)input selectors.
+   */
+  protected function getElementSelectorInputsOptions(array $element) {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function preCreate(array &$element, array $values) {}
 
   /**
@@ -624,17 +770,26 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
-    $form['general'] = [
-      '#type' => 'details',
-      '#title' => $this->t('General settings'),
-      '#open' => TRUE,
+    /** @var \Drupal\yamlform_ui\Form\YamlFormUiElementFormInterface $form_object */
+    $form_object = $form_state->getFormObject();
+    $yamlform = $form_object->getYamlForm();
+
+    $form['element'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Element settings'),
     ];
-    $form['general']['title'] = [
+    $form['element']['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title'),
       '#description' => $this->t('This is used as a descriptive label when displaying this form element.'),
       '#required' => TRUE,
       '#attributes' => ['autofocus' => 'autofocus'],
+    ];
+
+    $form['general'] = [
+      '#type' => 'details',
+      '#title' => $this->t('General settings'),
+      '#open' => TRUE,
     ];
     $form['general']['description'] = [
       '#type' => 'yamlform_html_editor',
@@ -681,6 +836,7 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
         '' => '',
         'before' => $this->t('Before'),
         'after' => $this->t('After'),
+        'inline' => $this->t('Inline'),
         'invisible' => $this->t('Invisible'),
         'attribute' => $this->t('Attribute'),
       ],
@@ -814,6 +970,17 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
       '#return_value' => TRUE,
     ];
 
+    $form['conditional'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Conditional logic'),
+      '#open' => FALSE,
+    ];
+    $form['conditional']['states'] = [
+      '#type' => 'yamlform_element_states',
+      '#state_options' => $this->getElementStateOptions(),
+      '#selector_options' => $yamlform->getElementsSelectorOptions(),
+    ];
+
     $form['display'] = [
       '#type' => 'details',
       '#title' => $this->t('Submission display'),
@@ -851,23 +1018,23 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $default_properties = $this->getDefaultProperties();
-    $properties = YamlFormElementHelper::removePrefix($this->configuration) + $default_properties;
+    $this->properties = YamlFormElementHelper::removePrefix($this->configuration) + $default_properties;
 
-    $this->setConfigurationFormAttributes($properties);
+    $this->setConfigurationFormAttributes($this->properties);
 
     $form = $this->form($form, $form_state);
 
-    $this->setConfigurationFormDefaultValueRecursive($form, $properties);
+    $this->setConfigurationFormDefaultValueRecursive($form, $this->properties);
 
     // Store 'type' as a hardcoded value and make sure it is always first.
     // Also always remove the 'yamlform_*' prefix from the type name.
-    if (isset($properties['type'])) {
+    if (isset($this->properties['type'])) {
       $form['type'] = [
         '#type' => 'value',
-        '#value' => preg_replace('/^yamlform_/', '', $properties['type']),
+        '#value' => preg_replace('/^yamlform_/', '', $this->properties['type']),
         '#parents' => ['properties', 'type'],
       ];
-      unset($properties['type']);
+      unset($this->properties['type']);
     }
 
     // Allow custom properties (ie #states and #attributes) to be added to the
@@ -875,7 +1042,7 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
     $form['custom'] = [
       '#type' => 'details',
       '#title' => $this->t('Custom settings'),
-      '#open' => $properties ? TRUE : FALSE,
+      '#open' => $this->properties ? TRUE : FALSE,
       '#access' => $this->currentUser->hasPermission('edit yamlform source'),
     ];
     if ($api_url = $this->getPluginApiUrl()) {
@@ -890,18 +1057,18 @@ class YamlFormElementBase extends PluginBase implements YamlFormElementInterface
       '#type' => 'yamlform_codemirror',
       '#mode' => 'yaml',
       '#title' => $this->t('Custom properties'),
-      '#description' => $this->t('Properties can include <a href=":state_href">#states</a> and <a href=":attributes_href">#attributes</a>.', [':states_href' => 'https://api.drupal.org/api/drupal/core%21includes%21common.inc/function/drupal_process_states', ':attributes_href' => 'https://api.drupal.org/api/drupal/developer!topics!forms_api_reference.html/7.x#attributes']) .
+      '#description' => $this->t('Properties can include additional custom <a href=":attributes_href">#attributes</a>.', [':attributes_href' => 'https://api.drupal.org/api/drupal/developer!topics!forms_api_reference.html/7.x#attributes']) .
       ' ' .
       $this->t('Properties do not have to prepended with hash (#) character, the hash character will be automatically added upon submission.') .
       '<br/>' .
       $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => YamlFormArrayHelper::toString(YamlFormElementHelper::addPrefix(YamlFormElementHelper::$ignoredProperties))]),
-      '#default_value' => Yaml::encode($properties),
+      '#default_value' => Yaml::encode($this->properties),
       '#parents' => ['properties', 'custom'],
     ];
 
     $form['token_tree_link'] = [
       '#theme' => 'token_tree_link',
-      '#token_types' => ['yamlform'],
+      '#token_types' => ['yamlform', 'yamlform-submission'],
       '#click_insert' => FALSE,
       '#dialog' => TRUE,
     ];

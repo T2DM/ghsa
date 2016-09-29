@@ -5,6 +5,7 @@ namespace Drupal\yamlform;
 use Drupal\Component\Utility\Xss;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\Token;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -25,6 +26,13 @@ class YamlFormMessageManager implements YamlFormMessageManagerInterface {
   protected $configFactory;
 
   /**
+   * YAML form submission storage.
+   *
+   * @var \Drupal\yamlform\YamlFormSubmissionStorageInterface
+   */
+  protected $entityStorage;
+
+  /**
    * The token service.
    *
    * @var \Drupal\Core\Utility\Token
@@ -43,7 +51,7 @@ class YamlFormMessageManager implements YamlFormMessageManagerInterface {
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * A YAML form.
@@ -71,18 +79,21 @@ class YamlFormMessageManager implements YamlFormMessageManagerInterface {
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
+   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   *   The entity manager.
    * @param \Drupal\Core\Utility\Token $token
    *   The token service.
    * @param \Psr\Log\LoggerInterface $logger
    *   A logger instance.
-   * @param \Drupal\yamlform\YamlFormRequestInterface $yamlform_request
+   * @param \Drupal\yamlform\YamlFormRequestInterface $request_handler
    *   The YAML form request handler.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, Token $token, LoggerInterface $logger, YamlFormRequestInterface $yamlform_request) {
+  public function __construct(ConfigFactoryInterface $config_factory, EntityManagerInterface $entity_manager, Token $token, LoggerInterface $logger, YamlFormRequestInterface $request_handler) {
     $this->configFactory = $config_factory;
+    $this->entityStorage = $entity_manager->getStorage('yamlform_submission');
     $this->token = $token;
     $this->logger = $logger;
-    $this->yamlFormRequest = $yamlform_request;
+    $this->requestHandler = $request_handler;
   }
 
   /**
@@ -154,14 +165,11 @@ class YamlFormMessageManager implements YamlFormMessageManagerInterface {
     $yamlform = $this->yamlform;
     $source_entity = $this->sourceEntity;
 
-    $submission_route_name = $this->yamlFormRequest->getRouteName($yamlform, $source_entity, 'yamlform.submissions');
-    $submission_route_parameters = $this->yamlFormRequest->getRouteParameters($yamlform, $source_entity);
     $t_args = [
       '%form' => ($source_entity) ? $source_entity->label() : $yamlform->label(),
       ':handlers_href' => $yamlform->toUrl('handlers-form')->toString(),
       ':settings_href' => $yamlform->toUrl('settings-form')->toString(),
       ':duplicate_href' => $yamlform->toUrl('duplicate-form')->toString(),
-      ':submissions_href' => Url::fromRoute($submission_route_name, $submission_route_parameters)->toString(),
     ];
 
     switch ($key) {
@@ -175,7 +183,19 @@ class YamlFormMessageManager implements YamlFormMessageManagerInterface {
         return $this->t('This form is currently not saving any submitted data. Please enable the <a href=":settings_href">saving of results</a> or add a <a href=":handlers_href">submission handler</a> to the form.', $t_args);
 
       case YamlFormMessageManagerInterface::SUBMISSION_PREVIOUS:
-        return $this->t('You have already submitted this form. <a href=":submissions_href">View your previous submissions</a>.', $t_args);
+        $yamlform_submission = $this->entityStorage->getLastSubmission($yamlform, $source_entity);
+        $submission_route_name = $this->requestHandler->getRouteName($yamlform_submission, $source_entity, 'yamlform.user.submission');
+        $submission_route_parameters = $this->requestHandler->getRouteParameters($yamlform_submission, $source_entity);
+        $t_args[':submission_href'] = Url::fromRoute($submission_route_name, $submission_route_parameters)->toString();
+
+        return $this->t('You have already submitted this form.') . ' ' . $this->t('<a href=":submission_href">View your previous submission</a>.', $t_args);
+
+      case YamlFormMessageManagerInterface::SUBMISSIONS_PREVIOUS:
+        $submissions_route_name = $this->requestHandler->getRouteName($yamlform, $source_entity, 'yamlform.user.submissions');
+        $submissions_route_parameters = $this->requestHandler->getRouteParameters($yamlform, $source_entity);
+        $t_args[':submissions_href'] = Url::fromRoute($submissions_route_name, $submissions_route_parameters)->toString();
+
+        return $this->t('You have already submitted this form.') . ' ' . $this->t('<a href=":submissions_href">View your previous submissions</a>.', $t_args);
 
       case YamlFormMessageManagerInterface::SUBMISSION_UPDATED:
         return $this->t('Submission updated in %form.', $t_args);

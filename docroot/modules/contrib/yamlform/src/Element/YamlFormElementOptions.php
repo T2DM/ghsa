@@ -7,7 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Url;
 use Drupal\yamlform\Entity\YamlFormOptions as YamlFormOptionsEntity;
-use Drupal\yamlform\Utility\YamlFormElementHelper;
 
 /**
  * Provides a form element for managing YAML form element options.
@@ -99,7 +98,7 @@ class YamlFormElementOptions extends FormElement {
         'class' => ['js-' . $element['#id'] . '-options'],
       ],
       '#error_no_message' => TRUE,
-      '#default_value' => (!is_array($element['#default_value'])) ? $element['#default_value'] : '',
+      '#default_value' => (isset($element['#default_value']) && !is_array($element['#default_value'])) ? $element['#default_value'] : '',
     ];
 
     // Custom options.
@@ -115,16 +114,12 @@ class YamlFormElementOptions extends FormElement {
         ],
       ],
       '#error_no_message' => TRUE,
-      '#default_value' => (!is_string($element['#default_value'])) ? $element['#default_value'] : [],
+      '#default_value' => (isset($element['#default_value']) && !is_string($element['#default_value'])) ? $element['#default_value'] : [],
     ];
 
     $element['#element_validate'] = [[get_called_class(), 'validateYamlFormElementOptions']];
 
-    // Wrap this $element in a <div> that handle #states.
-    YamlFormElementHelper::fixWrapper($element);
-
     return $element;
-
   }
 
   /**

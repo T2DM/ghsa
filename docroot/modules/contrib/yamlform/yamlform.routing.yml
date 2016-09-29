@@ -55,7 +55,7 @@ entity.yamlform.confirmation:
   requirements:
     _entity_access: 'yamlform.submission_create'
 
-entity.yamlform.submissions:
+entity.yamlform.user.submissions:
   path: '/yamlform/{yamlform}/submissions'
   defaults:
     _entity_list: 'yamlform_submission'
@@ -67,6 +67,23 @@ entity.yamlform.submissions:
   requirements:
     _entity_access: 'yamlform.submission_view_own'
     _user_is_logged_in: 'TRUE'
+
+entity.yamlform.user.submission:
+  path: '/yamlform/{yamlform}/submissions/{yamlform_submission}'
+  defaults:
+    _controller: '\Drupal\yamlform\Controller\YamlFormSubmissionController::index'
+    _title_callback: 'Drupal\yamlform\Controller\YamlFormSubmissionController::title'
+    type: 'default'
+  requirements:
+    _entity_access: 'yamlform_submission.view'
+
+entity.yamlform.user.submission.edit:
+  path: '/yamlform/{yamlform}/submissions/{yamlform_submission}/edit'
+  defaults:
+    _entity_form: 'yamlform_submission.default'
+    _title_callback: 'Drupal\yamlform\Controller\YamlFormSubmissionController::title'
+  requirements:
+    _entity_access: 'yamlform_submission.update'
 
 entity.yamlform.test:
   path: '/yamlform/{yamlform}/test'

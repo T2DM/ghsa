@@ -237,7 +237,7 @@ Edit tab
 
 - All elements (/yamlform/test_element)
 - Date elements (/yamlform/test_element_dates)
-- Entity autocomplete (/yamlform/test_element_entity_autocomplete)
+- Entity autocomplete (/yamlform/test_element_entity_reference)
     - Preview is broken and throwing serialization error.
 - Text format (/yamlform/test_element_text_format)
 - Ignored properties (/yamlform/test_element_ignored_properties)

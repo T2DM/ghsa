@@ -13,7 +13,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  * @YamlFormElement(
  *   id = "yamlform_signature",
  *   label = @Translation("Signature"),
- *   category = @Translation("Advanced")
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class YamlFormSignature extends YamlFormElementBase {

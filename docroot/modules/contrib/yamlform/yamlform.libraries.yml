@@ -13,6 +13,14 @@ yamlform.admin:
     - core/jquery.once
     - yamlform/yamlform.form
 
+# Theme
+
+yamlform.theme.bartik:
+  version: 1.x
+  css:
+    theme:
+      css/yamlform.theme.bartik.css: {}
+
 yamlform.theme.seven:
   version: 1.x
   css:
@@ -114,15 +122,6 @@ yamlform.element.color:
     - core/modernizr
     - yamlform/yamlform.element.inputmask
 
-yamlform.element.composite:
-  version: 1.x
-  js:
-    js/yamlform.element.detail.js: {}
-  dependencies:
-    - core/drupal
-    - core/jquery
-    - core/jquery.once
-
 yamlform.element.counter:
   version: 1.x
   js:
@@ -133,10 +132,22 @@ yamlform.element.counter:
     - core/jquery.once
     - yamlform/jquery.counter
 
-yamlform.element.details:
+yamlform.element.details.save:
   version: 1.x
   js:
-    js/yamlform.element.details.js: {}
+    js/yamlform.element.details.save.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+
+yamlform.element.details.toggle:
+  version: 1.x
+  css:
+    theme:
+      css/yamlform.element.details.toggle.css: {}
+  js:
+    js/yamlform.element.details.toggle.js: {}
   dependencies:
     - core/drupal
     - core/jquery
@@ -193,11 +204,23 @@ yamlform.element.other:
     - core/jquery
     - core/jquery.once
 
+yamlform.element.range:
+  version: 1.x
+  css:
+    theme:
+      css/yamlform.element.range.css: {}
+  js:
+    js/yamlform.element.range.js: {}
+  dependencies:
+    - core/modernizr
+
 yamlform.element.rating:
   version: 1.x
   css:
     component:
       css/yamlform.element.rating.css: {}
+  js:
+    js/yamlform.element.rating.js: {}
   dependencies:
     - yamlform/jquery.rateit
 
@@ -221,6 +244,23 @@ yamlform.element.signature:
   dependencies:
     - core/drupal
     - yamlform/signature_pad
+
+yamlform.element.states:
+  version: 1.x
+  css:
+    component:
+      css/yamlform.element.states.css: {}
+
+yamlform.element.text_format:
+  version: 1.x
+  js:
+    js/yamlform.element.text_format.js: {}
+
+yamlform.element.tableselect_sort:
+  version: 1.x
+  css:
+    theme:
+      css/yamlform.element.tableselect_sort.css: {}
 
 yamlform.element.toggle:
   version: 1.x

@@ -13,7 +13,8 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  * @YamlFormElement(
  *   id = "yamlform_markup",
  *   label = @Translation("HTML markup"),
- *   category = @Translation("Markup")
+ *   category = @Translation("Markup element"),
+ *   states_wrapper = TRUE,
  * )
  */
 class YamlFormMarkup extends YamlFormElementBase {
@@ -21,7 +22,7 @@ class YamlFormMarkup extends YamlFormElementBase {
   /**
    * {@inheritdoc}
    */
-  public function hasValue(array $element) {
+  public function isInput(array $element) {
     return FALSE;
   }
 
@@ -41,6 +42,7 @@ class YamlFormMarkup extends YamlFormElementBase {
       'display_on' => 'form',
       'private' => FALSE,
       'flex' => 1,
+      'states' => [],
     ];
   }
 
@@ -48,6 +50,8 @@ class YamlFormMarkup extends YamlFormElementBase {
    * {@inheritdoc}
    */
   public function prepare(array &$element, YamlFormSubmissionInterface $yamlform_submission) {
+    parent::prepare($element, $yamlform_submission);
+
     // Hide markup element is it should be only displayed on 'view'.
     if (isset($element['#display_on']) && $element['#display_on'] == 'view') {
       $element['#access'] = FALSE;
@@ -95,6 +99,13 @@ class YamlFormMarkup extends YamlFormElementBase {
     }
 
     return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getElementSelectorOptions(array $element) {
+    return [];
   }
 
   /**

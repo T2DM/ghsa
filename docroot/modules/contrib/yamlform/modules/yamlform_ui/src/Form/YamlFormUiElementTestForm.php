@@ -68,7 +68,6 @@ class YamlFormUiElementTestForm extends YamlFormUiElementFormBase {
 
     if ($test_element) {
       $yamlform_submission = YamlFormSubmission::create(['yamlform' => $this->yamlform]);
-
       $this->yamlformElement->initialize($test_element);
       $this->yamlformElement->initialize($this->element);
       $this->yamlformElement->prepare($this->element, $yamlform_submission);
@@ -124,7 +123,7 @@ class YamlFormUiElementTestForm extends YamlFormUiElementFormBase {
     $form['properties']['#tree'] = TRUE;
     $form['properties']['custom']['#open'] = TRUE;
 
-    $form['properties']['general']['type'] = [
+    $form['properties']['element']['type'] = [
       '#type' => 'item',
       '#title' => $this->t('Type'),
       '#markup' => $type,
@@ -168,7 +167,7 @@ class YamlFormUiElementTestForm extends YamlFormUiElementFormBase {
     // Rebuild is throwing the below error.
     // LogicException: Settings can not be serialized.
     // $form_state->setRebuild();
-
+    // @todo Determine what object is being serialized with form.
     $element_form_state = (new FormState())->setValues($form_state->getValue('properties') ?: []);
     $properties = $this->yamlformElement->getConfigurationFormProperties($form, $element_form_state);
 

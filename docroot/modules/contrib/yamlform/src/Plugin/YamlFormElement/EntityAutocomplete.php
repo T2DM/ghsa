@@ -3,6 +3,7 @@
 namespace Drupal\yamlform\Plugin\YamlFormElement;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\yamlform\YamlFormElementBase;
 use Drupal\yamlform\YamlFormSubmissionInterface;
 
 /**
@@ -12,18 +13,41 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "entity_autocomplete",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Entity!Element!EntityAutocomplete.php/class/EntityAutocomplete",
  *   label = @Translation("Entity autocomplete"),
- *   category = @Translation("Entity references")
+ *   category = @Translation("Entity reference elements"),
  * )
  */
-class EntityAutocomplete extends EntityReferenceBase {
+class EntityAutocomplete extends YamlFormElementBase implements YamlFormEntityReferenceInterface {
+
+  use YamlFormEntityReferenceTrait;
 
   /**
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
     return parent::getDefaultProperties() + [
+      'target_type' => 'node',
+      'selection_handler' => 'default',
+      'selection_settings' => [],
       'tags' => FALSE,
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setDefaultValue(array &$element) {
+    if (isset($element['#default_value']) && (!empty($element['#default_value']) || $element['#default_value'] === 0)) {
+      if ($this->hasMultipleValues($element)) {
+        $entity_ids = $this->getTargetEntityIds($element['#default_value']);
+        $element['#default_value'] = ($entity_ids) ? entity_load_multiple($element['#target_type'], $entity_ids) : [];
+      }
+      else {
+        $element['#default_value'] = entity_load($element['#target_type'], $element['#default_value']) ?: NULL;
+      }
+    }
+    else {
+      $element['#default_value'] = NULL;
+    }
   }
 
   /**
@@ -74,12 +98,14 @@ class EntityAutocomplete extends EntityReferenceBase {
    */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
+
     $form['entity_reference']['tags'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Tags'),
       '#description' => $this->t('Check this option if the user should be allowed to enter multiple entity references.'),
       '#return_value' => TRUE,
     ];
+
     return $form;
   }
 

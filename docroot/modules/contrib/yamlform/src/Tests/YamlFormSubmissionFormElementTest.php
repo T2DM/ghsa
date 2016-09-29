@@ -141,22 +141,22 @@ class YamlFormSubmissionFormElementTest extends YamlFormTestBase {
     $this->assert($form['elements']['datelist_elements']['datelist_default']['#default_value'] instanceof DrupalDateTime, 'datelist_default #default_value instance of \Drupal\Core\Datetime\DrupalDateTime.');
 
     // Check 'entity_autocomplete' #default_value.
-    $yamlform_entity_autocomplete = YamlForm::load('test_element_entity_autocomplete');
+    $yamlform_entity_autocomplete = YamlForm::load('test_element_entity_reference');
 
     /* Test entity_autocomplete element */
 
-    $this->drupalGet('yamlform/test_element_entity_autocomplete');
-    $this->assertFieldByName('user', 'admin (1)');
+    $this->drupalGet('yamlform/test_element_entity_reference');
+    $this->assertFieldByName('entity_autocomplete_user_default', 'admin (1)');
 
     // Issue #2471154 Anonymous user label can't be viewed and auth user labels
     // are only accessible with 'access user profiles' permission.
     // https://www.drupal.org/node/2471154
     // Check if 'view label' access for accounts is supported (8.2.x+).
     if (User::load(0)->access('view label')) {
-      $this->assertFieldByName('users', 'Anonymous (0), admin (1)');
+      $this->assertFieldByName('entity_autocomplete_user_tags', 'Anonymous (0), admin (1)');
     }
     else {
-      $this->assertFieldByName('users', '- Restricted access - (0), admin (1)');
+      $this->assertFieldByName('entity_autocomplete_user_tags', '- Restricted access - (0), admin (1)');
     }
 
     $form = $yamlform_entity_autocomplete->getSubmissionForm();
@@ -164,11 +164,11 @@ class YamlFormSubmissionFormElementTest extends YamlFormTestBase {
     // Single entity (w/o #tags).
     // TODO: (TESTING) Figure out why the below #default_value is an array when it should be the entity.
     // @see \Drupal\yamlform\YamlFormSubmissionForm::prepareElements()
-    $this->assert($form['elements']['user']['#default_value'][0] instanceof AccountInterface, 'user #default_value instance of \Drupal\Core\Session\AccountInterface.');
+    $this->assert($form['elements']['entity_autocomplete']['entity_autocomplete_user_default']['#default_value'][0] instanceof AccountInterface, 'user #default_value instance of \Drupal\Core\Session\AccountInterface.');
 
     // Multiple entities (w #tags).
-    $this->assert($form['elements']['users']['#default_value'][0] instanceof AccountInterface, 'users #default_value instance of \Drupal\Core\Session\AccountInterface.');
-    $this->assert($form['elements']['users']['#default_value'][1] instanceof AccountInterface, 'users #default_value instance of \Drupal\Core\Session\AccountInterface.');
+    $this->assert($form['elements']['entity_autocomplete']['entity_autocomplete_user_tags']['#default_value'][0] instanceof AccountInterface, 'users #default_value instance of \Drupal\Core\Session\AccountInterface.');
+    $this->assert($form['elements']['entity_autocomplete']['entity_autocomplete_user_tags']['#default_value'][1] instanceof AccountInterface, 'users #default_value instance of \Drupal\Core\Session\AccountInterface.');
 
     /* Test text format element */
 
@@ -191,7 +191,7 @@ class YamlFormSubmissionFormElementTest extends YamlFormTestBase {
     $this->drupalGet('yamlform/test_form_properties');
     $this->assertPattern('/Form prefix<form /');
     $this->assertPattern('/<\/form>\s+Form suffix/');
-    $this->assertRaw('form class="yamlform-submission-test-form-properties-form yamlform-submission-form test-form-properties" invalid="invalid" style="border: 10px solid red; padding: 1em;"');
+    $this->assertRaw('form class="yamlform-submission-test-form-properties-form yamlform-submission-form test-form-properties yamlform-details-toggle" invalid="invalid" style="border: 10px solid red; padding: 1em;"');
   }
 
 }

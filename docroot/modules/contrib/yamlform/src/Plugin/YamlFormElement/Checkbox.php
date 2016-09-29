@@ -9,7 +9,7 @@ namespace Drupal\yamlform\Plugin\YamlFormElement;
  *   id = "checkbox",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Checkbox.php/class/Checkbox",
  *   label = @Translation("Checkbox"),
- *   category = @Translation("Basic"),
+ *   category = @Translation("Basic elements"),
  * )
  */
 class Checkbox extends BooleanBase {

@@ -16,7 +16,7 @@ class YamlFormElementOptionsTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'block', 'filter', 'node', 'user', 'yamlform', 'yamlform_test'];
+  public static $modules = ['system', 'user', 'yamlform', 'yamlform_test'];
 
   /**
    * Tests building of options elements.
@@ -64,13 +64,17 @@ yamlform_element_options_custom:
     $this->assertRaw('<tr class="draggable odd" data-drupal-selector="edit-yamlform-options-options-0">');
     $this->assertRaw('<input data-drupal-selector="edit-yamlform-options-options-0-value" type="text" id="edit-yamlform-options-options-0-value" name="yamlform_options[options][0][value]" value="" size="25" maxlength="128" placeholder="Enter value" class="form-text" />');
     $this->assertRaw('<td><div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-yamlform-options-options-0-text form-item-yamlform-options-options-0-text form-no-label">');
-    $this->assertRaw('<input data-drupal-selector="edit-yamlform-options-options-0-text" type="text" id="edit-yamlform-options-options-0-text" name="yamlform_options[options][0][text]" value="" size="25" maxlength="128" placeholder="Enter text" class="form-text" />');
+    $this->assertRaw('<input data-drupal-selector="edit-yamlform-options-options-0-text" type="text" id="edit-yamlform-options-options-0-text" name="yamlform_options[options][0][text]" value="" size="25" placeholder="Enter text" class="form-text" />');
     $this->assertRaw('<input class="yamlform-options-sort-weight form-number" data-drupal-selector="edit-yamlform-options-options-0-weight" type="number" id="edit-yamlform-options-options-0-weight" name="yamlform_options[options][0][weight]" value="0" step="1" size="10" />');
     $this->assertRaw('<td><input data-drupal-selector="edit-yamlform-options-options-0-remove" formnovalidate="formnovalidate" type="image" id="edit-yamlform-options-options-0-remove" name="yamlform_options_table_remove_0" src="' . $base_path . 'core/misc/icons/787878/ex.svg" class="image-button js-form-submit form-submit" />');
 
     // Check optgroup 'yamlform_options' display CodeMirror editor.
     $this->assertRaw('<label for="edit-yamlform-options-optgroup" class="js-form-required form-required">yamlform_options (optgroup)</label>');
     $this->assertRaw('<textarea data-drupal-selector="edit-yamlform-options-optgroup-options" aria-describedby="edit-yamlform-options-optgroup-options--description" class="js-yamlform-codemirror yamlform-codemirror yaml form-textarea resize-vertical" data-yamlform-codemirror-mode="text/x-yaml" id="edit-yamlform-options-optgroup-options" name="yamlform_options_optgroup[options]" rows="5" cols="60">');
+
+    /**************************************************************************/
+    // Processing.
+    /**************************************************************************/
 
     // Check populated 'yamlform_options_default_value'.
     $this->assertFieldByName('yamlform_options_default_value[options][0][value]', 'one');

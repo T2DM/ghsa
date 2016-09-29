@@ -4,6 +4,7 @@ namespace Drupal\yamlform_test\Plugin\YamlFormHandler;
 
 use Drupal\Component\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\yamlform\Utility\YamlFormTidy;
 use Drupal\yamlform\YamlFormHandlerBase;
 use Drupal\yamlform\YamlFormSubmissionInterface;
 
@@ -28,7 +29,7 @@ class DebugYamlFormHandler extends YamlFormHandlerBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state, YamlFormSubmissionInterface $yamlform_submission) {
-    $build = ['#markup' => 'Submitted values are:<pre>' . Yaml::encode($yamlform_submission->getData()) . '</pre>'];
+    $build = ['#markup' => 'Submitted values are:<pre>' . YamlFormTidy::tidy(Yaml::encode($yamlform_submission->getData())) . '</pre>'];
     drupal_set_message(\Drupal::service('renderer')->render($build), 'warning');
   }
 

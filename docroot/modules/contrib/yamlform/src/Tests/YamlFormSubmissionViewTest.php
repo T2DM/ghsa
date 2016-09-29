@@ -3,7 +3,6 @@
 namespace Drupal\yamlform\Tests;
 
 use Drupal\Component\Render\FormattableMarkup;
-use Drupal\filter\Entity\FilterFormat;
 use Drupal\user\Entity\User;
 use Drupal\yamlform\Entity\YamlForm;
 use Drupal\yamlform\Entity\YamlFormSubmission;
@@ -27,13 +26,7 @@ class YamlFormSubmissionViewTest extends YamlFormTestBase {
    */
   public function setUp() {
     parent::setUp();
-
-    // Create Full HTML text format.
-    $full_html_format = FilterFormat::create([
-      'format' => 'full_html',
-      'name' => 'Full HTML',
-    ]);
-    $full_html_format->save();
+    $this->createFilters();
   }
 
   /**

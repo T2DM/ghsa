@@ -9,7 +9,7 @@
 
   Drupal.behaviors.yamlFormColor = {
     attach: function (context) {
-      $(context).find('.form-color').once().each(function () {
+      $(context).find('.form-color:not(.form-color-output)').once().each(function () {
         var $element = $(this);
         // Handle browser that don't support the HTML5 color input.
         if (Modernizr.inputtypes.color === false) {

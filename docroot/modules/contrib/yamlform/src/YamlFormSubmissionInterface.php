@@ -280,6 +280,14 @@ interface YamlFormSubmissionInterface extends ContentEntityInterface, EntityOwne
   public function getSourceUrl();
 
   /**
+   * Gets the YAML form submission's secure tokenized URL.
+   *
+   * @return \Drupal\Core\Url
+   *   The the YAML form submission's secure tokenized URL.
+   */
+  public function getTokenUrl();
+
+  /**
    * Invoke all YAML form handlers method.
    *
    * @param string $method

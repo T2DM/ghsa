@@ -289,6 +289,14 @@ interface YamlFormInterface extends ConfigEntityInterface, EntityWithPluginColle
   public function getElementsFlattenedAndHasValue();
 
   /**
+   * Get YAML form elements selectors as options.
+   *
+   * @return array
+   *   YAML form elements selectors as options.
+   */
+  public function getElementsSelectorOptions();
+
+  /**
    * Sets elements (YAML) value.
    *
    * @param array $elements

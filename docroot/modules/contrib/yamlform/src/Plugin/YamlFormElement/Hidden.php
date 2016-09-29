@@ -9,7 +9,7 @@ namespace Drupal\yamlform\Plugin\YamlFormElement;
  *   id = "hidden",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Hidden.php/class/Hidden",
  *   label = @Translation("Hidden"),
- *   category = @Translation("Basic")
+ *   category = @Translation("Basic elements"),
  * )
  */
 class Hidden extends TextBase {

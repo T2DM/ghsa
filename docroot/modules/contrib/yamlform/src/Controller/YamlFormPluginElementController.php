@@ -17,30 +17,30 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class YamlFormPluginElementController extends ControllerBase {
 
   /**
-   * A element manager.
+   * A element info manager.
    *
    * @var \Drupal\Core\Render\ElementInfoManagerInterface
    */
-  protected $elementManager;
+  protected $elementInfo;
 
   /**
    * A YAML form element plugin manager.
    *
    * @var \Drupal\yamlform\YamlFormElementManagerInterface
    */
-  protected $yamlFormElementManager;
+  protected $elementManager;
 
   /**
    * Constructs a YamlFormPluginBaseController object.
    *
-   * @param \Drupal\Core\Render\ElementInfoManagerInterface $element_manager
-   *   A element plugin manager.
-   * @param \Drupal\yamlform\YamlFormElementManagerInterface $yamlform_element_manager
+   * @param \Drupal\Core\Render\ElementInfoManagerInterface $element_info
+   *   A element info plugin manager.
+   * @param \Drupal\yamlform\YamlFormElementManagerInterface $element_manager
    *   A YAML form element plugin manager.
    */
-  public function __construct(ElementInfoManagerInterface $element_manager, YamlFormElementManagerInterface $yamlform_element_manager) {
+  public function __construct(ElementInfoManagerInterface $element_info, YamlFormElementManagerInterface $element_manager) {
+    $this->elementInfo = $element_info;
     $this->elementManager = $element_manager;
-    $this->yamlFormElementManager = $yamlform_element_manager;
   }
 
   /**
@@ -84,13 +84,14 @@ class YamlFormPluginElementController extends ControllerBase {
     // Define a default element used to get default properties.
     $element = ['#type' => 'element'];
 
-    $element_plugin_definitions = $this->elementManager->getDefinitions();
+    $element_plugin_definitions = $this->elementInfo->getDefinitions();
     foreach ($element_plugin_definitions as $element_plugin_id => $element_plugin_definition) {
-      if ($this->yamlFormElementManager->hasDefinition($element_plugin_id)) {
+      if ($this->elementManager->hasDefinition($element_plugin_id)) {
 
         /** @var \Drupal\yamlform\YamlFormElementInterface $yamlform_element */
-        $yamlform_element = $this->yamlFormElementManager->createInstance($element_plugin_id);
-        $yamlform_element_plugin_definition = $this->yamlFormElementManager->getDefinition($element_plugin_id);
+        $yamlform_element = $this->elementManager->createInstance($element_plugin_id);
+        $yamlform_element_plugin_definition = $this->elementManager->getDefinition($element_plugin_id);
+        $yamlform_element_info = $yamlform_element->getInfo();
 
         $parent_classes = YamlFormReflectionHelper::getParentClasses($yamlform_element, 'YamlFormElementBase');
 
@@ -103,17 +104,28 @@ class YamlFormPluginElementController extends ControllerBase {
 
         $related_types = $yamlform_element->getRelatedTypes($element);
 
-        $definitions = [
-          'value' => $yamlform_element->hasValue($element),
+        $yamlform_info_definitions = [
+          'input' => $yamlform_element->isInput($element),
           'container' => $yamlform_element->isContainer($element),
           'root' => $yamlform_element->isRoot($element),
           'hidden' => $yamlform_element->isHidden($element),
           'multiline' => $yamlform_element->isMultiline($element),
           'multiple' => $yamlform_element->hasMultipleValues($element),
+          'states_wrapper' => $yamlform_element_plugin_definition['states_wrapper'],
         ];
-        $settings = [];
-        foreach ($definitions as $key => $value) {
-          $settings[] = '<b>' . $key . '</b>: ' . ($value ? $this->t('Yes') : $this->t('No'));
+        $yamlform_info = [];
+        foreach ($yamlform_info_definitions as $key => $value) {
+          $yamlform_info[] = '<b>' . $key . '</b>: ' . ($value ? $this->t('Yes') : $this->t('No'));
+        }
+
+        $element_info_definitions = [
+          'input' => (empty($yamlform_element_info['#input'])) ? $this->t('No') : $this->t('Yes'),
+          'theme' => (isset($yamlform_element_info['#theme'])) ? $yamlform_element_info['#theme'] : 'N/A',
+          'theme_wrappers' => (isset($yamlform_element_info['#theme_wrappers'])) ? implode('; ', $yamlform_element_info['#theme_wrappers']) : 'N/A',
+        ];
+        $element_info = [];
+        foreach ($element_info_definitions as $key => $value) {
+          $element_info[] = '<b>' . $key . '</b>: ' . $value;
         }
 
         $properties = array_keys(YamlFormElementHelper::addPrefix($yamlform_element->getDefaultProperties()));
@@ -143,7 +155,8 @@ class YamlFormPluginElementController extends ControllerBase {
             new FormattableMarkup('<div class="yamlform-form-filter-text-source">@id</div>', ['@id' => $element_plugin_id]),
             $yamlform_element->getPluginLabel(),
             ['data' => ['#markup' => implode('<br/> → ', $parent_classes)], 'nowrap' => 'nowrap'],
-            ['data' => ['#markup' => implode('<br/>', $settings)], 'nowrap' => 'nowrap'],
+            ['data' => ['#markup' => implode('<br/>', $yamlform_info)], 'nowrap' => 'nowrap'],
+            ['data' => ['#markup' => implode('<br/>', $element_info)], 'nowrap' => 'nowrap'],
             ['data' => ['#markup' => implode('<br/>', $properties)]],
             $formats ? ['data' => ['#markup' => '• ' . implode('<br/>• ', $formats)], 'nowrap' => 'nowrap'] : '',
             $related_types ? ['data' => ['#markup' => '• ' . implode('<br/>• ', $related_types)], 'nowrap' => 'nowrap'] : '<' . $this->t('none') . '>',
@@ -184,7 +197,8 @@ class YamlFormPluginElementController extends ControllerBase {
         $this->t('Name'),
         $this->t('Label'),
         $this->t('Class hierarchy'),
-        $this->t('Definition'),
+        $this->t('YAML Form info'),
+        $this->t('Element info'),
         $this->t('Properties'),
         $this->t('Formats'),
         $this->t('Related'),
@@ -202,7 +216,7 @@ class YamlFormPluginElementController extends ControllerBase {
     $build['elements'] = [
       '#type' => 'details',
       '#title' => $this->t('Additional elements'),
-      '#description' => $this->t('Below are element that are available to a YAML form but do not have YAML form element plugin and/or require any additional integration'),
+      '#description' => $this->t('Below are elements that available but do not have a YAML Form Element integration plugin.'),
       'table' => [
         '#type' => 'table',
         '#header' => [

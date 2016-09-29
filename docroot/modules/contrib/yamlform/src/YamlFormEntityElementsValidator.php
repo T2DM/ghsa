@@ -7,7 +7,6 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Url;
-use Drupal\yamlform\Entity\YamlForm;
 use Drupal\yamlform\Utility\YamlFormArrayHelper;
 use Drupal\yamlform\Utility\YamlFormElementHelper;
 

@@ -42,12 +42,20 @@ class YamlFormBlock extends BlockBase {
     ];
     $form['default_data'] = [
       '#title' => $this->t('Default YAML form submission data (YAML)'),
-      '#description' => $this->t('Enter YAML form submission data as name and value pairs which will be used to prepopulate the selected YAML form.'),
+      '#description' => $this->t('Enter YAML form submission data as name and value pairs which will be used to prepopulate the selected YAML form. You may use tokens.'),
       '#type' => 'yamlform_codemirror',
       '#mode' => 'yaml',
       '#default_value' => $this->configuration['default_data'],
     ];
-
+    $form['token_tree_link'] = [
+      '#theme' => 'token_tree_link',
+      '#token_types' => [
+        'yamlform',
+        'yamlform-submission',
+      ],
+      '#click_insert' => FALSE,
+      '#dialog' => TRUE,
+    ];
     return $form;
   }
 

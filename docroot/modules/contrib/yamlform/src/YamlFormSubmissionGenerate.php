@@ -93,7 +93,7 @@ class YamlFormSubmissionGenerate implements YamlFormSubmissionGenerateInterface 
     $element_handler = $this->elementManager->createInstance($plugin_id);
 
     // Exit if element does not have a value.
-    if (!$element_handler->hasValue($element)) {
+    if (!$element_handler->isInput($element)) {
       return NULL;
     }
 

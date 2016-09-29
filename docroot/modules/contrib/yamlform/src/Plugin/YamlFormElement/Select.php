@@ -12,7 +12,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "select",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Select.php/class/Select",
  *   label = @Translation("Select"),
- *   category = @Translation("Options"),
+ *   category = @Translation("Options elements"),
  * )
  */
 class Select extends OptionsBase {

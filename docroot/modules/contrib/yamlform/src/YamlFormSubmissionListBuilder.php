@@ -35,7 +35,7 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * The YAML form.
@@ -137,16 +137,16 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
   public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage) {
     parent::__construct($entity_type, $storage);
 
-    $this->yamlFormRequest = \Drupal::service('yamlform.request');
+    $this->requestHandler = \Drupal::service('yamlform.request');
 
     $this->keys = \Drupal::request()->query->get('search');
     $this->state = \Drupal::request()->query->get('state');
 
-    list($this->yamlform, $this->sourceEntity) = $this->yamlFormRequest->getYamlFormEntities();
+    list($this->yamlform, $this->sourceEntity) = $this->requestHandler->getYamlFormEntities();
 
-    $base_route_name = ($this->yamlform) ? $this->yamlFormRequest->getBaseRouteName($this->yamlform, $this->sourceEntity) : '';
+    $base_route_name = ($this->yamlform) ? $this->requestHandler->getBaseRouteName($this->yamlform, $this->sourceEntity) : '';
 
-    $this->account = (\Drupal::routeMatch()->getRouteName() == "$base_route_name.yamlform.submissions") ? \Drupal::currentUser() : NULL;
+    $this->account = (\Drupal::routeMatch()->getRouteName() == "$base_route_name.yamlform.user.submissions") ? \Drupal::currentUser() : NULL;
 
     $this->elementManager = \Drupal::service('plugin.manager.yamlform.element');
 
@@ -204,14 +204,14 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
 
     // Customize.
     if ($this->customize) {
-      $route_name = $this->yamlFormRequest->getRouteName($this->yamlform, $this->sourceEntity, 'yamlform.results_table.custom');
-      $route_parameters = $this->yamlFormRequest->getRouteParameters($this->yamlform, $this->sourceEntity) + ['yamlform' => $this->yamlform->id()];
+      $route_name = $this->requestHandler->getRouteName($this->yamlform, $this->sourceEntity, 'yamlform.results_table.custom');
+      $route_parameters = $this->requestHandler->getRouteParameters($this->yamlform, $this->sourceEntity) + ['yamlform' => $this->yamlform->id()];
       $route_options = ['query' => \Drupal::destination()->getAsArray()];
       $build['custom'] = [
         '#type' => 'link',
         '#title' => $this->t('Customize'),
         '#url' => Url::fromRoute($route_name, $route_parameters, $route_options),
-        '#attributes' => YamlFormDialogHelper::getModalDialogAttributes(500, ['button', 'button-action', 'button--small', 'button-yamlform-setting']),
+        '#attributes' => YamlFormDialogHelper::getModalDialogAttributes(800, ['button', 'button-action', 'button--small', 'button-yamlform-setting']),
       ];
     }
 
@@ -315,8 +315,8 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    $route_name = $this->yamlFormRequest->getRouteName($entity, $entity->getSourceEntity(), 'yamlform_submission.canonical');
-    $route_parameters = $this->yamlFormRequest->getRouteParameters($entity, $entity->getSourceEntity());
+    $route_name = $this->requestHandler->getRouteName($entity, $entity->getSourceEntity(), $this->getSubmissionRouteName());
+    $route_parameters = $this->requestHandler->getRouteParameters($entity, $entity->getSourceEntity());
 
     $row = [
       'data' => [],
@@ -364,8 +364,8 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
         return ($is_raw) ? $entity->langcode->value : \Drupal::languageManager()->getLanguage($entity->langcode->value)->getName();
 
       case 'notes':
-        $route_name = $this->yamlFormRequest->getRouteName($entity, $entity->getSourceEntity(), 'yamlform_submission.notes_form');
-        $route_parameters = $this->yamlFormRequest->getRouteParameters($entity, $entity->getSourceEntity());
+        $route_name = $this->requestHandler->getRouteName($entity, $entity->getSourceEntity(), 'yamlform_submission.notes_form');
+        $route_parameters = $this->requestHandler->getRouteParameters($entity, $entity->getSourceEntity());
         $route_options = ['query' => \Drupal::destination()->getAsArray()];
         $state = $entity->get('notes')->value ? 'on' : 'off';
         return [
@@ -385,8 +385,8 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
         return $entity->getRemoteAddr();
 
       case 'sid':
-        $route_name = $this->yamlFormRequest->getRouteName($entity, $entity->getSourceEntity(), 'yamlform_submission.canonical');
-        $route_parameters = $this->yamlFormRequest->getRouteParameters($entity);
+        $route_name = $this->requestHandler->getRouteName($entity, $entity->getSourceEntity(), $this->getSubmissionRouteName());
+        $route_parameters = $this->requestHandler->getRouteParameters($entity);
         $link_text = $entity->id() . ($entity->isDraft() ? ' (' . $this->t('draft') . ')' : '');
         return Link::createFromRoute($link_text, $route_name, $route_parameters);
 
@@ -446,8 +446,8 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function getDefaultOperations(EntityInterface $entity) {
-    $base_route_name = $this->yamlFormRequest->getBaseRouteName($entity, $entity->getSourceEntity());
-    $route_parameters = $this->yamlFormRequest->getRouteParameters($entity, $entity->getSourceEntity());
+    $base_route_name = $this->requestHandler->getBaseRouteName($entity, $entity->getSourceEntity());
+    $route_parameters = $this->requestHandler->getRouteParameters($entity, $entity->getSourceEntity());
     $route_options = ['query' => \Drupal::destination()->getAsArray()];
 
     $operations = [];
@@ -497,13 +497,23 @@ class YamlFormSubmissionListBuilder extends EntityListBuilder {
   /****************************************************************************/
 
   /**
+   * Get submission route name based on the current route.
+   * @return string
+   *   The submission route name which can be either 'yamlform.user.submission'
+   *   or 'yamlform_submission.canonical.
+   */
+  protected function getSubmissionRouteName() {
+    return (strpos(\Drupal::routeMatch()->getRouteName(), 'yamlform.user.submissions') !== FALSE) ? 'yamlform.user.submission' : 'yamlform_submission.canonical';
+  }
+
+  /**
    * Get base route name for the YAML form or YAML form source entity.
    *
    * @return string
    *   The base route name for YAML form or YAML form source entity.
    */
   protected function getBaseRouteName() {
-    return $this->yamlFormRequest->getBaseRouteName($this->yamlform, $this->sourceEntity);
+    return $this->requestHandler->getBaseRouteName($this->yamlform, $this->sourceEntity);
   }
 
   /**

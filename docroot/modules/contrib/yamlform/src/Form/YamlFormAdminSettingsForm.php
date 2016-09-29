@@ -148,6 +148,13 @@ class YamlFormAdminSettingsForm extends ConfigFormBase {
       '#return_value' => TRUE,
       '#default_value' => $config->get('settings.default_form_novalidate'),
     ];
+    $form['form']['default_form_details_toggle']  = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Display collapse/expand all details link'),
+      '#description' => $this->t('If checked, an expand/collapse all (details) link will be added to all forms with two or more details elements.'),
+      '#return_value' => TRUE,
+      '#default_value' => $config->get('settings.default_form_details_toggle'),
+    ];
 
     $form['wizard'] = [
       '#type' => 'details',

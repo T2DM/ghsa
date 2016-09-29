@@ -11,7 +11,7 @@ use Drupal\yamlform\Element\YamlFormRating as YamlFormRatingElement;
  * @YamlFormElement(
  *   id = "yamlform_rating",
  *   label = @Translation("Rating"),
- *   category = @Translation("Advanced")
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class YamlFormRating extends Range {

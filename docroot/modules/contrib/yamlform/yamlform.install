@@ -228,3 +228,39 @@ function yamlform_update_8047(&$sandbox) {
 
   return implode("\n", $messages);
 }
+
+/**
+ * Issue #2802637: Add prefix support to CSV export column headers.
+ */
+function yamlform_update_8048() {
+  // Update 'yamlform.settings' configuration.
+  $settings_config = \Drupal::configFactory()->getEditable('yamlform.settings');
+  $settings_config->set('export.header_format', $settings_config->get('export.header_keys'));
+  $settings_config->clear('export.header_keys');
+  $settings_config->clear('export.likert_questions_format');
+  $settings_config->set('export.header_prefix', TRUE);
+  $settings_config->set('export.header_prefix_label_delimiter', ': ');
+  $settings_config->set('export.header_prefix_key_delimiter', '__');
+  $settings_config->save();
+}
+
+/**
+ * Issue #2803139: Add details toggle support to form settings.
+ */
+function yamlform_update_8049() {
+  // Update 'yamlform.settings' configuration.
+  $settings_config = \Drupal::configFactory()->getEditable('yamlform.settings');
+  $settings_config->set('settings.default_form_details_toggle', FALSE);
+  $settings_config->save();
+
+  // Update 'yamlform.yamlform.*' configuration.
+  _yamlform_update_settings();
+}
+
+/**
+ * Issue #2804147: Allow anonymous submission to be updated using a secure token.
+ */
+function yamlform_update_8050() {
+  // Update 'yamlform.yamlform.*' configuration.
+  _yamlform_update_settings();
+}

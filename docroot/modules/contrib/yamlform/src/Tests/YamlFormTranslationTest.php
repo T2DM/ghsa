@@ -100,7 +100,7 @@ class YamlFormTranslationTest extends WebTestBase {
 
     // Check translated YAML form options.
     $this->drupalGet('es/yamlform/example_options');
-    $this->assertRaw('<label for="edit-yes-no-yes" class="option">Sí</label>');
+    $this->assertRaw('<option value="Yes">Sí</option>');
     $this->assertRaw('<option value="840">Estados Unidos de América</option>');
   }
 

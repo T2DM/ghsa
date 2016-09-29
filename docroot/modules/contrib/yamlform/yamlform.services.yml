@@ -18,7 +18,7 @@ services:
 
   yamlform.message_manager:
     class: Drupal\yamlform\YamlFormMessageManager
-    arguments: ['@config.factory', '@token', '@logger.channel.yamlform', '@yamlform.request']
+    arguments: ['@config.factory', '@entity.manager', '@token', '@logger.channel.yamlform', '@yamlform.request']
 
   yamlform_submission.generate:
     class: Drupal\yamlform\YamlFormSubmissionGenerate

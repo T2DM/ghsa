@@ -74,12 +74,16 @@ class YamlFormSubmissionStorageTest extends WebTestBase {
     // Check next submission.
     $this->assertEqual($storage->getNextSubmission($user1_submissions[0], NULL, $user1)->id(), $user1_submissions[1]->id(), "User 1 can navigate forward to user 1's next submission");
     $this->assertNull($storage->getNextSubmission($user1_submissions[2], NULL, $user1), "User 1 can't navigate forward to user 2's next submission");
-    $this->assertEqual($storage->getNextSubmission($user1_submissions[2], NULL, $admin_user)->id(), $user2_submissions[0]->id(), "Admin user can navigate between user submissions");
+    $this->drupalLogin($admin_user);
+    $this->assertEqual($storage->getNextSubmission($user1_submissions[2], NULL)->id(), $user2_submissions[0]->id(), "Admin user can navigate between user submissions");
+    $this->drupalLogout();
 
     // Check previous submission.
     $this->assertEqual($storage->getPreviousSubmission($user1_submissions[1], NULL, $user1)->id(), $user1_submissions[0]->id(), "User 1 can navigate backward to user 1's previous submission");
     $this->assertNull($storage->getPreviousSubmission($user2_submissions[0], NULL, $user2), "User 2 can't navigate backward to user 1's previous submission");
-    $this->assertEqual($storage->getPreviousSubmission($user2_submissions[0], NULL, $admin_user)->id(), $user1_submissions[2]->id(), "Admin user can navigate between user submissions");
+    $this->drupalLogin($admin_user);
+    $this->assertEqual($storage->getPreviousSubmission($user2_submissions[0], NULL)->id(), $user1_submissions[2]->id(), "Admin user can navigate between user submissions");
+    $this->drupalLogout();
   }
 
 }

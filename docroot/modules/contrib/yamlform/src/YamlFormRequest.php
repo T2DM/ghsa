@@ -3,6 +3,7 @@
 namespace Drupal\yamlform;
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -237,19 +238,41 @@ class YamlFormRequest implements YamlFormRequestInterface {
 
     // Check that the YAML form is referenced by the source entity.
     if (!$yamlform->getSetting('form_prepopulate_source_entity')) {
-      // Check that source entity has 'yamlform' field and it is populated.
-      if (!method_exists($source_entity, 'hasField') || !$source_entity->hasField('yamlform') || !$source_entity->yamlform->target_id) {
+      // Get source entity's yamlform field.
+      $yamlform_field_name = $this->getSourceEntityYamlFormFieldName($source_entity);
+      if (!$yamlform_field_name) {
         return NULL;
       }
 
       // Check that source entity's reference YAML form is the current YAML
       // form.
-      if ($source_entity->yamlform->target_id != $yamlform->id()) {
+      if ($source_entity->$yamlform_field_name->target_id != $yamlform->id()) {
         return NULL;
       }
     }
 
     return $source_entity;
+  }
+
+  /**
+   * Get the source entity's yamlform field name.
+   *
+   * @param EntityInterface $source_entity
+   *   A YAML form submission's source entity.
+   *
+   * @return string
+   *   The name of the yamlform field, or an empty string.
+   */
+  protected function getSourceEntityYamlFormFieldName(EntityInterface $source_entity) {
+    if ($source_entity instanceof ContentEntityInterface) {
+      $fields = $source_entity->getFieldDefinitions();
+      foreach ($fields as $field_name => $field_definition) {
+        if ($field_definition->getType() == 'yamlform') {
+          return $field_name;
+        }
+      }
+    }
+    return '';
   }
 
 }

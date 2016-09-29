@@ -59,8 +59,8 @@ abstract class YamlFormUiElementTypeFormBase extends FormBase {
     // Get definitions with basic and advanced first and uncategorized elements
     // last.
     $no_category = '';
-    $basic_category = (string) $this->t('Basic');
-    $advanced_category = (string) $this->t('Advanced');
+    $basic_category = (string) $this->t('Basic elements');
+    $advanced_category = (string) $this->t('Advanced elements');
     $uncategorized = $grouped_definitions[$no_category];
 
     $sorted_definitions = [];
@@ -74,7 +74,7 @@ abstract class YamlFormUiElementTypeFormBase extends FormBase {
 
     foreach ($sorted_definitions as &$plugin_definition) {
       if (!isset($plugin_definition['category'])) {
-        $plugin_definition['category'] = $this->t('Other');
+        $plugin_definition['category'] = $this->t('Other elements');
       }
     }
 

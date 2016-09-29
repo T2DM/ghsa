@@ -35,7 +35,6 @@ class YamlFormEntitySettingsForm extends EntityForm {
       '#markup' => $yamlform->id(),
       '#value' => $yamlform->id(),
     ];
-
     $form['general']['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Title'),
@@ -193,6 +192,28 @@ class YamlFormEntitySettingsForm extends EntityForm {
       '#return_value' => TRUE,
       '#default_value' => $settings['form_autofocus'],
     ];
+    if ($default_settings['default_form_details_toggle']) {
+      $form['form']['form_details_toggle_disabled'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Display collapse/expand all details link'),
+        '#description' => $this->t('Expand/collapse all (details) is automatically added to all forms.'),
+        '#disabled' => TRUE,
+        '#default_value' => TRUE,
+      ];
+      $form['form']['form_details_toggle'] = [
+        '#type' => 'value',
+        '#value' => $settings['form_details_toggle'],
+      ];
+    }
+    else {
+      $form['form']['form_details_toggle'] = [
+        '#type' => 'checkbox',
+        '#title' => $this->t('Display collapse/expand all details link'),
+        '#description' => $this->t('If checked, an expand/collapse all (details) link will be added to this forms when there are two or more details elements.'),
+        '#return_value' => TRUE,
+        '#default_value' => $settings['form_details_toggle'],
+      ];
+    }
 
     // Wizard.
     $form['wizard'] = [
@@ -384,6 +405,13 @@ class YamlFormEntitySettingsForm extends EntityForm {
         ],
       ],
     ];
+    $form['submission']['token_update'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Allow users to update a submission using a secure token.'),
+      '#description' => $this->t("If checked users will be able to update a submission using the form's URL appended with the submission's (secure) token.  The URL to update a submission while be available when viewing a submission's information and can be inserted into the an email using the [yamlform-submission:update-url] token."),
+      '#return_value' => TRUE,
+      '#default_value' => $settings['token_update'],
+    ];
 
     // Limits.
     $form['limits'] = [
@@ -471,7 +499,7 @@ class YamlFormEntitySettingsForm extends EntityForm {
     ];
     $form['confirmation']['token_tree_link'] = [
       '#theme' => 'token_tree_link',
-      '#token_types' => ['yamlform', 'yamlform_submission'],
+      '#token_types' => ['yamlform', 'yamlform-submission'],
       '#click_insert' => FALSE,
       '#dialog' => TRUE,
     ];
@@ -528,6 +556,12 @@ class YamlFormEntitySettingsForm extends EntityForm {
       $values['template'],
       $values['status'],
       $values['uid']
+    );
+
+    // Remove disabled properties.
+    unset(
+      $values['form_novalidate_disabled'],
+      $values['form_details_toggle_disabled']
     );
 
     // Set settings and save the form.

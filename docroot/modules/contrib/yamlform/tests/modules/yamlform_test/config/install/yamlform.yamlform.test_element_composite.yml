@@ -5,14 +5,24 @@ uid: null
 template: false
 id: test_element_composite
 title: 'Test: Element: Composite'
-description: 'Test the YAML form modules''s composite elements, includes address and contact.'
+description: 'Test the YAML form modules''s composite elements, includes address, contact, name, and credit card.'
 elements: |
   address:
     '#type': address
     '#title': 'Address'
+    '#flexbox': true
   contact:
     '#type': contact
     '#title': 'Contact'
+    '#flexbox': true
+  name:
+    '#type': name
+    '#title': 'Name'
+    '#flexbox': true
+  creditcard:
+    '#type': creditcard
+    '#title': 'Credit card'
+    '#flexbox': true
 settings:
   page: true
   page_submit_path: ''
@@ -26,6 +36,7 @@ settings:
   form_prepopulate_source_entity: false
   form_novalidate: false
   form_autofocus: false
+  form_details_toggle: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -53,6 +64,7 @@ settings:
   entity_limit_total: null
   entity_limit_user: null
   results_disabled: false
+  token_update: false
 access:
   create:
     roles:

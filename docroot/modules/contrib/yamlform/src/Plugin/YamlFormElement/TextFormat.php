@@ -15,8 +15,8 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "text_format",
  *   api = "https://api.drupal.org/api/drupal/core!modules!filter!src!Element!TextFormat.php/class/TextFormat",
  *   label = @Translation("Text format"),
- *   category = @Translation("Advanced"),
- *   multiline = TRUE
+ *   category = @Translation("Advanced elements"),
+ *   multiline = TRUE,
  * )
  */
 class TextFormat extends YamlFormElementBase {
@@ -34,9 +34,17 @@ class TextFormat extends YamlFormElementBase {
   /**
    * {@inheritdoc}
    */
+  public function isInput(array $element) {
+    return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function prepare(array &$element, YamlFormSubmissionInterface $yamlform_submission) {
     parent::prepare($element, $yamlform_submission);
     $element['#after_build'] = [[get_class($this), 'afterBuild']];
+    $element['#attached']['library'][] = 'yamlform/yamlform.element.text_format';
   }
 
   /**
@@ -126,6 +134,17 @@ class TextFormat extends YamlFormElementBase {
       $formats[$filter->id()] = $filter->label();
     }
     return $formats;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getElementSelectorInputsOptions(array $element) {
+    $title = $this->getAdminLabel($element);
+    return [
+      'value' => $title . ' [' . t('Textarea') . ']',
+      'format' => $title . ' [' . t('Select') . ']',
+    ];
   }
 
   /**

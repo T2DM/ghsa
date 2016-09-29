@@ -7,7 +7,9 @@ use Drupal\Core\Form\FormStateInterface;
 // as Url because the name is already in use in" when executing any drush
 // yamlform command that loads this file..
 // use Drupal\Core\Url.
+use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\file\Entity\File;
+use Drupal\yamlform\Entity\YamlFormSubmission;
 use Drupal\yamlform\YamlFormElementBase;
 use Drupal\Component\Utility\Bytes;
 use Drupal\yamlform\YamlFormInterface;
@@ -20,7 +22,8 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "managed_file",
  *   api = "https://api.drupal.org/api/drupal/core!modules!file!src!Element!ManagedFile.php/class/ManagedFile",
  *   label = @Translation("Managed file"),
- *   category = @Translation("File uploads")
+ *   category = @Translation("File upload elements"),
+ *   states_wrapper = TRUE,
  * )
  */
 class ManagedFile extends YamlFormElementBase {
@@ -34,9 +37,30 @@ class ManagedFile extends YamlFormElementBase {
     $max_filesize = ($max_filesize / 1024 / 1024);
 
     return parent::getDefaultProperties() + [
+      'multiple' => FALSE,
       'max_filesize' => $max_filesize,
       'file_extensions' => 'gif jpg png',
+      'uri_scheme' => 'public',
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasMultipleValues(array $element) {
+    return (!empty($element['#multiple'])) ? TRUE : FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isMultiline(array $element) {
+    if ($this->hasMultipleValues($element)) {
+      return TRUE;
+    }
+    else {
+      return parent::isMultiline($element);
+    }
   }
 
   /**
@@ -53,6 +77,27 @@ class ManagedFile extends YamlFormElementBase {
   /**
    * {@inheritdoc}
    */
+  protected function prepareWrapper(array &$element) {
+    parent::prepareWrapper($element);
+
+    // Issue #2705471: Form states managed file fields.
+    // Workaround: Wrap the 'managed_file' element in a basic container.
+    if (!empty($element['#fixed_wrapper']) || empty($element['#prefix'])) {
+      return;
+    }
+
+    $container = [
+      '#prefix' => $element['#prefix'],
+      '#suffix' => $element['#suffix'],
+    ];
+    unset($element['#prefix'], $element['#suffix']);
+    $container[$element['#yamlform_key']] = $element + ['#fixed_wrapper' => TRUE];
+    $element = $container;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function setDefaultValue(array &$element) {
     if (!empty($element['#default_value']) && !is_array($element['#default_value'])) {
       $element['#default_value'] = [$element['#default_value']];
@@ -63,40 +108,91 @@ class ManagedFile extends YamlFormElementBase {
    * {@inheritdoc}
    */
   public function formatHtml(array &$element, $value, array $options = []) {
-    $file = File::load($value);
-    if (!$file) {
+    if (empty($value)) {
       return '';
     }
-    $format = $this->getFormat($element);
-    if ($format == 'link') {
+
+    $items = $this->formatItems($element, $value);
+    if (empty($items)) {
+      return '';
+    }
+
+    if ($this->hasMultipleValues($element)) {
       return [
-        '#theme' => 'file_link',
-        '#file' => $file,
+        '#theme' => 'item_list',
+        '#items' => $items,
       ];
     }
     else {
-      return parent::formatHtml($element, $value, $options);
+      return reset($items);
     }
-
   }
 
   /**
    * {@inheritdoc}
    */
   public function formatText(array &$element, $value, array $options = []) {
-    $file = File::load($value);
-    if (!$file) {
+    if (empty($value)) {
       return '';
     }
-    $format = $this->getFormat($element);
-    switch ($format) {
-      case 'id':
-        return $file->id();
 
-      case 'url':
-      default:
-        return file_create_url($file->getFileUri());
+    if (empty($element['#format']) || $element['#format'] == 'link') {
+      $element['#format'] = 'url';
     }
+
+    $items = $this->formatItems($element, $value);
+    if (empty($items)) {
+      return '';
+    }
+
+    // Add dash (aka bullet) before each item.
+    if ($this->hasMultipleValues($element)) {
+      foreach ($items as &$item) {
+        $item = '- ' . $item;
+      }
+    }
+
+    return implode("\n", $items);
+  }
+
+  /**
+   * Format a managed files as array of strings.
+   *
+   * @param array $element
+   *   An element.
+   * @param array|mixed $value
+   *   A value.
+   *
+   * @return array
+   *   Managed files as array of strings.
+   */
+  public function formatItems(array &$element, $value) {
+    $fids = (is_array($value)) ? $value : [$value];
+
+    $files = File::loadMultiple($fids);
+    $format = $this->getFormat($element);
+    $items = [];
+    foreach ($files as $fid => $file) {
+      switch ($format) {
+        case 'link':
+          $items[$fid] = [
+            '#theme' => 'file_link',
+            '#file' => $file,
+          ];
+          break;
+
+        case 'id':
+          $items[$fid] = $file->id();
+          break;
+
+        case 'url':
+        default:
+          $items[$fid] = file_create_url($file->getFileUri());
+          break;
+
+      }
+    }
+    return $items;
   }
 
   /**
@@ -120,6 +216,15 @@ class ManagedFile extends YamlFormElementBase {
   /**
    * {@inheritdoc}
    */
+  public function getElementSelectorOptions(array $element) {
+    $title = $this->getAdminLabel($element);
+    $name = $element['#yamlform_key'];
+    return [":input[name=\"files[{$name}]\"]" => $title . '  [' . $this->getPluginLabel() . ']'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function postSave(array &$element, YamlFormSubmissionInterface $yamlform_submission, $update = TRUE) {
     // Get current value and original value for this element.
     $key = $element['#yamlform_key'];
@@ -127,43 +232,46 @@ class ManagedFile extends YamlFormElementBase {
     $original_data = $yamlform_submission->getOriginalData();
     $data = $yamlform_submission->getData();
 
-    $value = isset($data[$key]) ? $data[$key] : NULL;
-    $original_value = isset($original_data[$key]) ? $original_data[$key] : NULL;
+    $value = isset($data[$key]) ? $data[$key] : [];
+    $fids = (is_array($value)) ? $value : [$value];
 
-    // Check the original submission and delete the old file upload.
-    if ($original_value && $original_value != $value) {
-      file_delete($original_value);
+    $original_value = isset($original_data[$key]) ? $original_data[$key] : [];
+    $original_fids = (is_array($original_value)) ? $original_value : [$original_value];
+
+    // Check the original submission fids and delete the old file upload.
+    foreach ($original_fids as $original_fid) {
+      if (!in_array($original_fid, $fids)) {
+        file_delete($original_fid);
+      }
     }
 
-    // Exit if there is no value (aka fid).
-    if (!$value) {
+    // Exit if there is no fids.
+    if (empty($fids)) {
       return;
     }
 
-    $file = File::load($value);
-    if (!$file) {
-      return;
+    $files = File::loadMultiple($fids);
+    foreach ($files as $fid => $file) {
+      $source_uri = $file->getFileUri();
+
+      // Replace /_sid_/ token with the submission id.
+      if (strpos($source_uri, '/_sid_/')) {
+        $destination_uri = str_replace('/_sid_/', '/' . $yamlform_submission->id() . '/', $source_uri);
+        $destination_directory = drupal_dirname($destination_uri);
+        file_prepare_directory($destination_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+        $destination_uri = file_unmanaged_move($source_uri, $destination_uri);
+        // Update the file's uri and save.
+        $file->setFileUri($destination_uri);
+        $file->save();
+      }
+
+      // Update file usage table.
+      // Set file usage which will also make the file's status permanent.
+      /** @var \Drupal\file\FileUsage\FileUsageInterface $file_usage */
+      $file_usage = \Drupal::service('file.usage');
+      $file_usage->delete($file, 'yamlform', 'yamlform_submission', $yamlform_submission->id(), 0);
+      $file_usage->add($file, 'yamlform', 'yamlform_submission', $yamlform_submission->id());
     }
-
-    $source_uri = $file->getFileUri();
-
-    // Replace /_sid_/ token with the submission id.
-    if (strpos($source_uri, '/_sid_/')) {
-      $destination_uri = str_replace('/_sid_/', '/' . $yamlform_submission->id() . '/', $source_uri);
-      $destination_directory = drupal_dirname($destination_uri);
-      file_prepare_directory($destination_directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
-      $destination_uri = file_unmanaged_move($source_uri, $destination_uri);
-      // Update the file's uri and save.
-      $file->setFileUri($destination_uri);
-      $file->save();
-    }
-
-    // Update file usage table.
-    // Set file usage which will also make the file's status permanent.
-    /** @var \Drupal\file\FileUsage\FileUsageInterface $file_usage */
-    $file_usage = \Drupal::service('file.usage');
-    $file_usage->delete($file, 'yamlform', 'yamlform_submission', $yamlform_submission->id(), 0);
-    $file_usage->add($file, 'yamlform', 'yamlform_submission', $yamlform_submission->id());
   }
 
   /**
@@ -175,13 +283,16 @@ class ManagedFile extends YamlFormElementBase {
     $data = $yamlform_submission->getData();
     $key = $element['#yamlform_key'];
 
+    $value = isset($data[$key]) ? $data[$key] : [];
+    $fids = (is_array($value)) ? $value : [$value];
+
     // Delete managed file record.
-    if (!empty($data[$key])) {
-      file_delete($data[$key]);
+    foreach ($fids as $fid) {
+      file_delete($fid);
     }
 
     // Remove the empty directory.
-    file_unmanaged_delete_recursive('public://yamlform//' . $yamlform->id() . '/' . $yamlform_submission->id());
+    file_unmanaged_delete_recursive($this->getUrlScheme($element) . '://yamlform/' . $yamlform->id() . '/' . $yamlform_submission->id());
   }
 
   /**
@@ -210,7 +321,9 @@ class ManagedFile extends YamlFormElementBase {
       'uid' => \Drupal::currentUser()->id(),
     ]);
     $file->save();
-    return $file->id();
+
+    $fid = $file->id();
+    return ($this->hasMultipleValues($element)) ? [$fid] : $fid;
   }
 
   /**
@@ -263,7 +376,7 @@ class ManagedFile extends YamlFormElementBase {
    */
   protected function getUploadLocation(array $element, YamlFormInterface $yamlform) {
     if (empty($element['#upload_location'])) {
-      $upload_location = 'public://yamlform/' . $yamlform->id() . '/_sid_';
+      $upload_location = $this->getUrlScheme($element) . '://yamlform/' . $yamlform->id() . '/_sid_';
     }
     else {
       $upload_location = $element['#upload_location'];
@@ -276,17 +389,34 @@ class ManagedFile extends YamlFormElementBase {
   }
 
   /**
+   * Get file upload URI scheme.
+   *
+   * @param array $element
+   *   An element.
+   *
+   * @return string
+   *   File upload URI scheme.
+   */
+  protected function getUrlScheme(array $element) {
+    return (isset($element['#uri_scheme'])) ? $element['#uri_scheme'] : 'public';
+  }
+
+  /**
    * Form API callback. Consolidate the array of fids for this field into a single fids.
    */
   public static function validate(array &$element, FormStateInterface $form_state) {
     if (!empty($element['#files'])) {
-      $file = reset($element['#files']);
-      $value = (int) $file->id();
+      $fids = array_keys($element['#files']);
+      if (empty($element['#multiple'])) {
+        $form_state->setValueForElement($element, reset($fids));
+      }
+      else {
+        $form_state->setValueForElement($element, $fids);
+      }
     }
     else {
-      $value = NULL;
+      $form_state->setValueForElement($element, NULL);
     }
-    $form_state->setValueForElement($element, $value);
   }
 
   /**
@@ -299,6 +429,13 @@ class ManagedFile extends YamlFormElementBase {
       '#title' => $this->t('File settings'),
       '#open' => FALSE,
     ];
+    $scheme_options = \Drupal::service('stream_wrapper_manager')->getNames(StreamWrapperInterface::WRITE_VISIBLE);
+    $form['file']['uri_scheme'] = [
+      '#type' => 'radios',
+      '#title' => t('Upload destination'),
+      '#options' => $scheme_options,
+      '#description' => t('Select where the final files should be stored. Private file storage has significantly more overhead than public files, but allows restricted access to files within this field.'),
+    ];
     $form['file']['max_filesize'] = [
       '#type' => 'number',
       '#title' => $this->t('Maximum file size'),
@@ -310,7 +447,75 @@ class ManagedFile extends YamlFormElementBase {
       '#title' => $this->t('File extensions'),
       '#description' => $this->t('A list of additional file extensions for this upload field, separated by spaces.'),
     ];
+    $form['file']['multiple'] = [
+      '#title' => $this->t('Multiple'),
+      '#type' => 'checkbox',
+      '#return_value' => TRUE,
+      '#description' => $this->t('Check this option if the user should be allowed to upload multiple files.'),
+    ];
     return $form;
+  }
+
+  /**
+   * Control access to YAML Form submission private file downloads.
+   *
+   * @param string $uri
+   *   The URI of the file.
+   *
+   * @return mixed
+   *   Returns NULL is the file is not attached to a YAML form submission.
+   *   Returns -1 if the user does not have permission to access a YAML Form
+   *   Returns an associative array of headers.
+   *
+   * @see hook_file_download()
+   * @see yamlform_file_download()
+   */
+  public static function accessFileDownload($uri) {
+    $files = \Drupal::entityTypeManager()
+      ->getStorage('file')
+      ->loadByProperties(['uri' => $uri]);
+    if (empty($files)) {
+      return NULL;
+    }
+
+    $file = reset($files);
+    if (empty($file)) {
+      return NULL;
+    }
+
+    /** @var \Drupal\file\FileUsage\FileUsageInterface $file_usage */
+    $file_usage = \Drupal::service('file.usage');
+    $usage = $file_usage->listUsage($file);
+    foreach ($usage as $module => $entity_types) {
+      // Check for YAML form module.
+      if ($module != 'yamlform') {
+        continue;
+      }
+
+      foreach ($entity_types as $entity_type => $counts) {
+        $entity_ids = array_keys($counts);
+
+        // Check for YAML form submission entity type.
+        if ($entity_type != 'yamlform_submission' || empty($entity_ids)) {
+          continue;
+        }
+
+        // Get YAML form submission.
+        $yamlform_submission = YamlFormSubmission::load(reset($entity_ids));
+        if (!$yamlform_submission) {
+          continue;
+        }
+
+        // Check YAML form submission view access.
+        if (!$yamlform_submission->access('view')) {
+          return -1;
+        }
+
+        // Return file content headers.
+        return file_get_content_headers($file);
+      }
+    }
+    return NULL;
   }
 
 }

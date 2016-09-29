@@ -13,7 +13,8 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "captcha",
  *   api = "https://www.drupal.org/project/captcha",
  *   label = @Translation("CAPTCHA"),
- *   category = @Translation("Advanced")
+ *   category = @Translation("Advanced elements"),
+ *   states_wrapper = TRUE,
  * )
  */
 class Captcha extends YamlFormElementBase {
@@ -26,13 +27,14 @@ class Captcha extends YamlFormElementBase {
       'captcha_type' => 'default',
       'captcha_admin_mode' => FALSE,
       'flex' => 1,
+      'states' => [],
     ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function hasValue(array $element) {
+  public function isInput(array $element) {
     return FALSE;
   }
 

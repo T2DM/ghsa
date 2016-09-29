@@ -9,8 +9,7 @@ namespace Drupal\yamlform\Plugin\YamlFormElement;
  *   id = "container",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Container.php/class/Container",
  *   label = @Translation("Container"),
- *   category = @Translation("Container")
- *
+ *   category = @Translation("Containers"),
  * )
  */
 class Container extends ContainerBase {
@@ -23,6 +22,7 @@ class Container extends ContainerBase {
       'attributes__class' => '',
       'attributes__style' => '',
       'flex' => 1,
+      'states' => [],
     ];
   }
 

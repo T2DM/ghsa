@@ -2,6 +2,7 @@
 
 namespace Drupal\yamlform\Plugin\YamlFormElement;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\yamlform\YamlFormElementBase;
@@ -21,6 +22,12 @@ abstract class DateBase extends YamlFormElementBase {
     // @see \Drupal\yamlform\Plugin\YamlFormElement\DateTime
     $element['#theme_wrappers'] = ['form_element'];
 
+    // Must manually process #states.
+    // @see drupal_process_states().
+    if (isset($element['#states'])) {
+      $element['#attached']['library'][] = 'core/drupal.states';
+      $element['#wrapper_attributes']['data-drupal-states'] = Json::encode($element['#states']);
+    }
     parent::prepare($element, $yamlform_submission);
   }
 
@@ -98,6 +105,20 @@ abstract class DateBase extends YamlFormElementBase {
     else {
       $form_state->setValue($name, '');
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function form(array $form, FormStateInterface $form_state) {
+    $form = parent::form($form, $form_state);
+
+    // Allow custom date formats to be entered.
+    $form['display']['format']['#type'] = 'yamlform_select_other';
+    $form['display']['format']['#other__option_label'] = $this->t('Custom date format...');
+    $form['display']['format']['#other__description'] = $this->t('A user-defined date format. See the <a href="http://php.net/manual/function.date.php">PHP manual</a> for available options.');
+
+    return $form;
   }
 
 }

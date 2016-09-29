@@ -28,13 +28,14 @@ abstract class ContainerBase extends YamlFormElementBase {
       'private' => FALSE,
 
       'flex' => 1,
+      'states' => [],
     ];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function hasValue(array $element) {
+  public function isInput(array $element) {
     return FALSE;
   }
 
@@ -82,6 +83,13 @@ abstract class ContainerBase extends YamlFormElementBase {
     // Containers should never have values and therefore should never have
     // a test value.
     return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getElementSelectorOptions(array $element) {
+    return [];
   }
 
 }

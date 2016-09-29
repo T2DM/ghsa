@@ -138,7 +138,7 @@ abstract class YamlFormUiElementFormBase extends FormBase implements YamlFormUiE
     }
 
     // Add type to the general details.
-    $form['properties']['general']['type'] = [
+    $form['properties']['element']['type'] = [
       '#type' => 'item',
       '#title' => $this->t('Type'),
       'label' => [
@@ -154,16 +154,16 @@ abstract class YamlFormUiElementFormBase extends FormBase implements YamlFormUiE
       if ($this->originalType) {
         $original_yamlform_element = $this->elementManager->createInstance($this->originalType);
         $route_parameters = ['yamlform' => $yamlform->id(), 'key' => $key];
-        $form['properties']['general']['type']['cancel'] = [
+        $form['properties']['element']['type']['cancel'] = [
           '#type' => 'link',
           '#title' => $this->t('Cancel'),
           '#url' => new Url('entity.yamlform_ui.element.edit_form', $route_parameters),
           '#attributes' => YamlFormDialogHelper::getModalDialogAttributes(800, ['button', 'button--small']),
         ];
-        $form['properties']['general']['type']['#description'] = '(' . $this->t('Changing from %type', ['%type' => $original_yamlform_element->getPluginLabel()]) . ')';
+        $form['properties']['element']['type']['#description'] = '(' . $this->t('Changing from %type', ['%type' => $original_yamlform_element->getPluginLabel()]) . ')';
       }
       else {
-        $form['properties']['general']['type']['change_type'] = [
+        $form['properties']['element']['type']['change_type'] = [
           '#type' => 'link',
           '#title' => $this->t('Change'),
           '#url' => new Url('entity.yamlform_ui.change_element', $route_parameters),
@@ -173,9 +173,9 @@ abstract class YamlFormUiElementFormBase extends FormBase implements YamlFormUiE
     }
 
     // Use title for key (machine_name).
-    if (isset($form['properties']['general']['title'])) {
-      $form['key']['#machine_name']['source'] = ['properties', 'general', 'title'];
-      $form['properties']['general']['title']['#id'] = 'title';
+    if (isset($form['properties']['element']['title'])) {
+      $form['key']['#machine_name']['source'] = ['properties', 'element', 'title'];
+      $form['properties']['element']['title']['#id'] = 'title';
     }
 
     $form['actions'] = ['#type' => 'actions'];

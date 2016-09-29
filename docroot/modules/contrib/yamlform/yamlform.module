@@ -13,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\yamlform\Entity\YamlForm;
+use Drupal\yamlform\Plugin\YamlFormElement\ManagedFile;
 use Drupal\yamlform\Utility\YamlFormTidy;
 use Drupal\yamlform\Utility\YamlFormOptionsHelper;
 use Drupal\yamlform\YamlFormInterface;
@@ -95,7 +96,20 @@ function yamlform_menu_local_tasks_alter(&$data, $route_name) {
  * Implements hook_form_alter().
  */
 function yamlform_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_state->getFormObject() instanceof YamlFormSubmissionForm) {
+  if (strpos($form_id, 'yamlform_') === FALSE) {
+    return;
+  }
+
+  $is_submission_form = ($form_state->getFormObject() instanceof YamlFormSubmissionForm);
+
+  // Don't automatically include details toggle all for submission forms.
+  // @todo Add setting that allows form builders to show details toggle all widget.
+  if (!$is_submission_form) {
+    $form['#attributes']['class'][] = 'yamlform-details-toggle';
+    $form['#attached']['library'][] = 'yamlform/yamlform.element.details.toggle';
+  }
+
+  if ($is_submission_form) {
     $form['#after_build'][] = '_yamlform_form_after_build';
   }
 }
@@ -313,7 +327,7 @@ function yamlform_page_attachments(&$page) {
 
     // Attach details element save open/close library.
     if (\Drupal::config('yamlform.settings')->get('ui.details_save')) {
-      $page['#attached']['library'][] = 'yamlform/yamlform.element.details';
+      $page['#attached']['library'][] = 'yamlform/yamlform.element.details.save';
     }
   }
 
@@ -322,7 +336,13 @@ function yamlform_page_attachments(&$page) {
   if (\Drupal::routeMatch()->getRouteName() == 'block.admin_display') {
     $page['#attached']['library'][] = 'yamlform/yamlform.codemirror.yaml';
   }
+}
 
+/**
+ * Implements hook_file_download().
+ */
+function yamlform_file_download($uri) {
+  return ManagedFile::accessFileDownload($uri);
 }
 
 /**

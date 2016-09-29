@@ -51,6 +51,12 @@ class YamlFormBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     elseif (strpos($route_name, 'entity.yamlform_ui.element') === 0) {
       $this->type = 'yamlform_element';
     }
+    elseif (strpos($route_match->getRouteName(), 'yamlform.user.submissions') !== FALSE) {
+      $this->type = 'yamlform_user_submissions';
+    }
+    elseif ($route_match->getParameter('yamlform_submission') instanceof YamlFormSubmissionInterface && strpos($route_name, 'yamlform.user.submission') !== FALSE) {
+      $this->type = 'yamlform_user_submission';
+    }
     elseif ($route_match->getParameter('yamlform_submission') instanceof YamlFormSubmissionInterface && $route_match->getParameter('yamlform_submission')->access('admin')) {
       $this->type = 'yamlform_submission';
     }
@@ -68,10 +74,12 @@ class YamlFormBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * {@inheritdoc}
    */
   public function build(RouteMatchInterface $route_match) {
+    $route_name = $route_match->getRouteName();
+
     if ($this->type == 'yamlform_source_entity') {
-      /** @var \Drupal\yamlform\YamlFormRequestInterface $yamlform_request */
-      $yamlform_request = \Drupal::service('yamlform.request');
-      $source_entity = $yamlform_request->getCurrentSourceEntity(['yamlform', 'yamlform_submission']);
+      /** @var \Drupal\yamlform\YamlFormRequestInterface $request_handler */
+      $request_handler = \Drupal::service('yamlform.request');
+      $source_entity = $request_handler->getCurrentSourceEntity(['yamlform', 'yamlform_submission']);
       $entity_type = $source_entity->getEntityTypeId();
       $entity_id = $source_entity->id();
 
@@ -79,11 +87,15 @@ class YamlFormBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $breadcrumb->addLink(Link::createFromRoute($this->t('Home'), '<front>'));
       $breadcrumb->addLink($source_entity->toLink());
       if ($yamlform_submission = $route_match->getParameter('yamlform_submission')) {
-        if ($source_entity->access('yamlform_submission_view') || $yamlform_submission->access('view_any')) {
+
+        if (strpos($route_match->getRouteName(), 'yamlform.user.submission') !== FALSE) {
+          $breadcrumb->addLink(Link::createFromRoute($this->t('Submissions'), "entity.$entity_type.yamlform.user.submissions", [$entity_type => $entity_id]));
+        }
+        elseif ($source_entity->access('yamlform_submission_view') || $yamlform_submission->access('view_any')) {
           $breadcrumb->addLink(Link::createFromRoute($this->t('Results'), "entity.$entity_type.yamlform.results_submissions", [$entity_type => $entity_id]));
         }
         elseif ($yamlform_submission->access('view_own')) {
-          $breadcrumb->addLink(Link::createFromRoute($this->t('Results'), "entity.$entity_type.yamlform.submissions", [$entity_type => $entity_id]));
+          $breadcrumb->addLink(Link::createFromRoute($this->t('Results'), "entity.$entity_type.yamlform.user.submissions", [$entity_type => $entity_id]));
         }
       }
     }
@@ -102,7 +114,7 @@ class YamlFormBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           break;
 
         case 'yamlform_handler':
-          if ($route_match->getRouteName() != 'yamlform.handler_plugins') {
+          if ($route_name != 'yamlform.handler_plugins') {
             /** @var \Drupal\yamlform\YamlFormInterface $yamlform */
             $yamlform = $route_match->getParameter('yamlform');
             $breadcrumb->addLink(Link::createFromRoute($yamlform->label(), 'entity.yamlform.canonical', ['yamlform' => $yamlform->id()]));
@@ -111,7 +123,7 @@ class YamlFormBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           break;
 
         case 'yamlform_options':
-          if ($route_match->getRouteName() != 'entity.yamlform_options.collection') {
+          if ($route_name != 'entity.yamlform_options.collection') {
             $breadcrumb->addLink(Link::createFromRoute($this->t('Options'), 'entity.yamlform_options.collection'));
           }
           break;
@@ -124,6 +136,25 @@ class YamlFormBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           $breadcrumb->addLink(Link::createFromRoute($yamlform->label(), 'entity.yamlform.canonical', ['yamlform' => $yamlform->id()]));
           $breadcrumb->addLink(Link::createFromRoute($this->t('Results'), 'entity.yamlform.results_submissions', ['yamlform' => $yamlform->id()]));
           break;
+
+        case 'yamlform_user_submissions':
+          /** @var \Drupal\yamlform\YamlFormInterface $yamlform */
+          $yamlform = $route_match->getParameter('yamlform');
+
+          $breadcrumb = new Breadcrumb();
+          $breadcrumb->addLink(Link::createFromRoute($yamlform->label(), 'entity.yamlform.canonical', ['yamlform' => $yamlform->id()]));
+          break;
+
+        case 'yamlform_user_submission':
+          /** @var \Drupal\yamlform\YamlFormSubmissionInterface $yamlform_submission */
+          $yamlform_submission = $route_match->getParameter('yamlform_submission');
+          $yamlform = $yamlform_submission->getYamlForm();
+
+          $breadcrumb = new Breadcrumb();
+          $breadcrumb->addLink(Link::createFromRoute($yamlform->label(), 'entity.yamlform.canonical', ['yamlform' => $yamlform->id()]));
+          $breadcrumb->addLink(Link::createFromRoute($this->t('Submissions'), 'entity.yamlform.user.submissions', ['yamlform' => $yamlform->id()]));
+          break;
+
       }
     }
 

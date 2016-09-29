@@ -100,8 +100,8 @@ function template_preprocess_yamlform(&$variables) {
  *          (canonical, edit-form, resend-form, html, text, or yaml).
  */
 function template_preprocess_yamlform_submission_navigation(array &$variables) {
-  /** @var \Drupal\yamlform\YamlFormRequestInterface $yamlform_request */
-  $yamlform_request = \Drupal::service('yamlform.request');
+  /** @var \Drupal\yamlform\YamlFormRequestInterface $request_handler */
+  $request_handler = \Drupal::service('yamlform.request');
   /** @var \Drupal\yamlform\YamlFormSubmissionStorageInterface $yamlform_submission_storage */
   $yamlform_submission_storage = \Drupal::entityTypeManager()->getStorage('yamlform_submission');
   /** @var \Drupal\yamlform\YamlFormSubmissionInterface $yamlform_submission */
@@ -109,19 +109,22 @@ function template_preprocess_yamlform_submission_navigation(array &$variables) {
   /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
   $source_entity = $variables['source_entity'];
 
-  $rel = $variables['rel'];
-  if (!$yamlform_submission->hasLinkTemplate($rel)) {
-    $rel = 'canonical';
+  if (strpos(\Drupal::routeMatch()->getRouteName(), 'yamlform.user.submission') !== FALSE) {
+    $route_name = $request_handler->getRouteName($yamlform_submission, $source_entity, 'yamlform.user.submission');
+    $account = \Drupal::currentUser();
+  }
+  else {
+    $rel = ($yamlform_submission->hasLinkTemplate($variables['rel'])) ? $variables['rel'] : 'canonical';
+    $rel = str_replace('-', '_', $rel);
+    $route_name = $request_handler->getRouteName($yamlform_submission, $source_entity, "yamlform_submission.$rel");
+    $account = NULL;
   }
 
-  $rel = str_replace('-', '_', $rel);
-
-  $route_name = $yamlform_request->getRouteName($yamlform_submission, $source_entity, "yamlform_submission.$rel");
-  $route_parameters = $yamlform_request->getRouteParameters($yamlform_submission, $source_entity);
-  if ($previous_submission = $yamlform_submission_storage->getPreviousSubmission($yamlform_submission, $source_entity, \Drupal::currentUser())) {
+  $route_parameters = $request_handler->getRouteParameters($yamlform_submission, $source_entity);
+  if ($previous_submission = $yamlform_submission_storage->getPreviousSubmission($yamlform_submission, $source_entity, $account)) {
     $variables['prev_url'] = Url::fromRoute($route_name, ['yamlform_submission' => $previous_submission->id()] + $route_parameters)->toString();
   }
-  if ($next_submission = $yamlform_submission_storage->getNextSubmission($yamlform_submission, $source_entity, \Drupal::currentUser())) {
+  if ($next_submission = $yamlform_submission_storage->getNextSubmission($yamlform_submission, $source_entity, $account)) {
     $variables['next_url'] = Url::fromRoute($route_name, ['yamlform_submission' => $next_submission->id()] + $route_parameters)->toString();
   }
 
@@ -140,15 +143,16 @@ function template_preprocess_yamlform_submission_navigation(array &$variables) {
 function template_preprocess_yamlform_submission_information(array &$variables) {
   /** @var \Drupal\yamlform\YamlFormSubmissionInterface $yamlform_submission */
   $yamlform_submission = $variables['yamlform_submission'];
+  $yamlform = $yamlform_submission->getYamlForm();
 
-  $variables['yamlform_id'] = $yamlform_submission->getYamlForm()->id();
+  $variables['yamlform_id'] = $yamlform->id();
   $variables['sid'] = $yamlform_submission->id();
   $variables['uuid'] = $yamlform_submission->uuid();
   $variables['is_draft'] = $yamlform_submission->isDraft() ? t('Yes') : t('No');
   $variables['current_page'] = $yamlform_submission->getCurrentPageTitle();
   $variables['remote_addr'] = $yamlform_submission->getRemoteAddr();
   $variables['submitted_by'] = $yamlform_submission->getOwner()->toLink();
-  $variables['form'] = $yamlform_submission->getYamlForm()->toLink();
+  $variables['form'] = $yamlform->toLink();
   $variables['created'] = YamlFormDateHelper::format($yamlform_submission->getCreatedTime());
   $variables['completed'] = YamlFormDateHelper::format($yamlform_submission->getCompletedTime());
   $variables['changed'] = YamlFormDateHelper::format($yamlform_submission->getChangedTime());
@@ -164,12 +168,17 @@ function template_preprocess_yamlform_submission_information(array &$variables) 
     $variables['uri'] = Link::fromTextAndUrl($source_url->setAbsolute(FALSE)->toString(), $source_url);;
   }
 
+  if ($yamlform->getSetting('token_update')) {
+    $token_url = $yamlform_submission->getTokenUrl();
+    $variables['token_update'] = Link::fromTextAndUrl($token_url->setAbsolute(FALSE)->toString(), $token_url);
+  }
+
   if ($source_entity = $yamlform_submission->getSourceEntity()) {
     $variables['submitted_to'] = $source_entity->toLink();
   }
 
   $variables['submissions_view'] = FALSE;
-  if ($yamlform_submission->getYamlForm()->access('submission_view_any')) {
+  if ($yamlform->access('submission_view_any')) {
     $variables['submissions_view'] = TRUE;
   }
   elseif ($source_entity) {
@@ -184,6 +193,7 @@ function template_preprocess_yamlform_submission_information(array &$variables) 
       $variables['submissions_view'] = TRUE;
     }
   }
+
 }
 
 /**

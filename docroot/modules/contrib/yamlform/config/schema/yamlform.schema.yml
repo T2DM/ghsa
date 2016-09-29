@@ -26,6 +26,9 @@ yamlform.settings:
         default_form_novalidate:
           type: boolean
           label: 'Disable client-side validation'
+        default_form_details_toggle:
+          type: boolean
+          label: 'Display collapse/expand all details link'
         default_wizard_prev_button_label:
           type: label
           label: 'Default wizard previous page button label'
@@ -116,9 +119,18 @@ yamlform.settings:
         delimiter:
           type: string
           label: 'Delimiter text format'
-        header_keys:
+        header_format:
           type: string
           label: 'Column header format'
+        header_prefix:
+          type: boolean
+          label: 'Column header prefix'
+        header_prefix_key_delimiter:
+          type: string
+          label: 'Column header prefix key delimiter'
+        header_prefix_label_delimiter:
+          type: string
+          label: 'Column header prefix label delimiter'
         entity_reference_format:
           type: string
           label: 'Options format'
@@ -128,18 +140,12 @@ yamlform.settings:
         options_item_format:
           type: string
           label: 'Entity reference format'
-        likert_questions_format:
-          type: string
-          label: 'Likert questions format'
         likert_answers_format:
           type: string
           label: 'Likert answers format'
         signature_format:
           type: string
           label: 'Signature format'
-        composite_header_prefix:
-          type: boolean
-          label: 'Composite header prefix'
         composite_element_item_format:
           type: string
           label: 'Composite element item format'
@@ -253,6 +259,9 @@ yamlform.yamlform.*:
         form_autofocus:
           type: boolean
           label: 'Autofocus'
+        form_details_toggle:
+          type: boolean
+          label: 'Display collapse/expand all details link'
         wizard_progress_bar:
           type: boolean
           label: 'Show wizard progress bar'
@@ -334,6 +343,9 @@ yamlform.yamlform.*:
         results_disabled:
           type: boolean
           label: 'Results disabled'
+        token_update:
+          type: boolean
+          label: 'Allow updates using token'
     access:
       type: mapping
       label: 'Access'

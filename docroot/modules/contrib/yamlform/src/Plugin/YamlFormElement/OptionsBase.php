@@ -5,7 +5,6 @@ namespace Drupal\yamlform\Plugin\YamlFormElement;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\yamlform\Utility\YamlFormArrayHelper;
-use Drupal\yamlform\Utility\YamlFormElementHelper;
 use Drupal\yamlform\Utility\YamlFormOptionsHelper;
 use Drupal\yamlform\YamlFormElementBase;
 use Drupal\yamlform\YamlFormSubmissionInterface;
@@ -23,6 +22,22 @@ abstract class OptionsBase extends YamlFormElementBase {
       'options' => [],
       'options_randomize' => FALSE,
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getRelatedTypes(array $element) {
+    $related_types = parent::getRelatedTypes($element);
+    // Remove entity reference elements.
+    $elements = $this->elementManager->getInstances();
+    foreach ($related_types as $type => $related_type) {
+      $element_instance = $elements[$type];
+      if ($element_instance instanceof YamlFormEntityReferenceInterface) {
+        unset($related_types[$type]);
+      }
+    }
+    return $related_types;
   }
 
   /**
@@ -58,9 +73,6 @@ abstract class OptionsBase extends YamlFormElementBase {
             break;
         }
       }
-
-      // Fix flexbox wrapper.
-      YamlFormElementHelper::fixWrapper($element, ['states' => FALSE]);
     }
   }
 
@@ -288,7 +300,7 @@ abstract class OptionsBase extends YamlFormElementBase {
       foreach ($element['#options'] as $option_value => $option_text) {
         $header[] = ($options['options_item_format'] == 'key') ? $option_value : $option_text;
       }
-      return $header;
+      return $this->prefixExportHeader($header, $element, $options);
     }
     else {
       return parent::buildExportHeader($element, $options);
@@ -347,6 +359,25 @@ abstract class OptionsBase extends YamlFormElementBase {
     $values = array_filter($values);
     $values = array_values($values);
     $form_state->setValue($name, $values);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getElementSelectorInputsOptions(array $element) {
+    $plugin_id = $this->getPluginId();
+    if (preg_match('/yamlform_(select|radios|checkboxes)_other$/', $plugin_id, $match)) {
+      $title = $this->getAdminLabel($element);
+      list($element_type) = explode(' ', $this->getPluginLabel());
+
+      $inputs = [];
+      $inputs[$match[1]] = $title . ' [' . $element_type . ']';
+      $inputs['other'] = $title . ' [' . $this->t('Text field') . ']';
+      return $inputs;
+    }
+    else {
+      return [];
+    }
   }
 
   /**

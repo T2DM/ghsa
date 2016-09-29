@@ -34,10 +34,18 @@ class YamlFormEntityReferenceAutocompleteWidget extends EntityReferenceAutocompl
       '#type' => 'yamlform_codemirror',
       '#mode' => 'yaml',
       '#title' => $this->t('Default YAML form submission data (YAML)'),
-      '#description' => $this->t('Enter YAML form submission data as name and value pairs which will be used to prepopulate the selected YAML form.'),
+      '#description' => $this->t('Enter YAML form submission data as name and value pairs which will be used to prepopulate the selected YAML form. You may use tokens.'),
       '#default_value' => $items[$delta]->default_data,
     ];
-
+    $element['token_tree_link'] = [
+      '#theme' => 'token_tree_link',
+      '#token_types' => [
+        'yamlform',
+        'yamlform-submission',
+      ],
+      '#click_insert' => FALSE,
+      '#dialog' => TRUE,
+    ];
     $element['status'] = [
       '#type' => 'radios',
       '#title' => $this->t('Form status'),

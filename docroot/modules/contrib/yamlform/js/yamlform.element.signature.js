@@ -51,6 +51,26 @@
           this.blur();
           return false;
         });
+
+        // Input onchange clears signature pad if value is empty.
+        // @see yamlform.states.js
+        $input.on('change', function () {
+          if (!$input.val()) {
+            signaturePad.clear();
+          }
+        });
+
+        // Turn signature pad off/on when the input is disabled/enabled.
+        // @see yamlform.states.js
+        $input.on('yamlform:disabled', function () {
+          if ($input.is(':disabled')) {
+            signaturePad.off();
+          }
+          else {
+            signaturePad.on();
+          }
+        });
+
       });
     }
   };

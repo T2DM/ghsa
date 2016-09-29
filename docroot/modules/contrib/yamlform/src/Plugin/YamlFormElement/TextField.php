@@ -11,7 +11,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "textfield",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Textfield.php/class/Textfield",
  *   label = @Translation("Text field"),
- *   category = @Translation("Basic"),
+ *   category = @Translation("Basic elements"),
  * )
  */
 class TextField extends TextBase {

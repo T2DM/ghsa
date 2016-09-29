@@ -18,7 +18,7 @@ class YamlFormEmailAdvancedHandlerTest extends YamlFormTestBase {
    */
   protected function createUsers() {
     // Create filter.
-    $this->createFilter();
+    $this->createFilters();
 
     $this->normalUser = $this->drupalCreateUser([
       'access user profiles',

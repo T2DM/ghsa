@@ -12,6 +12,7 @@
 
       // YAML form CodeMirror editor.
       $(context).find('textarea.js-yamlform-codemirror').once('yamlform-codemirror').each(function () {
+        var $input = $(this);
 
         // Open all closed details, so that editor height is correctly calculated.
         var $details = $(this).parents('details:not([open])');
@@ -42,6 +43,18 @@
         // rendered within a YAML form UI dialog.
         editor.on('blur', function (event){
           editor.save();
+        });
+
+        // Update CodeMirror when the textarea's value has changed.
+        // @see yamlform.states.js
+        $input.on('change', function () {
+          editor.getDoc().setValue($input.val());
+        });
+
+        // Set CodeMirror to be readonly when the textarea is disabled.
+        // @see yamlform.states.js
+        $input.on('yamlform:disabled', function () {
+          editor.setOption("readOnly", $input.is(':disabled'));
         });
 
       });

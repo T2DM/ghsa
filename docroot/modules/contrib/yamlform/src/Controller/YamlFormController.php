@@ -22,7 +22,7 @@ class YamlFormController extends ControllerBase implements ContainerInjectionInt
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * YAML form message manager.
@@ -34,11 +34,11 @@ class YamlFormController extends ControllerBase implements ContainerInjectionInt
   /**
    * Constructs a new YamlFormSubmissionController object.
    *
-   * @param \Drupal\yamlform\YamlFormRequestInterface $yamlform_request
+   * @param \Drupal\yamlform\YamlFormRequestInterface $request_handler
    *   The YAML form request handler.
    */
-  public function __construct(YamlFormRequestInterface $yamlform_request, YamlFormMessageManagerInterface $message_manager) {
-    $this->yamlFormRequest = $yamlform_request;
+  public function __construct(YamlFormRequestInterface $request_handler, YamlFormMessageManagerInterface $message_manager) {
+    $this->requestHandler = $request_handler;
     $this->messageManager = $message_manager;
   }
 
@@ -81,10 +81,10 @@ class YamlFormController extends ControllerBase implements ContainerInjectionInt
   public function confirmation(Request $request, YamlFormInterface $yamlform = NULL) {
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
     if (!$yamlform) {
-      list($yamlform, $source_entity) = $this->yamlFormRequest->getYamlFormEntities();
+      list($yamlform, $source_entity) = $this->requestHandler->getYamlFormEntities();
     }
     else {
-      $source_entity = $this->yamlFormRequest->getCurrentSourceEntity('yamlform');
+      $source_entity = $this->requestHandler->getCurrentSourceEntity('yamlform');
     }
 
     /** @var \Drupal\yamlform\YamlFormSubmissionInterface $yamlform_submission */
@@ -203,10 +203,10 @@ class YamlFormController extends ControllerBase implements ContainerInjectionInt
   public function title(YamlFormInterface $yamlform = NULL) {
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
     if (!$yamlform) {
-      list($yamlform, $source_entity) = $this->yamlFormRequest->getYamlFormEntities();
+      list($yamlform, $source_entity) = $this->requestHandler->getYamlFormEntities();
     }
     else {
-      $source_entity = $this->yamlFormRequest->getCurrentSourceEntity('yamlform');
+      $source_entity = $this->requestHandler->getCurrentSourceEntity('yamlform');
     }
     return ($source_entity) ? $source_entity->label() : $yamlform->label();
   }

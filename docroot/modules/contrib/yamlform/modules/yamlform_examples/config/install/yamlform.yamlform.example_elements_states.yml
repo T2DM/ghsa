@@ -30,7 +30,7 @@ elements: |
     '#open': true
     select:
       '#type': select
-      '#title': 'Please select ''other'' is the below select menu.'
+      '#title': 'Please select ''other'' in the below select menu.'
       '#options':
         1: One
         2: Two
@@ -47,6 +47,35 @@ elements: |
         required:
           ':input[name="select"]':
             value: other
+  select_multiple_example:
+    '#type': details
+    '#title': 'Select multiple example'
+    '#open': true
+    select_multiple:
+      '#type': select
+      '#title': 'Please select ''One'' or ''Two'' in the below select menu.'
+      '#options':
+        1: One
+        2: Two
+        3: Three
+        4: Four
+    select_multiple_other:
+      '#type': textfield
+      '#attributes':
+        placeholder: 'Enter other...'
+      '#states':
+        visible:
+          - ':input[name="select_multiple"]':
+              - value: 1
+          - or
+          - ':input[name="select_multiple"]':
+              - value: 2
+        required:
+          - ':input[name="select_multiple"]':
+              - value: 1
+          - or
+          - ':input[name="select_multiple"]':
+              - value: 2
   radios_example:
     '#type': details
     '#title': 'Radio buttons with other example'
@@ -82,7 +111,7 @@ elements: |
       '#title': 'More information'
       '#open': true
       '#states':
-        visible:
+        expanded:
           ':input[name="checkbox_more"]':
             checked: true
       checkbox_more_first_name:
@@ -116,44 +145,6 @@ elements: |
         required:
           ':input[name="filled"]':
             filled: true
-  empty_example:
-    '#type': details
-    '#title': 'Hide and clear elements example'
-    '#open': true
-    empty_example_checkbox:
-      '#type': checkbox
-      '#title': 'Check this box to hide and clear the values for the below textfield, select, and radio elements'
-    empty_example_textfield:
-      '#type': textfield
-      '#default_value': 'Some value'
-      '#states':
-        invisible:
-          ':input[name="empty_example_checkbox"]':
-            checked: true
-    empty_example_select:
-      '#type': select
-      '#title':  'Select'
-      '#options':
-        1: One
-        2: Two
-        3: Three
-      '#default_value': 1
-      '#states':
-        invisible:
-          ':input[name="empty_example_checkbox"]':
-            checked: true
-    empty_example_radios:
-      '#type': radios
-      '#title':  'Radios'
-      '#options':
-        1: One
-        2: Two
-        3: Three
-      '#default_value': 1
-      '#states':
-        invisible:
-          ':input[name="empty_example_checkbox"]':
-            checked: true
 settings:
   page: true
   page_submit_path: ''
@@ -167,6 +158,7 @@ settings:
   form_prepopulate_source_entity: false
   form_novalidate: false
   form_autofocus: false
+  form_details_toggle: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -194,6 +186,7 @@ settings:
   entity_limit_total: null
   entity_limit_user: null
   results_disabled: false
+  token_update: false
 access:
   create:
     roles:

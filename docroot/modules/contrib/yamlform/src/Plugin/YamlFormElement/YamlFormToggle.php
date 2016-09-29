@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @YamlFormElement(
  *   id = "yamlform_toggle",
  *   label = @Translation("Toggle"),
- *   category = @Translation("Advanced"),
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class YamlFormToggle extends Checkbox {

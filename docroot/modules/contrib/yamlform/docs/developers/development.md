@@ -161,9 +161,9 @@ drush yamlform-tidy -y yamlform_node
 
 # Re-import all YAML form configuration into your site.      
 drush features-import -y yamlform
+drush features-import -y yamlform_test
 drush features-import -y yamlform_examples
 drush features-import -y yamlform_templates
-drush features-import -y yamlform_test
 drush features-import -y yamlform_node
 ```
 
@@ -197,12 +197,12 @@ drush user-add-role user user
 
 drush role-create any
 drush user-create any --password="any"
-drush role-add-perm any 'view the administration theme,access administration pages,access toolbar,access yamlform overview,create yamlform,edit any yamlform,delete any yamlform,view yamlform node submissions any node,edit yamlform node submissions any node,delete yamlform node submissions any node'
+drush role-add-perm any 'view the administration theme,access administration pages,access toolbar,access yamlform overview,create yamlform,edit any yamlform,delete any yamlform,view yamlform submissions any node,edit yamlform submissions any node,delete yamlform submissions any node'
 drush user-add-role any any
 
 drush role-create own
 drush user-create own --password="own"
-drush role-add-perm own 'view the administration theme,access administration pages,access toolbar,access yamlform overview,create yamlform,edit own yamlform,delete own yamlform,view yamlform node submissions own node,edit yamlform node submissions own node,delete yamlform node submissions own node'
+drush role-add-perm own 'view the administration theme,access administration pages,access toolbar,access yamlform overview,create yamlform,edit own yamlform,delete own yamlform,view yamlform submissions own node,edit yamlform submissions own node,delete yamlform submissions own node'
 drush user-add-role own own
 ```
 

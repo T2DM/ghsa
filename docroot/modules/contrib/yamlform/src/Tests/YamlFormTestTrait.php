@@ -49,6 +49,13 @@ trait YamlFormTestTrait {
   protected $basicHtmlFilter;
 
   /**
+   * Full HTML filter format.
+   *
+   * @var \Drupal\filter\FilterFormatInterface
+   */
+  protected $fullHtmlFilter;
+
+  /**
    * Create YAML form test users.
    */
   protected function createUsers() {
@@ -98,7 +105,7 @@ trait YamlFormTestTrait {
   /**
    * Create basic HTML filter format.
    */
-  protected function createFilter() {
+  protected function createFilters() {
     $this->basicHtmlFilter = FilterFormat::create([
       'format' => 'basic_html',
       'name' => 'Basic HTML',
@@ -112,6 +119,12 @@ trait YamlFormTestTrait {
       ],
     ]);
     $this->basicHtmlFilter->save();
+
+    $this->fullHtmlFilter = FilterFormat::create([
+      'format' => 'full_html',
+      'name' => 'Full HTML',
+    ]);
+    $this->fullHtmlFilter->save();
   }
 
   /**
@@ -412,6 +425,9 @@ trait YamlFormTestTrait {
    */
   protected function assertCssSelect($selector, $message = '') {
     $element = $this->cssSelect($selector);
+    if (!$message) {
+      $message = new FormattableMarkup('Found @selector', ['@selector' => $selector]);
+    }
     $this->assertTrue(!empty($element), $message);
   }
 

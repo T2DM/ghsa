@@ -29,24 +29,29 @@ interface YamlFormMessageManagerInterface {
   const SUBMISSION_PREVIOUS = 3;
 
   /**
+   * Submissions previous.
+   */
+  const SUBMISSIONS_PREVIOUS = 4;
+
+  /**
    * Submission updates.
    */
-  const SUBMISSION_UPDATED = 4;
+  const SUBMISSION_UPDATED = 5;
 
   /**
    * Submission test.
    */
-  const SUBMISSION_TEST = 5;
+  const SUBMISSION_TEST = 6;
 
   /**
    * YAML form not saving or sending any data.
    */
-  const FORM_SAVE_EXCEPTION = 6;
+  const FORM_SAVE_EXCEPTION = 7;
 
   /**
    * YAML form not able to handle file uploads.
    */
-  const FORM_FILE_UPLOAD_EXCEPTION = 7;
+  const FORM_FILE_UPLOAD_EXCEPTION = 8;
 
   /****************************************************************************/
   // Configurable message constants.

@@ -75,6 +75,7 @@ class YamlFormElementManager extends DefaultPluginManager implements FallbackPlu
    */
   public function getInstances() {
     $plugin_definitions = $this->getDefinitions();
+
     // If all the plugin definitions are initialize returned the cached
     // instances.
     if (count($plugin_definitions) == count($this->instances)) {
@@ -130,6 +131,17 @@ class YamlFormElementManager extends DefaultPluginManager implements FallbackPlu
   public function getElementInstance(array $element) {
     $plugin_id = $this->getElementPluginId($element);
     return $this->createInstance($plugin_id, $element);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSortedDefinitions(array $definitions = NULL, $label_key = 'label') {
+    $definitions = isset($definitions) ? $definitions : $this->getDefinitions();
+    uasort($definitions, function ($a, $b) use ($label_key) {
+      return strnatcasecmp($a['category'] . '-' . $a[$label_key], $b['category'] . '-' . $b[$label_key]);
+    });
+    return $definitions;
   }
 
 }

@@ -83,4 +83,11 @@ class YamlFormElement extends Plugin {
    */
   public $composite = FALSE;
 
+  /**
+   * Flag that defines if #states wrapper should applied be to the element.
+   *
+   * @var boolean
+   */
+  public $states_wrapper = FALSE;
+
 }

@@ -16,7 +16,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "table",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Table.php/class/Table",
  *   label = @Translation("Table"),
- *   category = @Translation("Table")
+ *   category = @Translation("Table"),
  * )
  */
 class Table extends YamlFormElementBase {
@@ -34,7 +34,7 @@ class Table extends YamlFormElementBase {
   /**
    * {@inheritdoc}
    */
-  public function hasValue(array $element) {
+  public function isInput(array $element) {
     return FALSE;
   }
 
@@ -49,7 +49,11 @@ class Table extends YamlFormElementBase {
    * {@inheritdoc}
    */
   public function prepare(array &$element, YamlFormSubmissionInterface $yamlform_submission) {
-    parent::initialize($element);
+    parent::prepare($element, $yamlform_submission);
+
+    // Add .js-form.wrapper to fix #states handling.
+    $element['#attributes']['class'][] = 'js-form-wrapper';
+
     // Disable #tree for table element. YAML forms do not support the #tree
     // property.
     $element['#tree'] = FALSE;

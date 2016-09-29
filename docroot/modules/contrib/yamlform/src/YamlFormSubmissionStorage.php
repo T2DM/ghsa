@@ -63,25 +63,6 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
   /**
    * {@inheritdoc}
    */
-  public function hasPrevious(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
-    $query = $this->getQuery();
-    $query->condition('in_draft', 0);
-    $query->condition('yamlform_id', $yamlform->id());
-    $query->condition('uid', $account->id());
-    if ($source_entity) {
-      $query->condition('entity_type', $source_entity->getEntityTypeId());
-      $query->condition('entity_id', $source_entity->id());
-    }
-    else {
-      $query->notExists('entity_type');
-      $query->notExists('entity_id');
-    }
-    return ($query->execute()) ? TRUE : FALSE;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   protected function doCreate(array $values) {
     /** @var \Drupal\yamlform\YamlFormSubmissionInterface $entity */
     $entity = parent::doCreate($values);
@@ -174,6 +155,20 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
   /**
    * {@inheritdoc}
    */
+  public function getFirstSubmission(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+    return $this->getTerminusSubmission($yamlform, $source_entity, $account, 'ASC');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getLastSubmission(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
+    return $this->getTerminusSubmission($yamlform, $source_entity, $account, 'DESC');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getPreviousSubmission(YamlFormSubmissionInterface $yamlform_submission, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
     return $this->getSiblingSubmission($yamlform_submission, $source_entity, $account, 'previous');
   }
@@ -207,6 +202,24 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
   /**
    * {@inheritdoc}
    */
+  protected function getTerminusSubmission(YamlFormInterface $yamlform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, $sort = 'DESC') {
+    $query = $this->getQuery();
+    $query->condition('yamlform_id', $yamlform->id());
+    $query->range(0, 1);
+    if ($source_entity) {
+      $query->condition('entity_type', $source_entity->getEntityTypeId());
+      $query->condition('entity_id', $source_entity->id());
+    }
+    if ($account) {
+      $query->condition('uid', $account->id());
+    }
+    $query->sort('sid', $sort);
+    return ($entity_ids = $query->execute()) ? $this->load(reset($entity_ids)) : NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function getSiblingSubmission(YamlFormSubmissionInterface $yamlform_submission, EntityInterface $entity = NULL, AccountInterface $account = NULL, $direction = 'previous') {
     $yamlform = $yamlform_submission->getYamlForm();
 
@@ -220,11 +233,7 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
     }
 
     if ($account) {
-      $access_any = $yamlform->access('view_any', $account);
-      $entity_access_any = ($entity && $entity->access('yamlform_submission_view'));
-      if (!$access_any && !$entity_access_any) {
-        $query->condition('uid', $account->id());
-      }
+      $query->condition('uid', $account->id());
     }
 
     if ($direction == 'previous') {
@@ -376,13 +385,13 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
 
     // YAML form elements.
     if ($yamlform && $include_elements) {
-      /** @var \Drupal\yamlform\YamlFormElementManagerInterface $yamlform_element_manager */
-      $yamlform_element_manager = \Drupal::service('plugin.manager.yamlform.element');
+      /** @var \Drupal\yamlform\YamlFormElementManagerInterface $element_manager */
+      $element_manager = \Drupal::service('plugin.manager.yamlform.element');
 
       $elements = $yamlform->getElementsFlattenedAndHasValue();
       foreach ($elements as $element) {
         /** @var \Drupal\yamlform\YamlFormElementInterface $element_handler */
-        $element_handler = $yamlform_element_manager->createInstance($element['#type']);
+        $element_handler = $element_manager->createInstance($element['#type']);
         $columns += $element_handler->getTableColumn($element);
       }
     }
@@ -482,10 +491,12 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
       return YamlFormSubmissionStorageInterface::SAVED_DISABLED;
     }
 
+    $is_new = $entity->isNew();
     $result = parent::doSave($id, $entity);
 
     // Save data.
-    $this->saveData($entity);
+    $this->saveData($entity, !$is_new);
+
     // DEBUG: dsm($entity->getState());
     // Log transaction.
     $yamlform = $entity->getYamlForm();
@@ -620,8 +631,10 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
    *
    * @param \Drupal\yamlform\YamlFormSubmissionInterface $yamlform_submission
    *   A YAML form submission.
+   * @param bool $delete_first
+   *   TRUE to delete any data first. For new submissions this is not needed.
    */
-  protected function saveData(YamlFormSubmissionInterface $yamlform_submission) {
+  protected function saveData(YamlFormSubmissionInterface $yamlform_submission, $delete_first = TRUE) {
     // Get submission data rows.
     $data = $yamlform_submission->getData();
     $yamlform_id = $yamlform_submission->getYamlForm()->id();
@@ -651,13 +664,15 @@ class YamlFormSubmissionStorage extends SqlContentEntityStorage implements YamlF
       }
     }
 
-    // Delete existing submission data rows.
-    \Drupal::database()->delete('yamlform_submission_data')
-      ->condition('sid', $sid)
-      ->execute();
+    if ($delete_first) {
+      // Delete existing submission data rows.
+      $this->database->delete('yamlform_submission_data')
+        ->condition('sid', $sid)
+        ->execute();
+    }
 
     // Insert new submission data rows.
-    $query = \Drupal::database()
+    $query = $this->database
       ->insert('yamlform_submission_data')
       ->fields(['yamlform_id', 'sid', 'name', 'delta', 'value']);
     foreach ($rows as $row) {

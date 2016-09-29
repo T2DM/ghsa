@@ -22,17 +22,64 @@ because Drupal's YAML utility is not a service.](https://www.drupal.org/node/192
 
 > Impacts previewing entity autocomplete elements.
 
-**[Issue #2207383: Create a tooltip component](https://www.drupal.org/node/2207383)
+**[Issue #2207383: Create a tooltip component](https://www.drupal.org/node/2207383)**
 
 > Impacts displaying element description in a tooltip. jQUery UI's tooltip's UX
 > is not great.
 
-**Drupal's CKEditor link dialog replaces open dialog.
+**Drupal's CKEditor link dialog replaces open dialog.**
 
 > Makes it impossible to display the CKEditor's in a dialog.
 > Workaround: Use CKEditor's link dialog.
 
 _Not sure this issue should be addressed by core._
+
+### \#states API (Conditionals)
+
+
+#### Date/time (datetime)
+
+**[Issue #2419131: #states attribute does not work on #type datetime](https://www.drupal.org/node/2419131)**
+
+#### Details (details)
+
+**[Issue #2348851: Regression: Allow HTML tags inside detail summary](https://www.drupal.org/node/2348851)**
+
+#### Item (item)
+
+**[Issue #783438: #states doesn't work for #type item](https://www.drupal.org/node/783438)**
+
+#### HTML markup (markup)
+
+**[Issue #2700667: Notice: Undefined index: #type in drupal_process_states()](https://www.drupal.org/node/2700667)**
+
+#### Managed file (managed_file)
+
+**[Issue #2705471: Form states managed file fields](https://www.drupal.org/node/2705471)**
+
+#### Password confirm (password_confirm)
+
+**[Issue #1427838: password and password_confirm children do not pick up #states or #attributes](https://www.drupal.org/node/1427838)**
+
+#### Select (select)
+
+**[Issue #1426646: "-Select-" option is lost when form elements uses '#states'](https://www.drupal.org/node/1426646)**
+
+**[Issue #1149078: States API doesn't work with multiple select fields](https://www.drupal.org/node/1149078)**
+
+**[Issue #2791741: FAPI states: fields aren't hidden initally when depending on multi-value selection](https://www.drupal.org/node/2791741)**
+
+#### Radios (radios)
+
+**[Issue #2731991: Setting required on radios marks all options required](https://www.drupal.org/node/2731991)**
+
+**[Issue #994360: #states cannot disable/enable radios and checkboxes](https://www.drupal.org/node/994360)**
+
+#### Text format (text_format)
+
+**[Issue #997826: #states doesn't work correctly with type text_format](https://www.drupal.org/node/997826)**
+
+**[Issue #2625128: Text format selection stays visible when using editor and a hidden form state](https://www.drupal.org/node/2625128)**
 
 ### Submission Display
 

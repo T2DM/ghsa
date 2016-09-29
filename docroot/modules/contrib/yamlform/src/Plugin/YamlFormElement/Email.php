@@ -11,7 +11,7 @@ use Drupal\yamlform\YamlFormElementBase;
  *   id = "email",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Email.php/class/Email",
  *   label = @Translation("Email"),
- *   category = @Translation("Advanced")
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class Email extends YamlFormElementBase {

@@ -5,7 +5,6 @@ namespace Drupal\yamlform\Plugin\YamlFormElement;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\yamlform\Utility\YamlFormElementHelper;
 use Drupal\yamlform\YamlFormSubmissionInterface;
 
 /**
@@ -15,7 +14,7 @@ use Drupal\yamlform\YamlFormSubmissionInterface;
  *   id = "datetime",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Datetime!Element!Datetime.php/class/Datetime",
  *   label = @Translation("Date/time"),
- *   category = @Translation("Date/time elements")
+ *   category = @Translation("Date/time elements"),
  * )
  */
 class DateTime extends DateBase {
@@ -72,6 +71,17 @@ class DateTime extends DateBase {
     if (is_string($element['#default_value']) && !empty($element['#default_value'])) {
       $element['#default_value'] = ($element['#default_value']) ? DrupalDateTime::createFromTimestamp(strtotime($element['#default_value'])) : NULL;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getElementSelectorInputsOptions(array $element) {
+    $t_args = ['@title' => $this->getAdminLabel($element)];
+    return [
+      'date' => $this->t('@title [Date]', $t_args),
+      'time' => $this->t('@title [Time]', $t_args),
+    ];
   }
 
   /**

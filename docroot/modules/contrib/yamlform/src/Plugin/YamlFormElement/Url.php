@@ -9,7 +9,7 @@ namespace Drupal\yamlform\Plugin\YamlFormElement;
  *   id = "url",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Url.php/class/Url",
  *   label = @Translation("URL"),
- *   category = @Translation("Advanced")
+ *   category = @Translation("Advanced elements"),
  * )
  */
 class Url extends TextBase {

@@ -62,15 +62,15 @@ interface YamlFormElementInterface extends PluginInspectionInterface, PluginForm
   public function hasProperty($property_name);
 
   /**
-   * Checks if the YAML form element can have a value.
+   * Checks if the YAML form element carries a value.
    *
    * @param array $element
    *   An element.
    *
    * @return bool
-   *   TRUE if the YAML form element can have a value.
+   *   TRUE if the YAML form element carries a value.
    */
-  public function hasValue(array $element);
+  public function isInput(array $element);
 
   /**
    * Checks if the YAML form element has a wrapper.
@@ -148,6 +148,16 @@ interface YamlFormElementInterface extends PluginInspectionInterface, PluginForm
    *   TRUE if YAML form element value has multiple values.
    */
   public function hasMultipleValues(array $element);
+
+  /**
+   * Retrieves the default properties for the defined element type.
+   *
+   * @return array
+   *   An associative array describing the element types being defined.
+   *
+   * @see \Drupal\Core\Render\ElementInfoManagerInterface::getInfo
+   */
+  public function getInfo();
 
   /**
    * Get related element types.
@@ -424,6 +434,25 @@ interface YamlFormElementInterface extends PluginInspectionInterface, PluginForm
    * @see \Drupal\yamlform\YamlFormSubmissionExporterInterface::getDefaultExportOptions
    */
   public function buildExportRecord(array $element, $value, array $options);
+
+  /**
+   * Get an element's supported states as options.
+   *
+   * @return array
+   *   An array of element states.
+   */
+  public function getElementStateOptions();
+
+  /**
+   * Get an element's selectors as options.
+   *
+   * @param array $element
+   *   An element.
+   *
+   * @return array
+   *   An array of element selectors.
+   */
+  public function getElementSelectorOptions(array $element);
 
   /**
    * Changes the values of an entity before it is created.

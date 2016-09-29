@@ -252,7 +252,7 @@ class YamlFormElementExtrasTest extends WebTestBase {
     // table
     /**************************************************************************/
 
-    $this->assertRaw('<table data-drupal-selector="edit-table" id="edit-table" class="responsive-enabled" data-striping="1">');
+    $this->assertRaw('<table class="js-form-wrapper responsive-enabled" data-drupal-selector="edit-table" id="edit-table" data-striping="1">');
     $this->assertRaw('<th>First Name</th>');
     $this->assertRaw('<th>Last Name</th>');
     $this->assertRaw('<th>Gender</th>');
@@ -607,14 +607,14 @@ class YamlFormElementExtrasTest extends WebTestBase {
     $this->assertRaw("contact_basic:
   name: 'John Smith'
   company: Acme
+  email: example@example.com
+  phone: 123-456-7890
   address: '100 Main Street'
   address_2: 'PO BOX 999'
   city: 'Hill Valley'
   state_province: 'New Jersey'
-  country: 'United States of America'
   postal_code: 11111-1111
-  email: example@example.com
-  phone: 123-456-7890");
+  country: 'United States of America'");
 
     // Check validate required composite elements.
     $edit = [

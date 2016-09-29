@@ -231,7 +231,6 @@ class YamlFormUiEntityForm extends YamlFormEntityForm {
         '#attributes' => $local_action_attributes,
       ];
       if ($yamlform->hasFlexboxLayout()) {
-        drupal_set_message($this->t('Flexbox layouts are experimental and provided for testing purposes only. Use at your own risk.'), 'warning');
         $form['local_actions']['add_layout'] = [
           '#type' => 'link',
           '#title' => $this->t('Add layout'),

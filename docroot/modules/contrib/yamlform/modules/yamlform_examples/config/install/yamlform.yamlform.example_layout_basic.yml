@@ -81,6 +81,22 @@ elements: |
         five: Five
         six: Six
       '#options_display': three_columns
+  title_example:
+    '#type': details
+    '#title': 'Title display'
+    '#open': true
+    title_display_before:
+      '#type': textfield
+      '#title': 'Title displayed before'
+      '#title_display': before
+    title_display_after:
+      '#type': textfield
+      '#title': 'Title displayed after'
+      '#title_display': after
+    title_display_inline:
+      '#type': textfield
+      '#title': 'Title displayed inline'
+      '#title_display': inline
   description_example:
     '#type': details
     '#title': 'Description display'
@@ -179,6 +195,7 @@ settings:
   form_prepopulate_source_entity: false
   form_novalidate: false
   form_autofocus: false
+  form_details_toggle: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -206,6 +223,7 @@ settings:
   entity_limit_total: null
   entity_limit_user: null
   results_disabled: false
+  token_update: false
 access:
   create:
     roles:

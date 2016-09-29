@@ -48,19 +48,19 @@ abstract class YamlFormSubmissionsDeleteFormBase extends ConfirmFormBase {
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * Constructs a new YamlFormResultsDeleteBaseForm object.
    *
    * @param \Drupal\yamlform\YamlFormSubmissionStorageInterface $yamlform_submission_storage
    *   The YAML form submission storage.
-   * @param \Drupal\yamlform\YamlFormRequestInterface $yamlform_request
+   * @param \Drupal\yamlform\YamlFormRequestInterface $request_handler
    *   The YAML form request handler.
    */
-  public function __construct(YamlFormSubmissionStorageInterface $yamlform_submission_storage, YamlFormRequestInterface $yamlform_request) {
+  public function __construct(YamlFormSubmissionStorageInterface $yamlform_submission_storage, YamlFormRequestInterface $request_handler) {
     $this->submissionStorage = $yamlform_submission_storage;
-    $this->yamlFormRequest = $yamlform_request;
+    $this->requestHandler = $request_handler;
   }
 
   /**
@@ -84,7 +84,7 @@ abstract class YamlFormSubmissionsDeleteFormBase extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    list($this->yamlform, $this->sourceEntity) = $this->yamlFormRequest->getYamlFormEntities();
+    list($this->yamlform, $this->sourceEntity) = $this->requestHandler->getYamlFormEntities();
     return parent::buildForm($form, $form_state);
   }
 

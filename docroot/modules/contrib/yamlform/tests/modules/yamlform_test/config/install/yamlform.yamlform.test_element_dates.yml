@@ -17,7 +17,8 @@ elements: |
       '#default_value': '2009-08-18'
     date_range:
       '#type': date
-      '#title': 'date default'
+      '#title': 'date range (min/max)'
+      '#description': '(2009-01-01 to 2009-12-31)'
       '#min': '2009-01-01'
       '#max': '2009-12-31'
       '#default_value': '2009-08-18'
@@ -100,6 +101,7 @@ settings:
   form_prepopulate_source_entity: false
   form_novalidate: false
   form_autofocus: false
+  form_details_toggle: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -127,6 +129,7 @@ settings:
   entity_limit_total: null
   entity_limit_user: null
   results_disabled: false
+  token_update: false
 access:
   create:
     roles:

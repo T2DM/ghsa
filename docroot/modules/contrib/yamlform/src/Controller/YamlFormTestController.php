@@ -20,7 +20,7 @@ class YamlFormTestController extends ControllerBase implements ContainerInjectio
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * YAML form submission generation service.
@@ -32,13 +32,13 @@ class YamlFormTestController extends ControllerBase implements ContainerInjectio
   /**
    * Constructs a new YamlFormTestController object.
    *
-   * @param \Drupal\yamlform\YamlFormRequestInterface $yamlform_request
+   * @param \Drupal\yamlform\YamlFormRequestInterface $request_handler
    *   The YAML form request handler.
    * @param \Drupal\yamlform\YamlFormSubmissionGenerateInterface $submission_generate
    *   The YAML form submission generation service.
    */
-  public function __construct(YamlFormRequestInterface $yamlform_request, YamlFormSubmissionGenerateInterface $submission_generate) {
-    $this->yamlFormRequest = $yamlform_request;
+  public function __construct(YamlFormRequestInterface $request_handler, YamlFormSubmissionGenerateInterface $submission_generate) {
+    $this->requestHandler = $request_handler;
     $this->generate = $submission_generate;
   }
 
@@ -64,7 +64,7 @@ class YamlFormTestController extends ControllerBase implements ContainerInjectio
   public function testForm(Request $request) {
     /** @var \Drupal\yamlform\YamlFormInterface $yamlform */
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
-    list($yamlform, $source_entity) = $this->yamlFormRequest->getYamlFormEntities();
+    list($yamlform, $source_entity) = $this->requestHandler->getYamlFormEntities();
     $values = [];
 
     // Set source entity type and id.
@@ -95,7 +95,7 @@ class YamlFormTestController extends ControllerBase implements ContainerInjectio
   public function title(YamlFormInterface $yamlform) {
     /** @var \Drupal\yamlform\YamlFormInterface $yamlform */
     /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
-    list($yamlform, $source_entity) = $this->yamlFormRequest->getYamlFormEntities();
+    list($yamlform, $source_entity) = $this->requestHandler->getYamlFormEntities();
     return $this->t('Testing %title form', ['%title' => ($source_entity) ? $source_entity->label() : $yamlform->label()]);
   }
 

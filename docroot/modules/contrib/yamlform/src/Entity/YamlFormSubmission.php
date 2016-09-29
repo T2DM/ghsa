@@ -403,6 +403,13 @@ class YamlFormSubmission extends ContentEntityBase implements YamlFormSubmission
   /**
    * {@inheritdoc}
    */
+  public function getTokenUrl() {
+    return $this->getSourceUrl()->setOption('query', ['token' => $this->token->value]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function invokeYamlFormHandlers($method, &$context1 = NULL, &$context2 = NULL) {
     if ($yamlform = $this->getYamlForm()) {
       $yamlform->invokeHandlers($method, $this, $context1, $context2);
@@ -543,9 +550,9 @@ class YamlFormSubmission extends ContentEntityBase implements YamlFormSubmission
     }
 
     // Get request's source entity parameter.
-    /** @var \Drupal\yamlform\YamlFormRequestInterface $yamlform_request */
-    $yamlform_request = \Drupal::service('yamlform.request');
-    $source_entity = $yamlform_request->getCurrentSourceEntity('yamlform');
+    /** @var \Drupal\yamlform\YamlFormRequestInterface $request_handler */
+    $request_handler = \Drupal::service('yamlform.request');
+    $source_entity = $request_handler->getCurrentSourceEntity('yamlform');
     $values += [
       'entity_type' => ($source_entity) ? $source_entity->getEntityTypeId() : NULL,
       'entity_id' => ($source_entity) ? $source_entity->id() : NULL,

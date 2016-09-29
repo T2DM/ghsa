@@ -75,7 +75,7 @@ Tidy YAML files
 
 [Git Release Notes for Drush](https://www.drupal.org/project/grn)
 
-    drush release-notes 8.x-1.0-VERSION 8.x-1.x
+    drush release-notes --nouser 8.x-1.0-VERSION 8.x-1.x
 
 
 5. Tag and create a new release

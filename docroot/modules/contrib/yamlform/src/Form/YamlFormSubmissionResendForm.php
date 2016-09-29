@@ -40,16 +40,16 @@ class YamlFormSubmissionResendForm extends FormBase {
    *
    * @var \Drupal\yamlform\YamlFormRequestInterface
    */
-  protected $yamlFormRequest;
+  protected $requestHandler;
 
   /**
    * Constructs a new YamlFormResultsDeleteBaseForm object.
    *
-   * @param \Drupal\yamlform\YamlFormRequestInterface $yamlform_request
+   * @param \Drupal\yamlform\YamlFormRequestInterface $request_handler
    *   The YAML form request handler.
    */
-  public function __construct(YamlFormRequestInterface $yamlform_request) {
-    $this->yamlFormRequest = $yamlform_request;
+  public function __construct(YamlFormRequestInterface $request_handler) {
+    $this->requestHandler = $request_handler;
   }
 
   /**
@@ -163,7 +163,7 @@ class YamlFormSubmissionResendForm extends FormBase {
     ];
 
     // Add submission navigation.
-    $source_entity = $this->yamlFormRequest->getCurrentSourceEntity('yamlform_submission');
+    $source_entity = $this->requestHandler->getCurrentSourceEntity('yamlform_submission');
     $form['navigation'] = [
       '#theme' => 'yamlform_submission_navigation',
       '#yamlform_submission' => $yamlform_submission,

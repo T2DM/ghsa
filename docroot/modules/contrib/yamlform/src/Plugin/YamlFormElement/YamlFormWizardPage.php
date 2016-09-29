@@ -11,7 +11,7 @@ use Drupal\yamlform\YamlFormInterface;
  * @YamlFormElement(
  *   id = "yamlform_wizard_page",
  *   label = @Translation("Wizard page"),
- *   category = @Translation("Wizard")
+ *   category = @Translation("Wizard"),
  * )
  */
 class YamlFormWizardPage extends Details {
@@ -31,7 +31,7 @@ class YamlFormWizardPage extends Details {
   /**
    * {@inheritdoc}
    */
-  public function hasValue(array $element) {
+  public function isInput(array $element) {
     return FALSE;
   }
 
