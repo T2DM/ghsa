@@ -1425,12 +1425,52 @@ footer .block.contact_email	{
 
 
 /* js measurements are cumbersome. use this for responsive js */
+/**************************************************************/
+/*  views */
+/**************************************************************/
+
 #js_yardstick	{
 	position: absolute;
 	left: -99999px;
 	top: -99999px;
 	height: 2400px;
 	width: .1px;
+	}
+	
+	
+	
+	
+
+
+
+
+
+/**************************************************************/
+/*  drupal stuff */
+/**************************************************************/
+
+#panels-ipe-tray	{
+	font-size: 12px;
+	}
+	
+#block-ghsa-local-tasks ul	{
+	font-size: 14px;
+	margin-left: 0;
+	}
+#block-ghsa-local-tasks li	{
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid #e5e5e5;
+	overflow: hidden;
+	border-radius: 4px;
+	}
+#block-ghsa-local-tasks a	{
+	display: block;
+	padding: 3px 6px;
+	}
+#block-ghsa-local-tasks li:hover a,
+#block-ghsa-local-tasks a.is-active	{
+	background-color: #eee;
 	}
 	
 	
