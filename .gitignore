@@ -3,3 +3,8 @@ docroot/files
 docroot/sites/*/files
 docroot/sites/*/private
 
+# Ignore local dev files
+*.sql
+settings.local.php
+.DS_Store
+
