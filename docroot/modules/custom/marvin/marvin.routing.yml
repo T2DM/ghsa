@@ -1,0 +1,7 @@
+marvin_marvin:
+  path: 'marvin2'
+  defaults:
+    _controller: '\Drupal\marvin\Controller\MarvinController::description'
+    _title: 'Marvin Example'
+  requirements:
+    _permission: 'access content'
