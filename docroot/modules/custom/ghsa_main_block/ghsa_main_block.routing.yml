@@ -1,0 +1,7 @@
+hello_world.content:
+  path: '/hello'
+  defaults:
+#    _controller: '\Drupal\ghsa_main_block\Controller\GhsaMainBllockController::content'
+    _title: 'Hello World'
+  requirements:
+    _permission: 'access content'
