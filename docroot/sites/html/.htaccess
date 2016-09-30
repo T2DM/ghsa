@@ -1,0 +1,5 @@
+# Turn off all options we don't need.
+Options +Indexes
+
+# Set the default handler.
+DirectoryIndex home.html index.php index.html index.htm
