@@ -23,3 +23,7 @@ function ghsa_preprocess_region(&$variables) {
 	//kint($variables['content']);
 
 }
+
+function ghsa_preprocess(&$vars) {
+  $vars['theme_path'] = base_path() . drupal_get_path('theme', 'ghsa');
+}
