@@ -6,20 +6,22 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
 
     <!-- move these to .info during theming -->
-    <link rel="stylesheet" type="text/css" href="{{ theme_path }}/css/app.css" />
+  <link rel="stylesheet" type="text/css" href="{{ theme_path }}/css/app.css" />
+  <link rel="stylesheet" type="text/css" href="{{ theme_path }}/foundation/css/foundation.css" />
+    <link rel="stylesheet" type="text/css" href="{{ theme_path }}/foundation/css/app.css" />
     <link rel="stylesheet" type="text/css" href="{{ theme_path }}/css/ie.css" />
-
-    <!-- move these to .info during theming -->
-    <script type="text/javascript" src="{{ theme_path }}/js/jquery-2.2.3.min.js"></script>
-    <!--<script type="text/javascript" src="bower_components/what-input/what-input.js"></script>-->
-    <script type="text/javascript" src="{{ theme_path }}/bower_components/foundation-sites/dist/foundation.js"></script>
-    <script type="text/javascript" src="{{ theme_path }}/js/app.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ theme_path }}/css/home.css" />
-    <script type="text/javascript" src="{{ theme_path }}/js/jquery.cycle2.js"></script>
-    <script type="text/javascript" src="{{ theme_path }}/js/home.js"></script>
-    <script type="text/javascript" src="{{ theme_path }}/js/scripts.js"></script>
   </head>
   <body class="front">
     {{ page }}
   </body>
+
+  <script type="text/javascript" src="{{ theme_path }}/foundation/js/vendor/jquery.js"></script>
+  <!--<script type="text/javascript" src="bower_components/what-input/what-input.js"></script>-->
+  <script type="text/javascript" src="{{ theme_path }}/foundation/js/vendor/foundation.js"></script>
+  <script type="text/javascript" src="{{ theme_path }}/foundation/js/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ theme_path }}/css/home.css" />
+  <script type="text/javascript" src="{{ theme_path }}/js/jquery.cycle2.js"></script>
+  <script type="text/javascript" src="{{ theme_path }}/js/home.js"></script>
+  <script type="text/javascript" src="{{ theme_path }}/js/scripts.js"></script>
 </html>
