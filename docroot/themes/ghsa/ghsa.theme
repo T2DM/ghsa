@@ -27,3 +27,19 @@ function ghsa_preprocess_region(&$variables) {
 function ghsa_preprocess(&$vars) {
   $vars['theme_path'] = base_path() . drupal_get_path('theme', 'ghsa');
 }
+
+function ghsa_preprocess_views_view_table(&$vars){
+    $attr = [
+        'href' => '#test',
+        'role' => 'tab' ,
+        'class' => 'accordion-title' ,
+        'id' => 'test-heading' ,
+        'aria-controls' => 'test'
+    ];
+    $vars['a_element'] = new Attribute($attr);
+//    dsm($vars['rows'][0]['columns']['title']);
+//    dsm($vars['title']);
+//    $vars['title']='babo';
+}
+
+
