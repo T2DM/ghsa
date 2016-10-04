@@ -7,4 +7,4 @@ docroot/sites/*/private
 *.sql
 settings.local.php
 .DS_Store
-
+docroot/.idea/*
