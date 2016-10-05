@@ -11,3 +11,8 @@
 .accordion-item {
     list-style-type: none;
 }
+
+/* Hide the tab title */
+.visually-hidden {
+    display: none;
+}
