@@ -4,11 +4,12 @@
     attach: function (context, settings) {
 
       // Autosubmit for JumpMenusForm
-      // $("#page-changer select").change(function() {
-      //     window.location = $("#page-changer select option:selected").val();
-      // });
-      $('.balance-helper-jump-menus-form').css({'background':'red'});
-      alert('WORKS!');
+      $(".balance-helper-jump-menus-form #edit-state").change(function() {
+          window.location = $(".balance-helper-jump-menus-form #edit-state option:selected").val();
+      });
+      $(".balance-helper-jump-menus-form #edit-issues").change(function() {
+          window.location = $(".balance-helper-jump-menus-form #edit-issues option:selected").val();
+      });
 
     }
   };

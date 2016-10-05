@@ -42,16 +42,9 @@ function balance_helper_theme() {
  * Implements hook_form_alter().
  * Customize /node/add/file_upload form
  */
-// function balance_helper_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-//   if ($form_id == 'node_file_upload_form') {
-//     $form['#attached']['library'][] = 'balance_helper/FileUploadForm';
-//   }
-// }
-
 function balance_helper_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'balance-helper-jump-menus-form') {
-    // $form['#attached']['library'][] = 'balance_helper/JumpMenusForm';
-    drupal_set_message(t('WORKS!'), 'error');
+  if ($form_id == 'balance_helper_jump_menus_form') {
+    $form['#attached']['library'][] = 'balance_helper/JumpMenusForm';
   }
 }
 
