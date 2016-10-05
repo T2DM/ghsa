@@ -16,3 +16,12 @@
 .visually-hidden {
     display: none;
 }
+
+/* Emphasize header in accordion */
+.accordion-title {
+    font-size: 1.25em;
+}
+
+.accordion-content {
+    font-size: 1rem;
+}
