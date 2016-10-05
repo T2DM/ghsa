@@ -1,0 +1,13 @@
+balance_helper.custom_blocks:
+  path: 'admin/content/block-content'
+  defaults:
+    link_id: 'balance_helper.custom_blocks'
+    _title: 'Custom Blocks Tab'
+
+# balance_helper.page_form:
+#   path: 'test/form'
+#   defaults:
+#     _form:  '\Drupal\balance_helper\Form\JumpMenusForm'
+#     _title: 'Test Form Example'
+#   requirements:
+#     _permission: 'access content'

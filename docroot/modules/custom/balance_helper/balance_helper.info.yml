@@ -1,0 +1,5 @@
+name: Balance Helper
+type: module
+description: Helper functions for GHSA site.
+core: 8.x
+package: Balance Interactive

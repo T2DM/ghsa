@@ -1,0 +1,18 @@
+# ExposedFilters:
+#   version: VERSION
+#   js:
+#     js/exposed-filters.js: {}
+#   dependencies:
+#     - core/jquery
+#
+# FileUploadForm:
+#   version: VERSION
+#   js:
+#     js/file-upload-form.js: {}
+
+JumpMenusForm:
+  version: VERSION
+  js:
+    js/jump-menus.js: {}
+  dependencies:
+    - core/jquery
