@@ -40,19 +40,10 @@ function balance_helper_theme() {
 
 /**
  * Implements hook_form_alter().
- * Customize /node/add/file_upload form
+ *
  */
 function balance_helper_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form_id == 'balance_helper_jump_menus_form') {
     $form['#attached']['library'][] = 'balance_helper/JumpMenusForm';
   }
 }
-
-// /**
-//  * Implements hook_form_views_exposed_form_alter().
-//  *
-//  */
-// function balance_helper_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-//   $form['#attached']['library'][] = 'balance_helper/ExposedFilters';
-// }
-//

@@ -1,7 +1,0 @@
-balance_helper.custom_blocks:
-  title: 'Custom Blocks'
-  description: 'All custom blocks available'
-  route_name: 'balance_helper.custom_blocks'
-  base_route: 'system.admin_content'
-  weight: 100
-  
