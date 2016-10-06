@@ -47,6 +47,18 @@ function ghsa_preprocess_page_title(&$vars) {
   }
 }
 
+function ghsa_preprocess_views_view(&$vars){
+  $request = \Drupal::request();
+  $params = $request->attributes->all();
+  $tid = $params['arg_0'];
+  $term = Term::load($tid);
+  if($params['view_id'] == 'state_laws_individual_state' || $params['view_id'] == 'state_laws_individual_issue') {
+    $vars['term'] = $term;
+    $copy = $term->field_copy_for_state_laws->getValue()[0]['value'];
+    $vars['copy'] = empty($copy) ? 'No copy provided yet.' : $copy;
+  }
+}
+
 function ghsa_preprocess_views_view_table(&$vars){
     $attr = [
         'href' => '#test',
