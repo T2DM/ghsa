@@ -7,6 +7,7 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
+use Drupal\taxonomy\Entity\Term;
 
 
 
@@ -26,6 +27,24 @@ function ghsa_preprocess_region(&$variables) {
 
 function ghsa_preprocess(&$vars) {
   $vars['theme_path'] = base_path() . drupal_get_path('theme', 'ghsa');
+}
+
+/**
+ * Implement hook_preprocess_page_title().
+ *
+ * We want to change the page title for the views.
+ */
+function ghsa_preprocess_page_title(&$vars) {
+  $request = \Drupal::request();
+  $params = $request->attributes->all();
+  $tid = $params['arg_0'];
+  $term = Term::load($tid);
+  if($params['view_id'] == 'state_laws_individual_state') {
+    $vars['title'] = $term->getName();
+  }
+  elseif($params['view_id'] == 'state_laws_individual_issue') {
+    $vars['title'] = $term->getName();
+  }
 }
 
 function ghsa_preprocess_views_view_table(&$vars){
