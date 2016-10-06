@@ -54,7 +54,12 @@ function ghsa_preprocess_views_view(&$vars){
   $term = Term::load($tid);
   if($params['view_id'] == 'state_laws_individual_state' || $params['view_id'] == 'state_laws_individual_issue') {
     $vars['term'] = $term;
-    $copy = $term->field_copy_for_state_laws->getValue()[0]['value'];
+    if(!empty($term->getDescription())) {
+      $copy = $term->getDescription();
+    }
+    else {
+      $copy = $term->field_copy_for_state_laws->getValue()[0]['value'];
+    }
     $vars['copy'] = empty($copy) ? 'No copy provided yet.' : $copy;
   }
 }
