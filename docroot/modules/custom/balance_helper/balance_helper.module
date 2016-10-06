@@ -17,6 +17,7 @@ function balance_helper_help($route_name, RouteMatchInterface $route_match) {
       $output  = '<h3>' . t('About Balance Interactive helper module:') . '</h3>';
       $output .= '<ul>';
       $output .= '<li>' . t('Creates a "Jump Menus" block') . '</li>';
+      $output .= '<li>' . t('Adds a "search" placeholder to search form') . '</li>';
       $output .= '</ul>';
       return $output;
     default:
@@ -46,4 +47,8 @@ function balance_helper_form_alter(&$form, \Drupal\Core\Form\FormStateInterface 
   if ($form_id == 'balance_helper_jump_menus_form') {
     $form['#attached']['library'][] = 'balance_helper/JumpMenusForm';
   }
+  if ($form_id == 'search_block_form') {
+    $form['#attached']['library'][] = 'balance_helper/SearchForm';
+  }
+
 }

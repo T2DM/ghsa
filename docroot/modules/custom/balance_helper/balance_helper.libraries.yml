@@ -4,3 +4,10 @@ JumpMenusForm:
     js/jump-menus.js: {}
   dependencies:
     - core/jquery
+    
+SearchForm:
+  version: VERSION
+  js:
+    js/search-form.js: {}
+  dependencies:
+    - core/jquery
