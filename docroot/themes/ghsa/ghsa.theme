@@ -34,35 +34,35 @@ function ghsa_preprocess(&$vars) {
  *
  * We want to change the page title for the views.
  */
-function ghsa_preprocess_page_title(&$vars) {
-  $request = \Drupal::request();
-  $params = $request->attributes->all();
-  $tid = $params['arg_0'];
-  $term = Term::load($tid);
-  if($params['view_id'] == 'state_laws_individual_state') {
-    $vars['title'] = $term->getName();
-  }
-  elseif($params['view_id'] == 'state_laws_individual_issue') {
-    $vars['title'] = $term->getName();
-  }
-}
+// function ghsa_preprocess_page_title(&$vars) {
+//   $request = \Drupal::request();
+//   $params = $request->attributes->all();
+//   $tid = $params['arg_0'];
+//   $term = Term::load($tid);
+//   if($params['view_id'] == 'state_laws_individual_state') {
+//     $vars['title'] = $term->getName();
+//   }
+//   elseif($params['view_id'] == 'state_laws_individual_issue') {
+//     $vars['title'] = $term->getName();
+//   }
+// }
 
-function ghsa_preprocess_views_view(&$vars){
-  $request = \Drupal::request();
-  $params = $request->attributes->all();
-  $tid = $params['arg_0'];
-  $term = Term::load($tid);
-  if($params['view_id'] == 'state_laws_individual_state' || $params['view_id'] == 'state_laws_individual_issue') {
-    $vars['term'] = $term;
-    if(!empty($term->getDescription())) {
-      $copy = $term->getDescription();
-    }
-    else {
-      $copy = $term->field_copy_for_state_laws->getValue()[0]['value'];
-    }
-    $vars['copy'] = empty($copy) ? 'No copy provided yet.' : $copy;
-  }
-}
+// function ghsa_preprocess_views_view(&$vars){
+//   $request = \Drupal::request();
+//   $params = $request->attributes->all();
+//   $tid = $params['arg_0'];
+//   $term = Term::load($tid);
+//   if($params['view_id'] == 'state_laws_individual_state' || $params['view_id'] == 'state_laws_individual_issue') {
+//     $vars['term'] = $term;
+//     if(!empty($term->getDescription())) {
+//       $copy = $term->getDescription();
+//     }
+//     else {
+//       $copy = $term->field_copy_for_state_laws->getValue()[0]['value'];
+//     }
+//     $vars['copy'] = empty($copy) ? 'No copy provided yet.' : $copy;
+//   }
+// }
 
 function ghsa_preprocess_views_view_table(&$vars){
     $attr = [
@@ -77,5 +77,3 @@ function ghsa_preprocess_views_view_table(&$vars){
 //    dsm($vars['title']);
 //    $vars['title']='babo';
 }
-
-
