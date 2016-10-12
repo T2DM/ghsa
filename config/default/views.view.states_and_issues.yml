@@ -248,7 +248,7 @@ display:
           entity_field: vid
           plugin_id: bundle
       sorts: {  }
-      title: 'State Laws'
+      title: States
       header: {  }
       footer: {  }
       empty: {  }
@@ -269,7 +269,7 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
-      path: state-laws/by-issue
+      path: state-laws/issues
       display_description: ''
       fields:
         tid:
@@ -406,6 +406,17 @@ display:
           plugin_id: term_name
       defaults:
         fields: false
+        title: false
+      menu:
+        type: normal
+        title: Issues
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:a20d167a-e6e5-4c24-87ec-b8d4f2ece21e'
+        weight: -50
+        context: '0'
+        menu_name: main
+      title: Issues
     cache_metadata:
       max-age: 0
       contexts:
@@ -421,7 +432,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: state-laws/by-state
+      path: state-laws/states
       display_description: ''
       filters:
         vid:
@@ -610,8 +621,8 @@ display:
         title: States
         description: ''
         expanded: false
-        parent: 'menu_link_content:c21c6506-1db7-4d92-991a-aad6fdf015cb'
-        weight: 0
+        parent: 'menu_link_content:a20d167a-e6e5-4c24-87ec-b8d4f2ece21e'
+        weight: -49
         context: '0'
         menu_name: main
     cache_metadata:

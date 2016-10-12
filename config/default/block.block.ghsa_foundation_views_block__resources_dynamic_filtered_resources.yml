@@ -12,7 +12,7 @@ dependencies:
 id: ghsa_foundation_views_block__resources_dynamic_filtered_resources
 theme: ghsa_foundation
 region: content
-weight: -4
+weight: -3
 provider: null
 plugin: 'views_block:resources-dynamic_filtered_resources'
 settings:

@@ -495,7 +495,7 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-      path: state-laws/by-issue/%
+      path: state-laws/issues/%
       display_description: ''
       relationships:
         term_node_tid:
