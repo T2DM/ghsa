@@ -494,7 +494,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: state-laws/by-state/%
+      path: state-laws/states/%
       display_description: ''
       title: ''
       defaults:

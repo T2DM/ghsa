@@ -1,15 +1,16 @@
 uuid: 162112d4-cddc-474f-98b6-d9f2c85c2c55
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - balance_helper
+    - system
   theme:
     - ghsa_foundation
 id: ghsa_foundation_jumpmenus
 theme: ghsa_foundation
-region: '-1'
-weight: -11
+region: content
+weight: -6
 provider: null
 plugin: jump_menus
 settings:
@@ -17,4 +18,9 @@ settings:
   label: 'Jump Menus'
   provider: balance_helper
   label_display: visible
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: /state-laws
+    negate: false
+    context_mapping: {  }
