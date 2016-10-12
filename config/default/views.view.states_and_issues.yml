@@ -15,7 +15,7 @@ id: states_and_issues
 label: 'States and Issues'
 module: views
 description: '(taxomony) Shows a list of states and a list of issues'
-tag: 'ghsa'
+tag: ghsa
 base_table: taxonomy_term_field_data
 base_field: tid
 core: 8.x

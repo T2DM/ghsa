@@ -19,7 +19,7 @@ id: state_laws_individual_issue
 label: 'State Laws by Issue'
 module: views
 description: 'List of State Laws'
-tag: 'ghsa'
+tag: ghsa
 base_table: node_field_data
 base_field: nid
 core: 8.x
@@ -370,7 +370,7 @@ display:
           plugin_id: field
       filters:
         status:
-          value: true
+          value: '1'
           table: node_field_data
           field: status
           plugin_id: boolean
