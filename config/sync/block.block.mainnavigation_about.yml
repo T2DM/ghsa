@@ -1,0 +1,27 @@
+uuid: d76d769a-68f9-4038-a2d3-607317788a45
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - menu_block
+  theme:
+    - bartik
+id: mainnavigation_about
+theme: bartik
+region: footer_fourth
+weight: -9
+provider: null
+plugin: 'menu_block:main'
+settings:
+  id: 'menu_block:main'
+  label: About
+  provider: menu_block
+  label_display: visible
+  level: 1
+  depth: 0
+  expand: 0
+  parent: 'main:menu_link_content:3554307c-1e9a-4cf8-93ac-40f776466852'
+  suggestion: main
+visibility: {  }

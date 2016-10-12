@@ -1,0 +1,22 @@
+uuid: 8b27d316-96c9-4208-8f87-9c3d33beb991
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.state_laws
+  module:
+    - text
+id: node.state_laws.body
+field_name: body
+entity_type: node
+bundle: state_laws
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

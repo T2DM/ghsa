@@ -1,0 +1,42 @@
+uuid: 46e07b2a-cd8f-4152-ab32-62cea78ce6ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.three_column_callout.field_column_one
+    - field.field.paragraph.three_column_callout.field_column_three
+    - field.field.paragraph.three_column_callout.field_column_two
+    - paragraphs.paragraphs_type.three_column_callout
+  module:
+    - text
+    - workbench_moderation
+id: paragraph.three_column_callout.default
+targetEntityType: paragraph
+bundle: three_column_callout
+mode: default
+content:
+  field_column_one:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+  field_column_three:
+    weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+  field_column_two:
+    weight: 7
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+hidden:
+  created: true
+  status: true
+  uid: true

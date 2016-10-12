@@ -1,0 +1,54 @@
+uuid: 85d46928-c8ab-4dc5-96f4-40cb4b6f3de2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.slides.field_body
+    - field.field.node.slides.field_image
+    - field.field.node.slides.field_link
+    - node.type.slides
+  module:
+    - image
+    - link
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.slides.default
+targetEntityType: node
+bundle: slides
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_image:
+    weight: 2
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_link:
+    weight: 1
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+hidden:
+  links: true
+  workbench_moderation_control: true

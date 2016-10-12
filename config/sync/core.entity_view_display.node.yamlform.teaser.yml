@@ -1,0 +1,32 @@
+uuid: 76a5b4f4-1b7f-4748-b2a8-c30062652941
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.yamlform.body
+    - field.field.node.yamlform.yamlform
+    - node.type.yamlform
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: 6RWSyyrzUOt-ovvP3cO1CbTFckoskSeZXCbBWfXm7Nk
+id: node.yamlform.teaser
+targetEntityType: node
+bundle: yamlform
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  yamlform: true

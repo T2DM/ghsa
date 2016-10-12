@@ -1,0 +1,11 @@
+uuid: d7607856-6c35-4016-980a-1af776ed5c9d
+langcode: en
+status: true
+dependencies: {  }
+id: staff
+label: Staff
+weight: -8
+is_admin: null
+permissions:
+  - 'edit any state_laws content'
+  - 'delete any state_laws content'

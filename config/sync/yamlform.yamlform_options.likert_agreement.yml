@@ -1,0 +1,9 @@
+uuid: 41b2c3bd-11e6-435e-9bb9-2ad2829efa9b
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: BdGX9KjlWkGVN8T05rsdVNcLzJ1cpemIpEJYTHtGGmw
+id: likert_agreement
+label: 'Likert: Agreement'
+options: "1: Much Worse\n2: Somewhat Worse\n3: About the Same\n4: Somewhat Better\n5: Much Better\n"

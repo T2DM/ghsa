@@ -1,0 +1,35 @@
+uuid: f83399d2-15f6-404f-9836-f54993efbbf7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_view
+    - paragraphs.paragraphs_type.view
+  module:
+    - viewfield
+id: paragraph.view.field_view
+field_name: field_view
+entity_type: paragraph
+bundle: view
+label: View
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  force_default: false
+  allowed_views:
+    block_content: '0'
+    content: '0'
+    content_recent: '0'
+    files: '0'
+    frontpage: '0'
+    media: '0'
+    moderation_history: '0'
+    slideshow: '0'
+    taxonomy_term: '0'
+    user_admin_people: '0'
+    who_s_new: '0'
+    who_s_online: '0'
+field_type: viewfield

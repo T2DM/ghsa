@@ -1,0 +1,21 @@
+uuid: c4df4616-5fc0-41b1-8ac5-f2517208ad3a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_column_three
+    - paragraphs.paragraphs_type.three_column_callout
+  module:
+    - text
+id: paragraph.three_column_callout.field_column_three
+field_name: field_column_three
+entity_type: paragraph
+bundle: three_column_callout
+label: 'Column three'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
