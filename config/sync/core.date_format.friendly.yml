@@ -1,8 +1,0 @@
-uuid: d074c0d7-c829-45fe-9de0-5ec4c9bf4f8f
-langcode: en
-status: true
-dependencies: {  }
-id: friendly
-label: Friendly
-locked: false
-pattern: 'F j, Y'

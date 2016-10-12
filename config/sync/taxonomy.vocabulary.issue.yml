@@ -1,9 +1,0 @@
-uuid: e58b2ccb-215b-43b5-bb29-7b9b4549572f
-langcode: en
-status: true
-dependencies: {  }
-name: Issue
-vid: issue
-description: ''
-hierarchy: 0
-weight: -10

@@ -1,9 +1,0 @@
-uuid: 25e8895b-cec5-4080-b4c0-65add8eb4ba3
-langcode: en
-status: true
-dependencies: {  }
-name: Law
-vid: law
-description: ''
-hierarchy: 0
-weight: -6

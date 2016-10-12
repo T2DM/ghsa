@@ -1,9 +1,0 @@
-uuid: 05db6c5f-9854-4175-b944-415c62647792
-langcode: en
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: kwxic4Mu35urjplc_H57KMJ21N5hO8-zK1JU2RuajtU
-id: size
-label: Size
-options: "Extra Small: Extra Small\nSmall: Small\nMedium: Medium\nLarge: Large\nExtra Large: Extra Large\n"

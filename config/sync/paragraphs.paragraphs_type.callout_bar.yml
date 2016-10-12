@@ -1,6 +1,0 @@
-uuid: 541b6ede-0987-42b8-a22b-a4cafa6184a5
-langcode: en
-status: true
-dependencies: {  }
-id: callout_bar
-label: 'Callout Bar'

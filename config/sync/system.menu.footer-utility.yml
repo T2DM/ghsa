@@ -1,8 +1,0 @@
-uuid: d252cd82-d1ee-41f5-85b5-f8bc223407fd
-langcode: en
-status: true
-dependencies: {  }
-id: footer-utility
-label: 'Footer Utility'
-description: ''
-locked: false

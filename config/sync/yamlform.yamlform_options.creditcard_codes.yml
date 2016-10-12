@@ -1,9 +1,0 @@
-uuid: b5af822e-a79d-4166-bc48-226eedd43de4
-langcode: en
-status: true
-dependencies: {  }
-_core:
-  default_config_hash: 1OtAaS669EKlwgkWo6JcXeQqdFm3o2pgyPT_9rMZxno
-id: creditcard_codes
-label: 'Credit card codes'
-options: "VI: 'Visa'\nMC: 'Mastercard'\nAE: 'American Express'\nDC: 'Discover'\n"
