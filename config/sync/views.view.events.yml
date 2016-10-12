@@ -10,7 +10,6 @@ dependencies:
     - image.style.eventslanding
     - node.type.events
   module:
-    - null
     - datetime
     - entityqueue
     - image
