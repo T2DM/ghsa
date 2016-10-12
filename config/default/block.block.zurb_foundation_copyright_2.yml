@@ -1,0 +1,25 @@
+uuid: acb8a2ee-4ff1-4654-a72f-b9e1e8d63049
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:b4b033d3-e243-4667-92c6-17987d5f25db'
+  module:
+    - block_content
+  theme:
+    - zurb_foundation
+id: zurb_foundation_copyright_2
+theme: zurb_foundation
+region: header
+weight: -10
+provider: null
+plugin: 'block_content:b4b033d3-e243-4667-92c6-17987d5f25db'
+settings:
+  id: 'block_content:b4b033d3-e243-4667-92c6-17987d5f25db'
+  label: Copyright
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

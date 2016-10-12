@@ -1,0 +1,36 @@
+uuid: 69645c93-9083-4b44-904c-8de7cd71525c
+langcode: en
+status: true
+dependencies: {  }
+id: content_manager
+label: 'Content Manager'
+weight: -5
+is_admin: null
+permissions:
+  0: 'create media'
+  1: 'delete media'
+  2: 'update media'
+  3: 'view media'
+  4: 'access content overview'
+  5: 'view all revisions'
+  6: 'view own unpublished content'
+  7: 'create state_laws content'
+  8: 'delete any state_laws content'
+  9: 'edit any state_laws content'
+  10: 'revert state_laws revisions'
+  11: 'view state_laws revisions'
+  12: 'view any unpublished content'
+  13: 'view moderation states'
+  14: 'view latest version'
+  15: 'access toolbar'
+  16: 'access administration pages'
+  17: 'view the administration theme'
+  18: 'use text format content_manager'
+  19: 'use text format rich_text'
+  21: 'access image_browser entity browser pages'
+  22: 'access media_browser entity browser pages'
+  23: 'access media overview'
+  24: 'administer media'
+  25: 'administer taxonomy'
+  26: 'create slides content'
+  27: 'delete any slides content'

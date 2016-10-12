@@ -1,0 +1,20 @@
+uuid: 1f082014-5571-4d56-a0c6-1114a8b6c72f
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_searchform
+theme: ghsa_foundation
+region: meta_header
+weight: -13
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form'
+  provider: search
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,23 @@
+uuid: 456eaef3-ffdc-492d-9973-aa85290ee9a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.view.field_view
+    - paragraphs.paragraphs_type.view
+  module:
+    - viewfield
+id: paragraph.view.default
+targetEntityType: paragraph
+bundle: view
+mode: default
+content:
+  field_view:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_default
+hidden:
+  created: true
+  uid: true

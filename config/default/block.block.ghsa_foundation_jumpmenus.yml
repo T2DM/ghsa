@@ -1,0 +1,20 @@
+uuid: 162112d4-cddc-474f-98b6-d9f2c85c2c55
+langcode: en
+status: false
+dependencies:
+  module:
+    - balance_helper
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_jumpmenus
+theme: ghsa_foundation
+region: '-1'
+weight: -11
+provider: null
+plugin: jump_menus
+settings:
+  id: jump_menus
+  label: 'Jump Menus'
+  provider: balance_helper
+  label_display: visible
+visibility: {  }

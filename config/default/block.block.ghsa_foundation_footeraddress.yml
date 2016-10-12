@@ -1,0 +1,25 @@
+uuid: dd2ed210-65e2-40e9-b3d3-1bf36bb27dff
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:33fc5795-4751-4ecc-8b28-8b86eb9a8762'
+  module:
+    - block_content
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_footeraddress
+theme: ghsa_foundation
+region: footer_row_1_column_1
+weight: -12
+provider: null
+plugin: 'block_content:33fc5795-4751-4ecc-8b28-8b86eb9a8762'
+settings:
+  id: 'block_content:33fc5795-4751-4ecc-8b28-8b86eb9a8762'
+  label: 'Footer Address'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

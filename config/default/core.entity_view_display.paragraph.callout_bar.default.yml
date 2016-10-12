@@ -1,0 +1,23 @@
+uuid: 708b1411-b720-4477-b142-01e96d6e4528
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.callout_bar.field_text_formatted_long
+    - paragraphs.paragraphs_type.callout_bar
+  module:
+    - text
+id: paragraph.callout_bar.default
+targetEntityType: paragraph
+bundle: callout_bar
+mode: default
+content:
+  field_text_formatted_long:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+hidden:
+  created: true
+  uid: true

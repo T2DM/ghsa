@@ -1,0 +1,22 @@
+uuid: 8c4cccd4-8dfc-46de-a2c1-5aca57480579
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ghsa_foundation
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: ghsa_foundation_local_tasks
+theme: ghsa_foundation
+region: content
+weight: -7
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: false
+visibility: {  }

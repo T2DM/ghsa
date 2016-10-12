@@ -1,0 +1,25 @@
+uuid: 27c79e8e-3b62-47e8-a522-b29be9f88645
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c7ec5bf2-191e-45e5-b80e-d782190d1dcf'
+  module:
+    - block_content
+  theme:
+    - zurb_foundation
+id: zurb_foundation_footeremail
+theme: zurb_foundation
+region: header
+weight: -10
+provider: null
+plugin: 'block_content:c7ec5bf2-191e-45e5-b80e-d782190d1dcf'
+settings:
+  id: 'block_content:c7ec5bf2-191e-45e5-b80e-d782190d1dcf'
+  label: 'Footer Email'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

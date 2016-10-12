@@ -1,0 +1,6 @@
+uuid: a902f8ca-a40e-434e-a4aa-e323c16ecac6
+langcode: en
+status: true
+dependencies: {  }
+id: infographic_with_button
+label: 'Infographic with button'

@@ -1,0 +1,20 @@
+uuid: 9f896ade-4fec-4e6c-9a9d-752103a4f95b
+langcode: en
+status: false
+dependencies:
+  module:
+    - balance_helper
+  theme:
+    - zurb_foundation
+id: zurb_foundation_jumpmenus
+theme: zurb_foundation
+region: '-1'
+weight: -11
+provider: null
+plugin: jump_menus
+settings:
+  id: jump_menus
+  label: 'Jump Menus'
+  provider: balance_helper
+  label_display: visible
+visibility: {  }

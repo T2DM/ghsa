@@ -1,0 +1,25 @@
+uuid: 91d57d04-a8a9-4452-baf9-fa35e76fadc4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cb6d06bd-ed4e-4f00-b33d-bc2866f084b7'
+  module:
+    - block_content
+  theme:
+    - zurb_foundation
+id: zurb_foundation_footercontacttitle
+theme: zurb_foundation
+region: header
+weight: -10
+provider: null
+plugin: 'block_content:cb6d06bd-ed4e-4f00-b33d-bc2866f084b7'
+settings:
+  id: 'block_content:cb6d06bd-ed4e-4f00-b33d-bc2866f084b7'
+  label: 'Footer Contact Title'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

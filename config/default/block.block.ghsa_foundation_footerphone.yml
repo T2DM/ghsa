@@ -1,0 +1,25 @@
+uuid: 71a371c1-e694-4493-8716-764222e77ec4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0e384622-afb9-4367-bd3f-c0d825dd6697'
+  module:
+    - block_content
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_footerphone
+theme: ghsa_foundation
+region: footer_row_1_column_2
+weight: -11
+provider: null
+plugin: 'block_content:0e384622-afb9-4367-bd3f-c0d825dd6697'
+settings:
+  id: 'block_content:0e384622-afb9-4367-bd3f-c0d825dd6697'
+  label: 'Footer Phone'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

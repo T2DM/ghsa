@@ -1,0 +1,20 @@
+uuid: 27af875a-edd9-4bd5-ad37-8ad138e17796
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - zurb_foundation
+id: zurb_foundation_searchform
+theme: zurb_foundation
+region: header
+weight: -12
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form'
+  provider: search
+  label_display: '0'
+visibility: {  }

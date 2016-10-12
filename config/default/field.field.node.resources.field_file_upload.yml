@@ -1,0 +1,27 @@
+uuid: 388a971b-8b9f-4b73-8c5b-0a460dcb1257
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file_upload
+    - node.type.resources
+  module:
+    - file
+id: node.resources.field_file_upload
+field_name: field_file_upload
+entity_type: node
+bundle: resources
+label: 'File Upload'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: publications/files
+  file_extensions: 'txt pdf docx doc xls xlsx'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

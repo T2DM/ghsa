@@ -1,0 +1,9 @@
+uuid: 35b53a9a-3713-4d9d-adeb-74cfb4cfc76c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: rkZtxdpKk0YHL4HNBS39sYz5suqpqjp-Y9lQKEdTuWY
+id: likert_satisfaction
+label: 'Likert: Satisfaction'
+options: "1: Very Unsatisfied\n2: Unsatisfied\n3: Neutral\n4: Satisfied\n5: Very Satisfied\n"

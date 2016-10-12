@@ -1,0 +1,25 @@
+uuid: caee9f2f-ccdb-47bd-a485-cee84b6c2ee1
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:bc90ca3f-0df6-4ba1-9e13-2a1cda4a68c8'
+  module:
+    - block_content
+  theme:
+    - ghsa
+id: footersubscribe
+theme: ghsa
+region: footer_row_1_column_3
+weight: -10
+provider: null
+plugin: 'block_content:bc90ca3f-0df6-4ba1-9e13-2a1cda4a68c8'
+settings:
+  id: 'block_content:bc90ca3f-0df6-4ba1-9e13-2a1cda4a68c8'
+  label: 'Footer Subscribe'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

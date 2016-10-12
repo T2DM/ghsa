@@ -1,0 +1,42 @@
+uuid: 53802e4f-47f0-4bd4-8490-022e7a8a4b7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.state.field_copy_for_state_laws
+    - taxonomy.vocabulary.state
+  module:
+    - path
+    - text
+id: taxonomy_term.state.default
+targetEntityType: taxonomy_term
+bundle: state
+mode: default
+content:
+  description:
+    type: text_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_copy_for_state_laws:
+    weight: 31
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+  name:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

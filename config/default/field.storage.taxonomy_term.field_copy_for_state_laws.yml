@@ -1,0 +1,19 @@
+uuid: 1ab894dd-9d1c-431a-9ae0-e618fe9b47f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - text
+id: taxonomy_term.field_copy_for_state_laws
+field_name: field_copy_for_state_laws
+entity_type: taxonomy_term
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

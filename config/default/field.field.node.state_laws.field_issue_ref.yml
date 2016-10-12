@@ -1,0 +1,28 @@
+uuid: 1e5013ed-222b-454e-bd24-c7d41f4b7158
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_ref
+    - node.type.state_laws
+    - taxonomy.vocabulary.issue
+id: node.state_laws.field_issue_ref
+field_name: field_issue_ref
+entity_type: node
+bundle: state_laws
+label: Issue
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      issue: issue
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

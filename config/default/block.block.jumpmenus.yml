@@ -1,0 +1,20 @@
+uuid: dddc7119-a340-4518-80a2-24e054ac5a3b
+langcode: en
+status: false
+dependencies:
+  module:
+    - balance_helper
+  theme:
+    - ghsa
+id: jumpmenus
+theme: ghsa
+region: '-1'
+weight: -11
+provider: null
+plugin: jump_menus
+settings:
+  id: jump_menus
+  label: 'Jump Menus'
+  provider: balance_helper
+  label_display: visible
+visibility: {  }

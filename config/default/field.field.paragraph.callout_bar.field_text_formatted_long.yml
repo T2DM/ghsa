@@ -1,0 +1,21 @@
+uuid: dfeb075f-da12-4d59-bac8-e64b4e25944d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_formatted_long
+    - paragraphs.paragraphs_type.callout_bar
+  module:
+    - text
+id: paragraph.callout_bar.field_text_formatted_long
+field_name: field_text_formatted_long
+entity_type: paragraph
+bundle: callout_bar
+label: Text
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

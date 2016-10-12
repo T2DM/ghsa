@@ -1,0 +1,27 @@
+uuid: 3bda674d-b06c-485c-8630-71dda4a24ee1
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.header-utility
+  module:
+    - menu_block
+  theme:
+    - zurb_foundation
+id: zurb_foundation_headerutility
+theme: zurb_foundation
+region: header
+weight: -10
+provider: null
+plugin: 'menu_block:header-utility'
+settings:
+  id: 'menu_block:header-utility'
+  label: 'Header Utility'
+  provider: menu_block
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand: 0
+  parent: 'header-utility:'
+  suggestion: header_utility
+visibility: {  }

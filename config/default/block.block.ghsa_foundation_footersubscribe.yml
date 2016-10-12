@@ -1,0 +1,25 @@
+uuid: 0d9e6078-b77f-470e-b3d0-f3a4c22989b9
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:bc90ca3f-0df6-4ba1-9e13-2a1cda4a68c8'
+  module:
+    - block_content
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_footersubscribe
+theme: ghsa_foundation
+region: footer_row_1_column_3
+weight: -12
+provider: null
+plugin: 'block_content:bc90ca3f-0df6-4ba1-9e13-2a1cda4a68c8'
+settings:
+  id: 'block_content:bc90ca3f-0df6-4ba1-9e13-2a1cda4a68c8'
+  label: 'Footer Subscribe'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

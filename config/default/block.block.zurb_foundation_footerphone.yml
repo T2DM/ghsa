@@ -1,0 +1,25 @@
+uuid: 9cb11336-4c7b-482c-99d2-79dfd2fec3ef
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0e384622-afb9-4367-bd3f-c0d825dd6697'
+  module:
+    - block_content
+  theme:
+    - zurb_foundation
+id: zurb_foundation_footerphone
+theme: zurb_foundation
+region: header
+weight: -10
+provider: null
+plugin: 'block_content:0e384622-afb9-4367-bd3f-c0d825dd6697'
+settings:
+  id: 'block_content:0e384622-afb9-4367-bd3f-c0d825dd6697'
+  label: 'Footer Phone'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

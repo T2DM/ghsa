@@ -1,0 +1,31 @@
+uuid: 9049ede9-79e5-4c8e-88de-efc92a9d024f
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:39e5cbda-69e8-4ab8-a15e-68a5993c8988'
+  module:
+    - block_content
+    - system
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_twitterfeed
+theme: ghsa_foundation
+region: content
+weight: -3
+provider: null
+plugin: 'block_content:39e5cbda-69e8-4ab8-a15e-68a5993c8988'
+settings:
+  id: 'block_content:39e5cbda-69e8-4ab8-a15e-68a5993c8988'
+  label: 'Twitter Feed'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

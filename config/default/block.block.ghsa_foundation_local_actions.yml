@@ -1,0 +1,20 @@
+uuid: c7962476-5ee8-4373-8a2b-d7765dad2166
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ghsa_foundation
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: ghsa_foundation_local_actions
+theme: ghsa_foundation
+region: content
+weight: -2
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

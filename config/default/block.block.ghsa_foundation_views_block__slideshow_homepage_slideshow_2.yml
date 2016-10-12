@@ -1,0 +1,30 @@
+uuid: c3bd7d40-1620-43ab-bad8-f1aeb739d79c
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.slideshow
+  module:
+    - system
+    - views
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_views_block__slideshow_homepage_slideshow_2
+theme: ghsa_foundation
+region: content
+weight: -8
+provider: null
+plugin: 'views_block:slideshow-homepage_slideshow'
+settings:
+  id: 'views_block:slideshow-homepage_slideshow'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,24 @@
+uuid: 46fbeb3c-1af3-42d6-92de-2939722e7727
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: featured_events
+label: 'Featured Events'
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: node
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      events: events
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+queue_settings:
+  min_size: 1
+  max_size: 1
+  act_as_queue: false

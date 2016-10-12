@@ -1,0 +1,27 @@
+uuid: 755869de-8cf3-4966-bd2d-357b6f108d6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - menu_block
+  theme:
+    - ghsa_foundation
+id: ghsa_foundation_footer_main
+theme: ghsa_foundation
+region: footer_row_2_menu
+weight: -12
+provider: null
+plugin: 'menu_block:main'
+settings:
+  id: 'menu_block:main'
+  label: 'Footer Main Menu Reiteration'
+  provider: menu_block
+  label_display: '0'
+  level: 1
+  depth: 2
+  expand: 1
+  parent: 'main:'
+  suggestion: footermain
+visibility: {  }
