@@ -11,49 +11,34 @@ class JumpMenusForm extends FormBase {
     return 'balance_helper_jump_menus_form';
   }
 
-  // function taxonomy_vocabulary_load($vid) {
-  //   return Vocabulary::load($vid);
-  // }
+  private function getTermList($vocabularyName) {
+    try{
+      $output = null;
+      $query = \Drupal::entityQuery('taxonomy_term');
+      $query->condition('vid',$vocabularyName);
+      $query->sort('name','ASC');
+      $tIds = $query->execute();
 
-  /**
-   * Load term data.
-   */
-  public function getTermData($bundle, $entity_id = 0) {
+      $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+      $allTerms =   $term_storage->loadMultiple($tIds);
+      $arrTerm = array();
+      foreach($allTerms as $idx=>$val){
+        // $arrTerm[$val->id()] = $this->t($val->name->value);
+        $arrTerm[$val->name->value] = $this->t($val->name->value);
+      }
 
-    $result = [];
-
-    $entity_manager = \Drupal::getContainer()->get('entity.manager');
-    $storage = $entity_manager->getStorage('taxonomy_term');
-    $terms = $storage->loadTree($bundle, $entity_id, 1, TRUE);
-
-    foreach ($terms as $term) {
-      $result[] = (object) [
-        'tid' => $term->id(),
-        'name' => $term->getName(),
-        // 'description__value' => $term->getDescription(),
-        // 'langcode' => $term->default_langcode,
-      ];
+      $output = $arrTerm;
+    }catch(Exception $ex){
+      $output = null;
+      watchdog_exception(__FUNCTION__, $ex);
     }
-
-    return $result;
+    return $output;
   }
-
 
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    // $results = db_query("SELECT tid, name FROM {taxonomy_term_data} WHERE vid = 1")->fetchAll();
-    //
-    // $options = array();
-    //
-    // foreach($results  as $key=>$value){
-    //   $options[$key] = $vlaue;
-    // }
-
-    $state_options = array(
-      '01' => 'Alaska',
-      '02' => 'Texas',
-    );
-
+    $state_options = $this->getTermList('state');
+    $issue_options = $this->getTermList('issue');
 
     $form['state'] = [
       '#type' => 'select',
@@ -67,14 +52,8 @@ class JumpMenusForm extends FormBase {
     $form['issues'] = [
       '#type' => 'select',
       '#title' => $this->t('Issues'),
-      '#options' => [
-        '1' => $this->t('One'),
-        $this->t('Two')->render() => [
-          '2.1' => $this->t('Two point one'),
-          '2.2' => $this->t('Two point two'),
-        ],
-        '3' => $this->t('Three'),
-      ],
+      '#empty_option' => $this->t('- Select -'),
+      '#options' => $issue_options,
     ];
 
     $form['actions'] = [
