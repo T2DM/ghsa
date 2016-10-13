@@ -1,4 +1,6 @@
 <?php
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Template\Attribute;
 
 // Add your custom theme override functions here.
 
@@ -39,6 +41,44 @@ function ghsa_foundation_preprocess_page(&$variables) {
 }
 
 /**
- * Implements template_preprocess_views_view().
+ * Prepares variables for accordion.
  */
-function ghsa_foundation_preprocess_views_view(&$variables) {}
+function ghsa_foundation_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+
+  if($view->current_display == 'accordion') {
+    $handler  = $view->style_plugin;
+    // Fetch classes from handler options.
+    if ($handler->options['class']) {
+      $class = explode(' ', $handler->options['class']);
+      $class = array_map('\Drupal\Component\Utility\Html::cleanCssIdentifier', $class);
+      if(!in_array('accordion')) {
+        $class[] = 'accordion';
+      }
+    }
+    else {
+      $class[] = 'accordion';
+    }
+    $variables['accordion']['attributes'] = new Attribute(array('class' => $class));
+    $variables['accordion']['meta'] = 'data-accordion';
+    $variables['accordion']['type'] = $handler->options['type'];
+
+    template_preprocess_views_view_unformatted($variables);
+  }
+}
+
+/**
+ * Prepares variables for accordion. This is for the HTML List format in views.
+ */
+function ghsa_foundation_preprocess_views_view_list(&$variables) {
+  static $index = 0;
+  $view = $variables['view'];
+
+  if($view->current_display == 'accordion') {
+    $variables['panel_id'] = 'panel' . $index;
+    if($index == 0) {
+      $variables['is_active'] = 'is-active';
+    }
+    $index++;
+  }
+}
