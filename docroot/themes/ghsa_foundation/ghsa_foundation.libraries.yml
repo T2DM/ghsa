@@ -3,5 +3,6 @@ global:
   css:
     base:
       css/ghsa_foundation.css: {}
+      css/override.css: {}
   js:
     js/ghsa_foundation.js: {}

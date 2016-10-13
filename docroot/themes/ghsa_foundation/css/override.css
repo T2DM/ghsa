@@ -1,0 +1,28 @@
+/**************************************************************/
+/*  nav.header_primary_menu  */
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+    content: none;  }
+
+.dropdown.menu > li.is-dropdown-submenu-parent > a {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+/*  accordion */
+.accordion-item {
+    list-style-type: none;
+}
+
+/* Hide the tab title */
+.visually-hidden {
+    display: none;
+}
+
+/* Emphasize header in accordion */
+.accordion-title {
+    font-size: 1.25em;
+}
+
+.accordion-content {
+    font-size: 1rem;
+    padding-left: 30px;
+}
