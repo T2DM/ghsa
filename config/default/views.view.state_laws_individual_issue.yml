@@ -150,8 +150,8 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h2
-          element_class: ''
+          element_type: p
+          element_class: law-title
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -215,7 +215,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: p
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -488,9 +488,9 @@ display:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_issue_ref'
         - 'config:field.storage.node.field_state_ref'
-  by_issue:
+  accordion:
     display_plugin: page
-    id: by_issue
+    id: accordion
     display_title: 'by Issue'
     position: 2
     display_options:
@@ -565,7 +565,7 @@ display:
           entity_field: name
           plugin_id: string
       style:
-        type: table
+        type: html_list
         options:
           grouping:
             -
@@ -574,47 +574,9 @@ display:
               rendered_strip: false
           row_class: ''
           default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            title: title
-            body: body
-            field_issue_ref: field_issue_ref
-            field_state_ref: field_state_ref
-          info:
-            title:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            body:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_issue_ref:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_state_ref:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
+          type: ul
+          wrapper_class: item-list
+          class: ''
       row:
         type: fields
         options:
@@ -623,7 +585,7 @@ display:
           separator: ''
           hide_empty: false
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
