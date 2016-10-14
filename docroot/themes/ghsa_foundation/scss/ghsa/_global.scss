@@ -1224,7 +1224,8 @@ main .breadcrumb ul	{
 	content: ""
 	}
 .breadcrumb a	{
-	padding: 4px 0;
+	position: relative;
+	z-index: 10;
 	}
 .breadcrumb li.first a	{
 	padding-left: 0;
