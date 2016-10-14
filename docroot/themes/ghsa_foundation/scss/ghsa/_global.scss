@@ -30,9 +30,9 @@ html {
 
 body	{
 	text-align: left;
-	color: #fff;
+	// color: #fff;
 	min-width: 320px;
-	background-color: #2b3036;
+	// background-color: #2b3036;
 	}
 a	{
 	cursor: pointer;
@@ -665,7 +665,8 @@ header a:hover	{
 	min-width: 143px;
 	}
 .header_primary_menu_container	{
-	width: 32%;
+	// width: 32%;
+	width: 40%;
 	}
 .header_secondary_menu_container	{
 	width: 23.24%;
@@ -698,8 +699,8 @@ header {
 .header_logo_container	{
 	}
 .header_logo	{
-	float: right;
-	display: block;
+	float: left;
+	margin-top: 26px;
 	}
 
 .header_logo_bug,
@@ -1374,10 +1375,13 @@ footer .contact_email,
 	}
 
 .footer_primary_menu	{
-	display: table;
-	table-layout: fixed;
 	border-bottom: 1px solid #41454a;
 	}
+
+.footer_primary_menu ul {
+	margin-bottom: 30px;
+}
+
 .footer_primary_menu > ul > li,
 .footer_primary_menu .menu-wrapper > ul > li	{
 	display: table-cell;
@@ -1397,13 +1401,17 @@ footer .contact_email,
 	margin: 0;
 	}
 
+.footer_primary_menu .menu > li {
+    display: block;
+		vertical-align: top;
+}
+
 
 /**************************************************************/
 /*  footer_copyright */
 
 .footer_copyright	{
 	text-align: center;
-	padding: 50px 0 30px 0;
 	}
 
 

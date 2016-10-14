@@ -15,13 +15,17 @@ libraries:
 # Regions are output in the page.html.twig
 
 regions:
-  meta_header: 'Meta Header'
-  header_main_menu: Header Main Menu
-  header: Header
-  help: Help
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
-  highlighted: Highlighted
+  # meta_header: 'Meta Header'
+  # header_main_menu: Header Main Menu
+  # header: Header
+  # help: Help
+  # page_top: 'Page top'
+  # page_bottom: 'Page bottom'
+  # highlighted: Highlighted
+  header_row_1_logo: Header Logo
+  header_row_1_menu_primary: Header Primary Menu
+  header_row_1_menu_secondary: Header Secondary Menu
+  header_row_1_search: Header Search
   content: Content
   footer_row_1_title: Footer Row 1, Title
   footer_row_1_column_1: Footer Row 1, Column 1
@@ -31,9 +35,9 @@ regions:
   footer_row_2_copyright: Footer Row 2, Copyright
   hidden: Hidden
 
-regions_hidden:
-  page_top: 'Page Top'
-  page_bottom: 'Page bottom'
+# regions_hidden:
+#   page_top: 'Page Top'
+#   page_bottom: 'Page bottom'
 
 # Hidden regions
 # regions_hidden[]: Page top
