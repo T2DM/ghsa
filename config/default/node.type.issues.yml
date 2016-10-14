@@ -1,0 +1,26 @@
+uuid: 7a832311-58aa-4d2a-b0d0-855569921c18
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - draft
+      - published
+      - archived
+      - needs_review
+    default_moderation_state: draft
+name: Issues
+type: issues
+description: 'Used for Issue Toolkits.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

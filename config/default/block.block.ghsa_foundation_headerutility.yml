@@ -10,7 +10,7 @@ dependencies:
     - ghsa_foundation
 id: ghsa_foundation_headerutility
 theme: ghsa_foundation
-region: header
+region: content
 weight: -11
 provider: null
 plugin: 'menu_block:header-utility'

@@ -12,8 +12,8 @@ _core:
   default_config_hash: rx9IrdDv7Ldc4kpalZAxdhIPZfYIeOMh1N-qKoQZwHo
 id: ghsa_foundation_main_menu
 theme: ghsa_foundation
-region: header
-weight: -12
+region: header_row_1_menu_primary
+weight: -11
 provider: null
 plugin: 'system_menu_block:main'
 settings:
