@@ -26,7 +26,7 @@
 // Make sure the charset is set appropriately
 @charset 'utf-8';
 
-//This is your _settings.scss file where you can override foundation variables. 
+//This is your _settings.scss file where you can override foundation variables.
 @import 'settings';
 
 // Core
@@ -81,3 +81,9 @@ $flex: false;
 
 // Older IE support
 // @import "vendor/ie";
+
+// GHSA
+@import "ghsa/variables";
+@import "ghsa/reset";
+@import "ghsa/fonts";
+@import "ghsa/global";

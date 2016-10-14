@@ -16,6 +16,7 @@ libraries:
 
 regions:
   meta_header: 'Meta Header'
+  header_main_menu: Header Main Menu
   header: Header
   help: Help
   page_top: 'Page top'
@@ -29,7 +30,7 @@ regions:
   footer_row_2_menu: Footer Row 2, Menu
   footer_row_2_copyright: Footer Row 2, Copyright
   hidden: Hidden
-  
+
 regions_hidden:
   page_top: 'Page Top'
   page_bottom: 'Page bottom'

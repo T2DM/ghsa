@@ -85,13 +85,17 @@
               {{ linked_logo }}
             {% endif %}
           </div>
-          <div class="left large-4 columns">
-            {% if is_front %}
-              <h1 id="site-name">{{ linked_site_name }}</h1>
-            {% else %}
-              <div id="site-name">{{ linked_site_name }}</div>
-            {% endif %}
+          <div class="large-4 columns header-site-info">
+  					<div class="header-organization">Governors Highway Safety Association</div>
+  					<div class="header-tagline">The States’ Voice on Highway Safety</div>
           </div>
+
+          <div class="large-6 columns">
+            <nav class="header-primary-menu" id="js_primary_menu">
+      					{{ page.header_main_menu }}
+			      </nav>
+          </div>
+
         {% endif %}
       </header>
 
