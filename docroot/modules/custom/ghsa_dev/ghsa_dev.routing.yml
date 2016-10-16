@@ -1,0 +1,15 @@
+ghsa_dev_create:
+  path: 'ghsa-dev/create'
+  defaults:
+    _controller: 'Drupal\ghsa_dev\Controller\CreateDemoStateLaws::content'
+    _title: 'Create a bunch of demo state laws'
+  requirements:
+    _permission: 'access content'
+
+ghsa_dev_delete:
+  path: 'ghsa-dev/delete'
+  defaults:
+    _controller: 'Drupal\ghsa_dev\Controller\DeleteDemoStateLaws::content'
+    _title: 'Delete demo all state laws'
+  requirements:
+    _permission: 'access content'
