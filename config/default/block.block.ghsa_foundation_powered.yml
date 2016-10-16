@@ -1,0 +1,22 @@
+uuid: a393ad26-5c58-470d-b546-cdce207b6eea
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - ghsa_foundation
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: ghsa_foundation_powered
+theme: ghsa_foundation
+region: '-1'
+weight: -11
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }
