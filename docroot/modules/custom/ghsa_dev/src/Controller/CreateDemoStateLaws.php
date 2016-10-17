@@ -199,19 +199,36 @@ class CreateDemoStateLaws extends ControllerBase {
         </tbody></table>
         ';
     $html['test'] = '
-        <table class="stack hover table-scroll">
-            <tbody> 
-                <tr>
-                    <td rowspan="2">DUID Zero Tolerance or <em>Per se</em> Laws for Some Drugs</td> 
-                    <td colspan="2">Marijuana-Specific</td>      
-                </tr>
-                <tr>
-                    <td>Possession &amp; Use Laws</td>
-                    <td>Impaired Driving Laws</td>
-                </tr>
-                
-            </tbody>
-         </table>
+        <table class="stack">
+  <thead>
+    <tr>
+      <th>Cookies</th>
+      <th>Taste</th>
+      <th>Calories</th>
+      <th>Overall</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chocolate Chip</td>
+      <td>Tastey</td>
+      <td>120cal</td>
+      <td>7.5/10</td>
+    </tr>
+    <tr>
+      <td>Snickerdoodle</td>
+      <td>Delicious</td>
+      <td>95cal</td>
+      <td>8/10</td>
+    </tr>
+    <tr>
+      <td>Oatmeal Raisin</td>
+      <td>Superb</td>
+      <td>10cal</td>
+      <td>11/10</td>
+    </tr>
+  </tbody>
+</table>
     ';
     if(empty($html[$issue])) {
       $issue = 'Drug Impaired Driving';
