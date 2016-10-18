@@ -1,0 +1,43 @@
+uuid: 272542f2-9198-46cd-a31b-f86277871222
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.issues.body
+    - field.field.node.issues.field_image
+    - field.field.node.issues.field_issue_ref
+    - node.type.issues
+  module:
+    - image
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.issues.default
+targetEntityType: node
+bundle: issues
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  field_issue_ref: true
+  links: true
+  workbench_moderation_control: true

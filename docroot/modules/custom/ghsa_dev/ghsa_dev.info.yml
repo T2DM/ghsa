@@ -1,0 +1,10 @@
+name: GHSA Development
+description: A place to put one time use code during development.
+type: module
+core: 8.x
+version: 8.x-1.0
+package: 1 GHSA Dev
+
+
+
+

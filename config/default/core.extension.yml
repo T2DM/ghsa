@@ -37,6 +37,7 @@ module:
   flexslider: 0
   flexslider_fields: 0
   flexslider_views: 0
+  ghsa_dev: 0
   help: 0
   history: 0
   image: 0

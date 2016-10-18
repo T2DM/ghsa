@@ -32,7 +32,7 @@ filters:
   editor_file_reference:
     id: editor_file_reference
     provider: editor
-    status: true
+    status: false
     weight: -45
     settings: {  }
   entity_embed:
