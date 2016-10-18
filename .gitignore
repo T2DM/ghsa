@@ -1,10 +1,6 @@
-# Ignore paths that contain user-generated content.
-docroot/files
-docroot/sites/*/files
-docroot/sites/*/private
+# Marvin's ignore files
+config/default1
+config/default-broken
+config/default-cesar
+docroot/sites/lightning.ghsa
 
-# Ignore local dev files
-*.sql
-settings.local.php
-.DS_Store
-docroot/.idea/*
