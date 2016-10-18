@@ -42,8 +42,8 @@ class JumpMenusForm extends FormBase {
 
     $form['state'] = [
       '#type' => 'select',
-      '#title' => t('States'),
-      '#empty_option' => $this->t('- Select -'),
+      // '#title' => t('States'),
+      '#empty_option' => $this->t('- Go to a State -'),
       '#options' => $state_options,
       // '#multiple' => true,
       // '#description' => t('Filter by State.'),
@@ -51,8 +51,8 @@ class JumpMenusForm extends FormBase {
 
     $form['issues'] = [
       '#type' => 'select',
-      '#title' => $this->t('Issues'),
-      '#empty_option' => $this->t('- Select -'),
+      // '#title' => $this->t('Issues'),
+      '#empty_option' => $this->t('- Go to an Issue -'),
       '#options' => $issue_options,
     ];
 
