@@ -1,7 +1,0 @@
-global:
-  version: VERSION
-  css:
-    base:
-      css/ghsa_foundation2.css: {}
-  js:
-    js/ghsa_foundation2.js: {}
