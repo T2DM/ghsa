@@ -5751,3 +5751,7 @@ footer .contact_email,
     height: 320px; }
   body {
     width: 320px; } }
+
+.block-ghsa-foundation-jumpmenus {
+  float: right;
+  margin-left: 40px; }
