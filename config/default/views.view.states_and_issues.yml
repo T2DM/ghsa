@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - system.menu.main
     - taxonomy.vocabulary.ahs_awards
     - taxonomy.vocabulary.issue
     - taxonomy.vocabulary.law
@@ -407,11 +408,11 @@ display:
         fields: false
         title: false
       menu:
-        type: none
+        type: normal
         title: Issues
         description: ''
         expanded: false
-        parent: ''
+        parent: 'menu_link_content:4fac6af4-f706-464c-953e-3bf8c47442e9'
         weight: -50
         context: '0'
         menu_name: main
@@ -616,11 +617,11 @@ display:
           entity_field: name
           plugin_id: term_name
       menu:
-        type: none
+        type: normal
         title: States
         description: ''
         expanded: false
-        parent: ''
+        parent: 'menu_link_content:4fac6af4-f706-464c-953e-3bf8c47442e9'
         weight: -49
         context: '0'
         menu_name: main
