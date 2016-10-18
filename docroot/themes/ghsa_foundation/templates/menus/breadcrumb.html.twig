@@ -12,26 +12,24 @@
 
 
 <!-- START: section.main_breadcrumb_container -->
-<div class="main_breadcrumb_container columns column_no_padding_left">
-
+<div class="main_breadcrumb_container container">
 	<div class="breadcrumb">
-	{% if breadcrumb %}
-		<nav role="navigation" aria-labelledby="system-breadcrumb">
-			<h2 class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
-			<ul>
-			{% for item in breadcrumb %}
-				<li>
-					{% if item.url %}
-						<a href="{{ item.url }}">{{ item.text }}</a>
-					{% else %}
-						{{ item.text }}
-					{% endif %}
-				</li>
-			{% endfor %}
-			</ul>
-		</nav>
-	{% endif %}
+  	{% if breadcrumb %}
+  		<nav role="navigation" aria-labelledby="system-breadcrumb">
+  			<h2 class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+  			<ul>
+    			{% for item in breadcrumb %}
+    				<li>
+    					{% if item.url %}
+    						<a href="{{ item.url }}">{{ item.text }}</a>
+    					{% else %}
+    						{{ item.text }}
+    					{% endif %}
+    				</li>
+    			{% endfor %}
+  			</ul>
+  		</nav>
+  	{% endif %}
 	</div>
-
 </div>
 <!-- END: section.main_breadcrumb_container -->

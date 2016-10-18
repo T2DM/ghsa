@@ -39,22 +39,23 @@
  * @see html.html.twig
  */
 #}
-						
+
+
 {% if page.header_row_1_search %}
 	{{ page.header_row_1_search }}
-{% endif %}		
+{% endif %}
 
 <!-- START: header : contains logo, primary menu, secondary menu, search -->
 <header>
-	
-	
+
+
 	<!-- START: section.header_items -->
 	<section class="header_items row">
-				
+
 		<div class="header_mobile_menu_toggle_container inner_column">
 			<div class="header_mobile_menu_toggle" id="js_header_mobile_menu_toggle">Mobile Menu Toggle</div>
 		</div>
-				
+
 		<!-- START: div.header_logo -->
 		<div class="header_logo_container inner_column column_no_padding_both">
 			<a class="header_logo">
@@ -66,37 +67,38 @@
 			</a>
 		</div>
 		<!-- END: div.header_logo -->
-				
+
 		<!-- START: div.header_primary_menu_container -->
 		<div id="js_header_primary_menu_container" class="header_primary_menu_container inner_column column_no_padding_both">
-			
+
 			<nav class="header_primary_menu" id="js_primary_menu">
-		
+
 				{% if page.header_row_1_menu_primary %}
 					{{ page.header_row_1_menu_primary }}
 				{% endif %}
-		
+
 			</nav>
-			
+
+
 		</div>
 		<!-- END: div.header_primary_menu_container -->
-				
+
 		<!-- START: div.header_secondary_menu_container -->
-		<div class="header_secondary_menu_container inner_column column_no_padding_both">
+		<div class="header_secondary_menu_container inner_column column_no_padding_both" style="display: none">
 			<nav class="header_secondary_menu" id="js_secondary_menu">
-		
+
 				{% if page.header_row_1_menu_secondary %}
 					{{ page.header_row_1_menu_secondary }}
 				{% endif %}
-		
+
 			</nav>
 		</div>
 		<!-- END: div.header_secondary_menu_container -->
-				
+
 		{% if page.header_row_1_menu_secondary %}
 		<!-- START: header_search_container -->
-		<div class="header_search_container inner_column column_no_padding_both">
-			
+		<div class="header_search_container inner_column column_no_padding_both" style="display: none">
+
 			<!-- START: header_search -->
 			<div class="header_search" id="js_search_desktop">
 				<h2 class="hidden">Search</h2>
@@ -107,37 +109,37 @@
 				</div>
 			</div>
 			<!-- END: header_search -->
-			
+
 		</div>
 		<!-- END: header_search_container -->
 		{% endif %}
-	
+
 	</section>
 	<!-- END: section.header_items -->
-	
-	
+
+
 	<!-- START: section.header_items_2 -->
 	<section class="header_items_2 row">
-				
+
 		<div class="mobile_640_column_1 inner_column"><ul></ul></div>
 		<div class="mobile_640_column_2 inner_column"></div>
 		<div class="mobile_640_column_3 inner_column"><ul></ul></div>
-	
+
 	</section>
 	<!-- END: section.header_items_2 -->
-	
-	
+
+
 	<!-- START: section.header_items_3 -->
 	<section class="header_items_3 row">
-				
+
 		<div class="mobile_640_column_1 inner_column"></div>
 		<div class="mobile_640_column_2 inner_column"></div>
 		<div class="mobile_640_column_3 inner_column"></div>
-	
+
 	</section>
 	<!-- END: section.header_items_2 -->
-	
-	
+
+
 </header>
 <!-- END: header -->
 
@@ -146,27 +148,27 @@
 
 <!-- START: main : contains main page content -->
 <main>
-	
-	
+
+
 	<!-- START: article : contains main article content -->
 	<article class="main_content row">
-	
-				
+
+
 		<!-- START: columns -->
 		<div class="columns small-10 small-offset-1 end column_no_padding_both">
-	
-			
+
+
 			<a id="skip_to_main_content" class="tiny_near_hidden"></a>
 			{{ page.content }}
-			
-		
+
+
 		</div>
 		<!-- END: centered column -->
-	
-	
+
+
 	</article>
 	<!-- END: article : contains main article content -->
-	
+
 
 </main>
 <!-- END: main -->
@@ -175,8 +177,8 @@
 
 <!-- START: footer : contains footer elements -->
 <footer>
-	
-	
+
+
 	{% if page.footer_row_1_title or page.footer_row_1_column_1 or page.footer_row_1_column_2 or page.footer_row_1_column_3 %}
 	<!-- START: section.footer_contact_information -->
 	<section class="footer_contact_information">
@@ -207,7 +209,7 @@
 						{{ page.footer_row_1_column_3 }}
 					{% endif %}
 				</div>
-		
+
 			</div>
 			<!-- END: columns -->
 
@@ -217,35 +219,35 @@
 	</section>
 	<!-- END: section.footer_contact_information -->
 	{% endif %}
-				
+
 	<!-- START: section.footer_primary_menu_container -->
 	<section class="footer_primary_menu_container row">
-		
+
 		<!-- START: div.footer_primary_menu -->
 		<nav class="footer_primary_menu columns small-10 small-offset-1 end column_no_padding_both" id="js_footer_primary_menu">
-		
+
 			{% if page.footer_row_2_menu %}
 				{{ page.footer_row_2_menu }}
 			{% endif %}
-	
+
 		</nav>
 		<!-- END: div.footer_primary_menu -->
-		
+
 	</section>
 	<!-- END: section.footer_primary_menu_container -->
-	
+
 	<!-- START: section.footer_copyright -->
 	<section class="footer_copyright row">
-	
+
 		<div class="columns small-10 small-offset-1 end column_no_padding_both">
 			{% if page.footer_row_2_copyright %}
 				{{ page.footer_row_2_copyright }}
 			{% endif %}
 		</div>
-		
+
 	</section>
 	<!-- END: section.footer_copyright -->
-	
-	
+
+
 </footer>
 <!-- END: footer -->
