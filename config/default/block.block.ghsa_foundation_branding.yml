@@ -1,6 +1,6 @@
 uuid: 9591eb28-4243-4bf0-ba68-1d685d38c58b
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -10,8 +10,8 @@ _core:
   default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
 id: ghsa_foundation_branding
 theme: ghsa_foundation
-region: '-1'
-weight: -10
+region: header_row_1_logo
+weight: -12
 provider: null
 plugin: system_branding_block
 settings:

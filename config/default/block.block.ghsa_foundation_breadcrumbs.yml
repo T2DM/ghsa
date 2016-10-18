@@ -9,7 +9,7 @@ dependencies:
 id: ghsa_foundation_breadcrumbs
 theme: ghsa_foundation
 region: content
-weight: -10
+weight: -12
 provider: null
 plugin: system_breadcrumb_block
 settings:

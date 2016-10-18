@@ -24,7 +24,6 @@ settings:
             - Subscript
             - '-'
             - RemoveFormat
-            - Styles
         -
           name: Linking
           items:
@@ -39,7 +38,6 @@ settings:
           name: Media
           items:
             - Blockquote
-            - DrupalImage
             - Table
             - HorizontalRule
             - media_browser

@@ -47,9 +47,9 @@ spi:
     variables: {  }
     time: 0
   cron_interval: 28800
-  site_name: 'ghsa: test'
-  site_machine_name: 50ea277f_142d_4671_97a8_79761a4ee42b__ghsaeczdaccxfx
-  site_uuid: b10a8d99-be2d-4d7a-ad3e-822dc87d5818
+  site_name: 'ghsa: dev'
+  site_machine_name: 50ea277f_142d_4671_97a8_79761a4ee42b__ghsasgndtykgnr
+  site_uuid: 47e00deb-8739-4b31-aa78-8028fcdd06bf
 mapping:
   acquia_spi_send_node_user:
     - acquia_connector.settings
