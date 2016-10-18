@@ -150,5 +150,6 @@ content:
 hidden:
   field_meta_tags: true
   links: true
+  panelizer: true
   scheduled_update: true
   workbench_moderation_control: true

@@ -35,4 +35,5 @@ hidden:
   field_meta_tags: true
   field_paragraphs: true
   field_view: true
+  panelizer: true
   scheduled_update: true
