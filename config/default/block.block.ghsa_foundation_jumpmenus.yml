@@ -10,14 +10,14 @@ dependencies:
 id: ghsa_foundation_jumpmenus
 theme: ghsa_foundation
 region: content
-weight: -6
+weight: -5
 provider: null
 plugin: jump_menus
 settings:
   id: jump_menus
   label: 'Jump Menus'
   provider: balance_helper
-  label_display: visible
+  label_display: '0'
 visibility:
   request_path:
     id: request_path

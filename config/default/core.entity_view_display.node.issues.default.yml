@@ -1,0 +1,149 @@
+uuid: edc0970a-d779-4b59-b8cb-c0605a0b7938
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.issues.body
+    - field.field.node.issues.field_image
+    - field.field.node.issues.field_issue_ref
+    - node.type.issues
+  module:
+    - image
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: true
+    custom: false
+    allow: true
+    default: default
+    displays:
+      default:
+        blocks:
+          e1090214-d972-4768-821d-249cf1c96ae2:
+            id: 'entity_field:node:uid'
+            label: 'Authored by'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: author
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: middle
+            weight: 0
+            uuid: e1090214-d972-4768-821d-249cf1c96ae2
+          e8b7e029-d5ba-48b6-a67e-a2983aaca585:
+            id: 'entity_field:node:created'
+            label: 'Authored on'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: timestamp
+              settings:
+                date_format: medium
+                custom_date_format: ''
+                timezone: ''
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: middle
+            weight: 0
+            uuid: e8b7e029-d5ba-48b6-a67e-a2983aaca585
+          7885b6dc-d00d-4651-afb1-140d81cb84e2:
+            id: 'entity_field:node:body'
+            label: Body
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: text_default
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: middle
+            weight: 2
+            uuid: 7885b6dc-d00d-4651-afb1-140d81cb84e2
+          b271b4c8-c95e-4a0f-a238-334f32faf5b5:
+            id: 'entity_field:node:field_image'
+            label: 'Page Banner'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: image
+              settings:
+                image_style: ''
+                image_link: ''
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: middle
+            weight: 0
+            uuid: b271b4c8-c95e-4a0f-a238-334f32faf5b5
+          6e60abe5-d3f2-4cc7-ab59-cfbaa3a5baf6:
+            id: 'entity_field:node:field_issue_ref'
+            label: Issue
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: entity_reference_label
+              settings:
+                link: true
+              third_party_settings: {  }
+              weight: 0
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: middle
+            weight: 1
+            uuid: 6e60abe5-d3f2-4cc7-ab59-cfbaa3a5baf6
+        id: panels_variant
+        label: Default
+        uuid: 99ee6f86-be80-40f6-b87c-e78923c034cb
+        weight: 0
+        layout: onecol
+        layout_settings: {  }
+        page_title: '[node:title]'
+        storage_type: ''
+        storage_id: ''
+        builder: ipe
+        pattern: panelizer
+id: node.issues.default
+targetEntityType: node
+bundle: issues
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_issue_ref:
+    weight: 1
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+hidden:
+  links: true
+  workbench_moderation_control: true

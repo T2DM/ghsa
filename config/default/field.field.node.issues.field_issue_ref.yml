@@ -1,0 +1,28 @@
+uuid: 290811f7-d3ee-457c-95c8-520334162a15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_ref
+    - node.type.issues
+    - taxonomy.vocabulary.issue
+id: node.issues.field_issue_ref
+field_name: field_issue_ref
+entity_type: node
+bundle: issues
+label: Issue
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      issue: issue
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

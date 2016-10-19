@@ -12,7 +12,7 @@ dependencies:
 id: ghsa_foundation_views_block__news_dynamic_filtered_news
 theme: ghsa_foundation
 region: content
-weight: -4
+weight: -3
 provider: null
 plugin: 'views_block:news-dynamic_filtered_news'
 settings:
@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/taxonomy/term/*'
+    pages: "/taxonomy/term/*\r\nissues/*"
     negate: false
     context_mapping: {  }

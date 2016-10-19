@@ -1,6 +1,6 @@
 uuid: d91515d9-0774-4c86-ab4d-5dcf8ebcb633
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.header-utility
@@ -10,8 +10,8 @@ dependencies:
     - ghsa_foundation
 id: ghsa_foundation_headerutility
 theme: ghsa_foundation
-region: content
-weight: -11
+region: '-1'
+weight: -9
 provider: null
 plugin: 'menu_block:header-utility'
 settings:

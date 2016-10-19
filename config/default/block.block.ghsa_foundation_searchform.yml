@@ -8,7 +8,7 @@ dependencies:
     - ghsa_foundation
 id: ghsa_foundation_searchform
 theme: ghsa_foundation
-region: content
+region: header_row_1_menu_secondary
 weight: -12
 provider: null
 plugin: search_form_block
