@@ -10,6 +10,7 @@ dependencies:
     - image.style.flexslider_full
     - node.type.slides
   module:
+    - null
     - entityqueue
     - flexslider_fields
     - flexslider_views
@@ -81,7 +82,7 @@ display:
         options:
           grouping: {  }
           flexslider: null
-          optionset: default
+          optionset: image_pager
           captionfield: ''
           id: ''
       row:
