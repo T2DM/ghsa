@@ -5757,9 +5757,11 @@ footer .contact_email,
 
 .main_columns {
   position: relative;
-  padding-right: 300px; }
+  padding-right: 300px;
+  overflow: hidden; }
 
 .twitter {
   position: absolute;
   top: 0;
-  right: 0; }
+  right: 0;
+  background-color: #2b3036; }
