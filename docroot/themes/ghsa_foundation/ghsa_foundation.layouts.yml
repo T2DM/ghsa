@@ -1,0 +1,19 @@
+home:
+  label: Home Page Layout
+  category: GHSA
+  path: layouts/home
+  icon: home.png
+  #css: home.css
+  template: home
+  regions:
+    slider:
+      label: slider
+    top:
+      label: top
+    left:
+      label: left
+    right:
+      label: right
+    twitter:
+      label: twitter
+      

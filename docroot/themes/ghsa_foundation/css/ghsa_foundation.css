@@ -5754,3 +5754,14 @@ footer .contact_email,
   float: right;
   margin-left: 40px;
   z-index: 1; }
+
+.main_columns {
+  position: relative;
+  padding-right: 300px;
+  overflow: hidden; }
+
+.twitter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #2b3036; }

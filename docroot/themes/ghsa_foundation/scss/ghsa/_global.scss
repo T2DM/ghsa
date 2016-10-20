@@ -1317,7 +1317,7 @@ main article li:last-of-type	{
 footer	{
 	color: #96989a;
 	@extend .font_nunito_regular;
-	background-color: #2b3036;
+	background-color: $color-footer-gray;
 	}
 footer a	{
 	color: #fff;
@@ -1970,4 +1970,17 @@ footer .contact_email,
 	    float: right;
 			margin-left: 40px;
 			z-index: 1;
+	}
+
+	// Insert twitter feed on home page
+	.main_columns {
+		position: relative;
+		padding-right: 300px;
+		overflow: hidden;
+	}
+	.twitter {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: $color-footer-gray;
 	}

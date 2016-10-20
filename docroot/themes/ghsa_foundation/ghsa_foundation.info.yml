@@ -27,6 +27,8 @@ regions:
   header_row_1_menu_primary: Header Primary Menu
   header_row_1_menu_secondary: Header Secondary Menu
   header_row_1_search: Header Search
+  help: Help
+  home_hero: Home Hero
   content: Content
   footer_row_1_title: Footer Row 1, Title
   footer_row_1_column_1: Footer Row 1, Column 1
@@ -34,6 +36,7 @@ regions:
   footer_row_1_column_3: Footer Row 1, Column 3
   footer_row_2_menu: Footer Row 2, Menu
   footer_row_2_copyright: Footer Row 2, Copyright
+  twitter_feed: Twitter Feed
   hidden: Hidden
 
 # regions_hidden:
