@@ -162,64 +162,6 @@
 
 </header>
 <!-- END: header -->
-		</section>
-			<div class="row_stripe_grey">
-				<div>
-					{% if page.home_hero %}
-					  <div class="main_section_hero_left">
-					    <div class="large-9 columns">
-					      {{ page.home_hero }}
-					    </div>
-							<div class="large-3 columns">
-					      hero right side content here
-					    </div>
-					  </div>
-					{% endif %}
-					<!-- START: views-row -->
-					<div class="views-row">
-
-						<!-- START: slideshow_hero_container -->
-						<div class="slideshow_hero_container">
-							<div class="slideshow_hero_image no_image_resize"><img src="{{ theme_path }}/images/hero-example-slide-1.jpg" alt="yadda" /></div>
-							<div class="slideshow_hero_content">
-								<div class="slideshow_hero_content_button button_1"><a href="#">Michigan Grantee Boot Camp</a></div>
-								<div class="slideshow_hero_content_text"><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo</p></div>
-							</div>
-						</div>
-						<!-- END: slideshow_hero_container -->
-
-					</div>
-					<!-- END: views-row -->
-
-				</div>
-				<!-- END: home_slideshow_container -->
-
-
-				<!-- START: home_slideshow_controls -->
-				<div class="home_slideshow_controls">
-
-					<h2 class="hidden">Slideshow Controls</h2>
-					<div id="home_slideshow_control_pager">
-						<h2 class="hidden">Slide Navigation</h2>
-						<ul role="listbox">
-							<li role="option" tab-index="0" aria-selected="true">1</li>
-							<li role="option" tab-index="-1" aria-selected="false">2</li>
-							<li role="option" tab-index="-1" aria-selected="false">3</li>
-						</ul>
-					</div>
-
-				</div>
-				<!-- END: home_slideshow_controls -->
-
-
-			</div>
-			<!-- END: section.home_slideshow -->
-
-
-		</section>
-		<!-- END: section.main_section_hero -->
-
-
 
 
 
@@ -283,91 +225,111 @@
 </div>
 {% endif %}
 
+
 <div class="row">
-  <main id="main" class="{{ main_grid }} columns" role="main">
-    {% if page.highlighted %}
-      {% spaceless %}
-        {{ page.highlighted }}
-      {% endspaceless %}
-    {% endif %}
-    <a id="main-content"></a>
-    {% if breadcrumb %} {{ breadcrumb }} {% endif %}
-    <section>
-      {{ page.content }}
-    </section>
-  </main>
+
+		<section>
+			{{ page.home_hero }}
+		</section>
 
 </div>
 
-<!-- START: footer : contains footer elements -->
-<footer>
 
-  {% if page.footer_row_1_title or page.footer_row_1_column_1 or page.footer_row_1_column_2 or page.footer_row_1_column_3 %}
-  	<!-- START: section.footer_contact_information -->
-  	<section class="footer_contact_information">
+<div class="main_columns large-9 columns">
+	<div class="main_columns_inner clearfix">
 
-  		<!-- START: .row -->
-  		<div class="row footer_contact_information_data">
+		<div class="row">
+		  <main id="main" class="{{ main_grid }} columns" role="main">
+		    {% if page.highlighted %}
+		      {% spaceless %}
+		        {{ page.highlighted }}
+		      {% endspaceless %}
+		    {% endif %}
+		    <a id="main-content"></a>
+		    {% if breadcrumb %} {{ breadcrumb }} {% endif %}
+		    <section>
+		      {{ page.content }}
+		    </section>
+		  </main>
 
-  			<!-- START: columns -->
-  			<div class="columns small-10 small-offset-1 end column_no_padding_both">
-
-  				<div class="inner_column region_contact_block_title">
-  					{% if page.footer_row_1_title %}
-  						{{ page.footer_row_1_title }}
-  					{% endif %}
-  				</div>
-  				<div class="inner_column">
-  					{% if page.footer_row_1_column_1 %}
-  						{{ page.footer_row_1_column_1 }}
-  					{% endif %}
-  				</div>
-  				<div class="inner_column">
-  					{% if page.footer_row_1_column_2 %}
-  						{{ page.footer_row_1_column_2 }}
-  					{% endif %}
-  				</div>
-  				<div class="inner_column">
-  					{% if page.footer_row_1_column_3 %}
-  						{{ page.footer_row_1_column_3 }}
-  					{% endif %}
-  				</div>
-
-  			</div>
-  			<!-- END: columns -->
-
-  		</div>
-  		<!-- END: .row -->
-
-  	</section>
-  	<!-- END: section.footer_contact_information -->
-  {% endif %}
-
-  <!-- START: section.footer_primary_menu_container -->
-	<section class="footer_primary_menu_container row">
-
-		<!-- START: div.footer_primary_menu -->
-		<nav class="footer_primary_menu columns small-10 small-offset-1 end column_no_padding_both" id="js_footer_primary_menu">
-
-			{% if page.footer_row_2_menu %}
-				{{ page.footer_row_2_menu }}
-			{% endif %}
-
-		</nav>
-		<!-- END: div.footer_primary_menu -->
-
-	</section>
-	<!-- END: section.footer_primary_menu_container -->
-
-	<!-- START: section.footer_copyright -->
-	<section class="footer_copyright row">
-
-		<div class="columns small-10 small-offset-1 end column_no_padding_both">
-			{% if page.footer_row_2_copyright %}
-				{{ page.footer_row_2_copyright }}
-			{% endif %}
 		</div>
 
-	</section>
-	<!-- END: section.footer_copyright -->
-</footer>
+		<!-- START: footer : contains footer elements -->
+		<footer>
+
+		  {% if page.footer_row_1_title or page.footer_row_1_column_1 or page.footer_row_1_column_2 or page.footer_row_1_column_3 %}
+		  	<!-- START: section.footer_contact_information -->
+		  	<section class="footer_contact_information">
+
+		  		<!-- START: .row -->
+		  		<div class="row footer_contact_information_data">
+
+		  			<!-- START: columns -->
+		  			<div class="columns small-10 small-offset-1 end column_no_padding_both">
+
+		  				<div class="inner_column region_contact_block_title">
+		  					{% if page.footer_row_1_title %}
+		  						{{ page.footer_row_1_title }}
+		  					{% endif %}
+		  				</div>
+		  				<div class="inner_column">
+		  					{% if page.footer_row_1_column_1 %}
+		  						{{ page.footer_row_1_column_1 }}
+		  					{% endif %}
+		  				</div>
+		  				<div class="inner_column">
+		  					{% if page.footer_row_1_column_2 %}
+		  						{{ page.footer_row_1_column_2 }}
+		  					{% endif %}
+		  				</div>
+		  				<div class="inner_column">
+		  					{% if page.footer_row_1_column_3 %}
+		  						{{ page.footer_row_1_column_3 }}
+		  					{% endif %}
+		  				</div>
+
+		  			</div>
+		  			<!-- END: columns -->
+
+		  		</div>
+		  		<!-- END: .row -->
+
+		  	</section>
+		  	<!-- END: section.footer_contact_information -->
+		  {% endif %}
+
+		  <!-- START: section.footer_primary_menu_container -->
+			<section class="footer_primary_menu_container row">
+
+				<!-- START: div.footer_primary_menu -->
+				<nav class="footer_primary_menu columns small-10 small-offset-1 end column_no_padding_both" id="js_footer_primary_menu">
+
+					{% if page.footer_row_2_menu %}
+						{{ page.footer_row_2_menu }}
+					{% endif %}
+
+				</nav>
+				<!-- END: div.footer_primary_menu -->
+
+			</section>
+			<!-- END: section.footer_primary_menu_container -->
+
+			<!-- START: section.footer_copyright -->
+			<section class="footer_copyright row">
+
+				<div class="columns small-10 small-offset-1 end column_no_padding_both">
+					{% if page.footer_row_2_copyright %}
+						{{ page.footer_row_2_copyright }}
+					{% endif %}
+				</div>
+
+			</section>
+			<!-- END: section.footer_copyright -->
+		</footer>
+
+	</div>
+</div>
+
+<div class="twitter large-3 columns">
+	This is the twitter feed
+</div>
