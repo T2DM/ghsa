@@ -3,4 +3,7 @@ config/default1
 config/default-broken
 config/default-cesar
 docroot/sites/lightning.ghsa
+docroot/sites/development.services.yml
+docroot/sites/default/files
+
 

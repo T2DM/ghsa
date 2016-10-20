@@ -11,8 +11,8 @@ dependencies:
     - ghsa_foundation
 id: ghsa_foundation_twitterfeed
 theme: ghsa_foundation
-region: content
-weight: -1
+region: twitter_feed
+weight: -13
 provider: null
 plugin: 'block_content:39e5cbda-69e8-4ab8-a15e-68a5993c8988'
 settings:
