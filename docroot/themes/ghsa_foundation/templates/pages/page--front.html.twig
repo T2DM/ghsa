@@ -330,6 +330,8 @@
 	</div>
 </div>
 
-<div class="twitter large-3 columns">
-	This is the twitter feed
-</div>
+{% if page.twitter_feed %}
+  <div class="twitter large-3 columns">
+    {{ page.twitter_feed }}
+  </div>
+{% endif %}

@@ -36,6 +36,7 @@ regions:
   footer_row_1_column_3: Footer Row 1, Column 3
   footer_row_2_menu: Footer Row 2, Menu
   footer_row_2_copyright: Footer Row 2, Copyright
+  twitter_feed: Twitter Feed
   hidden: Hidden
 
 # regions_hidden:
