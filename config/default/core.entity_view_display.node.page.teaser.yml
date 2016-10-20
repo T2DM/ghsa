@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_paragraphs
     - field.field.node.page.field_view
+    - field.field.node.page.panelizer
     - field.field.node.page.scheduled_update
     - node.type.page
   module:

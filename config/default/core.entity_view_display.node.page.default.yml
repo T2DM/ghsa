@@ -19,7 +19,7 @@ dependencies:
 third_party_settings:
   panelizer:
     enable: true
-    custom: false
+    custom: true
     allow: true
     default: default
     displays:

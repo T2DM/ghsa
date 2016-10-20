@@ -10,7 +10,7 @@ dependencies:
 id: ghsa_foundation_jumpmenus
 theme: ghsa_foundation
 region: content
-weight: -5
+weight: -13
 provider: null
 plugin: jump_menus
 settings:

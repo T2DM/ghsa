@@ -11,7 +11,7 @@ dependencies:
 id: ghsa_foundation_headerutility
 theme: ghsa_foundation
 region: '-1'
-weight: -9
+weight: -12
 provider: null
 plugin: 'menu_block:header-utility'
 settings:
