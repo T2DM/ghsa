@@ -1971,3 +1971,14 @@ footer .contact_email,
 			margin-left: 40px;
 			z-index: 1;
 	}
+
+	// Insert twitter feed on home page
+	.main_columns {
+		position: relative;
+		padding-right: 300px;
+	}
+	.twitter {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}

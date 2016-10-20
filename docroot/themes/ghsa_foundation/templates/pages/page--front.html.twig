@@ -235,7 +235,7 @@
 </div>
 
 
-<div class="main_columns large-9 columns">
+<div class="main_columns">
 	<div class="main_columns_inner clearfix">
 
 		<div class="row">
@@ -251,8 +251,15 @@
 		      {{ page.content }}
 		    </section>
 		  </main>
-
 		</div>
+
+
+		{% if page.twitter_feed %}
+		  <div class="twitter">
+		    {{ page.twitter_feed }}
+		  </div>
+		{% endif %}
+
 
 		<!-- START: footer : contains footer elements -->
 		<footer>
@@ -329,9 +336,3 @@
 
 	</div>
 </div>
-
-{% if page.twitter_feed %}
-  <div class="twitter large-3 columns">
-    {{ page.twitter_feed }}
-  </div>
-{% endif %}
