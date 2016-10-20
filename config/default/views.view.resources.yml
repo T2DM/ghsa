@@ -1277,7 +1277,7 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: 'large-4 columns'
           default_row_class: true
       defaults:
         style: false

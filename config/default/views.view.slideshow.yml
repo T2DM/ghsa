@@ -10,7 +10,6 @@ dependencies:
     - image.style.flexslider_full
     - node.type.slides
   module:
-    - null
     - entityqueue
     - flexslider_fields
     - flexslider_views
