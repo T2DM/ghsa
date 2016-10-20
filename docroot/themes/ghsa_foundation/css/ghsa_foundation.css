@@ -5765,3 +5765,9 @@ footer .contact_email,
   top: 0;
   right: 0;
   background-color: #2b3036; }
+
+viewheader > h2 {
+  display: inline-block; }
+
+.flex-control-thumbs .flex-active {
+  display: none; }

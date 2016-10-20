@@ -1984,3 +1984,11 @@ footer .contact_email,
 		right: 0;
 		background-color: $color-footer-gray;
 	}
+
+	viewheader > h2 {
+		display: inline-block;
+	}
+
+	.flex-control-thumbs .flex-active {
+    display: none;
+	}
