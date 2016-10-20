@@ -18,9 +18,9 @@ dependencies:
     - viewfield
 third_party_settings:
   panelizer:
-    enable: true
-    custom: true
-    allow: true
+    enable: false
+    custom: false
+    allow: false
     default: default
     displays:
       default:

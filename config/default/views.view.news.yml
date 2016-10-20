@@ -776,6 +776,8 @@ display:
         fields: false
         header: false
         footer: false
+        style: false
+        row: false
       fields:
         title:
           id: title
@@ -1046,23 +1048,24 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h2>News</h2>'
+            value: "<img src=\"/themes/ghsa_foundation/images/icon-news.png\" alt=\"icon-news\" /><h2>News</h2><a href=\"/about/news\" class=\"button\">Read News</a>\n"
             format: full_html
           plugin_id: text
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a class="button">Read News</a>'
-            format: full_html
-          plugin_id: text
+      footer: {  }
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 2
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
+      row:
+        type: fields
+        options: {  }
     cache_metadata:
       max-age: -1
       contexts:

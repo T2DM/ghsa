@@ -81,7 +81,7 @@ display:
         options:
           grouping: {  }
           flexslider: null
-          optionset: default
+          optionset: image_pager
           captionfield: ''
           id: ''
       row:

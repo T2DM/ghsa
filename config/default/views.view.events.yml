@@ -8,9 +8,9 @@ dependencies:
     - field.storage.node.field_date
     - field.storage.node.field_event_image
     - image.style.eventslanding
+    - image.style.large
     - node.type.events
   module:
-    - null
     - datetime
     - entityqueue
     - image
@@ -1072,25 +1072,14 @@ display:
         filters: false
         filter_groups: false
         header: false
+        style: false
+        row: false
       pager:
         type: some
         options:
           items_per_page: 2
           offset: 0
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/events/current-upcoming-meetings" class="button">See All Upcoming Events</a>'
-            format: full_html
-          plugin_id: text
+      footer: {  }
       title: 'Upcoming Events'
       filters:
         status:
@@ -1168,9 +1157,27 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h2>Events</h2>'
-            format: rich_text
+            value: '<img src="/themes/ghsa_foundation/images/icon-events.png" alt="icon-events" /><h2>Events</h2><a href="/events/current-upcoming-meetings" class="button">See All Upcoming Events</a>'
+            format: full_html
           plugin_id: text
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 2
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
+      row:
+        type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1570,7 +1577,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: eventslanding
+            image_style: large
             image_link: ''
           group_column: ''
           group_columns: {  }
@@ -1783,27 +1790,13 @@ display:
         filter_groups: false
         sorts: false
         title: false
+        style: false
+        row: false
       pager:
-        type: full
+        type: some
         options:
           items_per_page: 3
           offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
       footer:
         area:
           id: area
@@ -1898,12 +1891,24 @@ display:
           granularity: second
           plugin_id: datetime
       title: 'Past Events'
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: 'large-4 columns'
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1970,7 +1975,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: eventslanding
+            image_style: large
             image_link: ''
           group_column: ''
           group_columns: {  }
@@ -2182,27 +2187,13 @@ display:
         title: false
         filters: false
         filter_groups: false
+        style: false
+        row: false
       pager:
-        type: full
+        type: some
         options:
           items_per_page: 3
           offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
       footer:
         area:
           id: area
@@ -2283,12 +2274,24 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: 'large-4 columns'
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
