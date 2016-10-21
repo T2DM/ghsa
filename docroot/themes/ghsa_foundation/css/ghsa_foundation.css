@@ -5771,3 +5771,35 @@ viewheader > h2 {
 
 .flex-control-thumbs .flex-active {
   display: none; }
+
+.blocktabs .ui-widget-header {
+  border: 0;
+  background: transparent;
+  float: right;
+  position: relative;
+  top: -60px; }
+
+.blocktabs .ui-tabs-nav li.ui-tabs-active a,
+.blocktabs .ui-tabs-nav li:hover a {
+  color: #0078a9; }
+
+.blocktabs .ui-tabs-nav li.ui-state-default,
+.blocktabs .ui-tabs-nav li.ui-state-active,
+.blocktabs .ui-tabs-nav li:hover {
+  background: transparent;
+  border: 0; }
+
+.block-blocktabsprogramandinitiatives .ui-widget-content {
+  border: 0; }
+
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-state-default a:visited {
+  font-family: Nunito, "GHSA-Helvetica", "GHSA-Arial", Arial, sans-serif; }
+
+.block-blocktabsprogramandinitiatives h2::before {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  content: "";
+  background: url(../images/icon-initiative.png) 0 1px no-repeat; }
