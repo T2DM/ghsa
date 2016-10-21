@@ -66,8 +66,10 @@ function ghsa_foundation_preprocess_views_view(&$variables) {
     template_preprocess_views_view_unformatted($variables);
   }
 
-  if($view->id() == 'events') {
-    $displays = ['three_upcoming_events', 'three_past_events'];
+  // Add the row class to appropriate places
+  $views = ['events', 'issues'];
+  if(in_array($view->id(), $views)) {
+    $displays = ['three_upcoming_events', 'three_past_events', 'issues_grid'];
     if(in_array($view->current_display, $displays)) {
       $variables['row'] = 'row';
     }
