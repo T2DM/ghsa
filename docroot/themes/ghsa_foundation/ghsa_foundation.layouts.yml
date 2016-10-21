@@ -16,4 +16,24 @@ home:
       label: right
     twitter:
       label: twitter
-      
+
+issues:
+  label: Issues CT Layout
+  category: GHSA
+  path: layouts/issues
+  icon: issues.png
+  #css: home.css
+  template: issues
+  regions:
+    banner:
+      label: banner
+    top:
+      label: top
+    middle_left:
+      label: middle left
+    middle_right:
+      label: middle right
+    bottom_left:
+      label: bottom left
+    bottom_right:
+      label: bottom right
