@@ -1,0 +1,28 @@
+uuid: cee82173-c565-455b-a073-3994825ff505
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_issue_ref
+    - node.type.products
+    - taxonomy.vocabulary.issue
+id: node.products.field_issue_ref
+field_name: field_issue_ref
+entity_type: node
+bundle: products
+label: Issue
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      issue: issue
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

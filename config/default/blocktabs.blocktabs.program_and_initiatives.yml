@@ -1,0 +1,43 @@
+uuid: 14a0f01f-5e3c-4547-a5cf-7092808680e0
+langcode: en
+status: true
+dependencies: {  }
+name: program_and_initiatives
+label: 'Program and Initiatives'
+tabs:
+  85bfea62-2461-4bed-818a-205d9218bcda:
+    uuid: 85bfea62-2461-4bed-818a-205d9218bcda
+    id: views_tab
+    title: Abico
+    weight: '1'
+    data:
+      view_name: tabs_program_and_initiatives
+      view_display: tab_1
+      view_arg: ''
+  3d3b2a97-3242-47b8-b14d-de880086fb23:
+    uuid: 3d3b2a97-3242-47b8-b14d-de880086fb23
+    id: views_tab
+    title: Gravis
+    weight: '2'
+    data:
+      view_name: tabs_program_and_initiatives
+      view_display: tab_2
+      view_arg: ''
+  4fc4b120-ff9d-4866-927b-3c850a0f0dd7:
+    uuid: 4fc4b120-ff9d-4866-927b-3c850a0f0dd7
+    id: views_tab
+    title: Aliquam
+    weight: '3'
+    data:
+      view_name: tabs_program_and_initiatives
+      view_display: tab_3
+      view_arg: ''
+  eed3986b-4ee4-45ee-ac70-986beb7d12e9:
+    uuid: eed3986b-4ee4-45ee-ac70-986beb7d12e9
+    id: views_tab
+    title: Paulatim
+    weight: 4
+    data:
+      view_name: tabs_program_and_initiatives
+      view_display: tab_4
+      view_arg: ''

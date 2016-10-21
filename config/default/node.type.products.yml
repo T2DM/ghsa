@@ -1,4 +1,4 @@
-uuid: aae6adf2-a55f-41dd-80c6-e7314fbbd5a4
+uuid: bdf3d94a-f2e9-4f78-a017-997de64d0998
 langcode: en
 status: true
 dependencies:
@@ -17,10 +17,10 @@ third_party_settings:
       - draft
       - needs_review
     default_moderation_state: draft
-name: Issues
-type: issues
-description: 'Used for Issue Toolkits.'
+name: Products
+type: products
+description: 'Used to create products = Initiatives'
 help: ''
-new_revision: false
+new_revision: true
 preview_mode: 1
 display_submitted: false

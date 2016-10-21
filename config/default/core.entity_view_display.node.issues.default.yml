@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.issues.body
     - field.field.node.issues.field_image
     - field.field.node.issues.field_issue_ref
+    - field.field.node.issues.panelizer
     - node.type.issues
   module:
     - image
@@ -14,9 +15,9 @@ dependencies:
     - user
 third_party_settings:
   panelizer:
-    enable: true
+    enable: false
     custom: false
-    allow: true
+    allow: false
     default: default
     displays:
       default:
@@ -146,4 +147,5 @@ content:
     type: entity_reference_label
 hidden:
   links: true
+  panelizer: true
   workbench_moderation_control: true

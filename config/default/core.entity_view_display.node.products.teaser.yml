@@ -1,20 +1,20 @@
-uuid: 6ed6321e-59f4-4dd8-9361-6782ac23c68d
+uuid: 826d1b4b-268b-4436-8aa4-99f177a144f5
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.issues.body
-    - field.field.node.issues.field_image
-    - field.field.node.issues.field_issue_ref
-    - field.field.node.issues.panelizer
-    - node.type.issues
+    - field.field.node.products.body
+    - field.field.node.products.field_image
+    - field.field.node.products.field_issue_ref
+    - field.field.node.products.field_product_ref
+    - node.type.products
   module:
     - text
     - user
-id: node.issues.teaser
+id: node.products.teaser
 targetEntityType: node
-bundle: issues
+bundle: products
 mode: teaser
 content:
   body:
@@ -31,4 +31,4 @@ content:
 hidden:
   field_image: true
   field_issue_ref: true
-  panelizer: true
+  field_product_ref: true

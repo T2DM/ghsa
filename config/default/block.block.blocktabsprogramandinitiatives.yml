@@ -1,0 +1,28 @@
+uuid: 864d0ea9-4678-4a2f-99e1-14daffec3572
+langcode: en
+status: true
+dependencies:
+  config:
+    - blocktabs.blocktabs.program_and_initiatives
+  module:
+    - blocktabs
+    - system
+  theme:
+    - ghsa_foundation
+id: blocktabsprogramandinitiatives
+theme: ghsa_foundation
+region: content
+weight: -11
+provider: null
+plugin: 'blocktabs_block:program_and_initiatives'
+settings:
+  id: 'blocktabs_block:program_and_initiatives'
+  label: 'Program and Initiatives'
+  provider: blocktabs
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

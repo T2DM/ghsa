@@ -9,14 +9,15 @@ label: Resources
 type: 'canonical_entities:node'
 pattern: '/resources/[node:title]'
 selection_criteria:
-  b55c9e6e-514f-4280-a43b-683a05e2dd68:
+  eb5c8960-6cd0-4e92-9605-4c9f62837c14:
     id: node_type
     bundles:
+      products: products
       resources: resources
     negate: false
     context_mapping:
       node: node
-    uuid: b55c9e6e-514f-4280-a43b-683a05e2dd68
+    uuid: eb5c8960-6cd0-4e92-9605-4c9f62837c14
 selection_logic: and
 weight: -5
 relationships: {  }

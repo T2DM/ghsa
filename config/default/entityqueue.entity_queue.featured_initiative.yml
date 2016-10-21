@@ -1,0 +1,24 @@
+uuid: cacf6bd2-8e4b-4604-8e34-0371ffcd7eb0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: featured_initiative
+label: 'Featured Initiative'
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: node
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      products: products
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+queue_settings:
+  min_size: 0
+  max_size: 20
+  act_as_queue: false

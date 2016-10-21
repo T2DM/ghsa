@@ -1,22 +1,22 @@
-uuid: 51b4d95a-5843-4fd8-a099-5bc5388498cc
+uuid: e42407a5-69e6-4a36-ae96-e7b3d7cf8c9b
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.resources
+    - views.view.products
   module:
     - system
     - views
   theme:
     - ghsa_foundation
-id: ghsa_foundation_views_block__resources_dynamic_filtered_resources
+id: views_block__products_featured_initiative
 theme: ghsa_foundation
 region: content
-weight: -8
+weight: 0
 provider: null
-plugin: 'views_block:resources-dynamic_filtered_resources'
+plugin: 'views_block:products-featured_initiative'
 settings:
-  id: 'views_block:resources-dynamic_filtered_resources'
+  id: 'views_block:products-featured_initiative'
   label: ''
   provider: views
   label_display: visible
@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/taxonomy/term/*\r\n/issues/*"
+    pages: '/issues/*'
     negate: false
     context_mapping: {  }
