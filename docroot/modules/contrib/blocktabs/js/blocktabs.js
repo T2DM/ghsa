@@ -19,7 +19,7 @@
     attach: function (context, settings) {
       $(context).find('div.blocktabs').each(function () {
         $(this).tabs({
-         event: "mouseover"
+        //  event: "mouseover"
         });
       });
     }
