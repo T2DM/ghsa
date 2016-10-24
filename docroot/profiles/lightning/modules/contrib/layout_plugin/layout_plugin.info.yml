@@ -1,5 +1,5 @@
 name: Layout Plugin
 type: module
-description: 'A registry for layout plugins.'
+description: 'Provides a way for modules or themes to register layouts.'
 core: 8.x
 package: Layout

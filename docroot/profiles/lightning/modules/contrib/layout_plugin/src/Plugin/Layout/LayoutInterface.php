@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\layout_plugin\Plugin\LayoutPluginInterface.
- */
-
 namespace Drupal\layout_plugin\Plugin\Layout;
 
 use Drupal\Component\Plugin\DerivativeInspectionInterface;

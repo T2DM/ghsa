@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\layout_plugin\Plugin\Layout\LayoutPluginManager.
- */
-
 namespace Drupal\layout_plugin\Plugin\Layout;
 
 use Drupal\Core\Cache\CacheBackendInterface;
@@ -141,6 +136,9 @@ class LayoutPluginManager extends DefaultPluginManager implements LayoutPluginMa
     // Go through each category, sort it, and get just the labels out.
     $options = array();
     foreach ($categories as $category) {
+      // Convert from a translation to a real string.
+      $category = (string) $category;
+
       // Sort the category.
       $plugins[$category] = $this->getSortedDefinitions($plugins[$category]);
 

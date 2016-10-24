@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\layout_plugin\Unit\PluginManagerTest.
- */
-
 namespace Drupal\Tests\layout_plugin\Unit;
 
 use Drupal\layout_plugin\Plugin\Layout\LayoutPluginManager;

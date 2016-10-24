@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\layout_plugin\Plugin\Layout\LayoutBase.
- */
-
 namespace Drupal\layout_plugin\Plugin\Layout;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
@@ -121,7 +116,7 @@ abstract class LayoutBase extends PluginBase implements LayoutInterface, Configu
    * {@inheritdoc}
    */
   public function build(array $regions) {
-    $build = $regions;
+    $build = array_intersect_key($regions, $this->getRegionDefinitions());
     $build['#layout'] = $this->getPluginDefinition();
     $build['#settings'] = $this->getConfiguration();
     if ($theme = $this->getThemeHook()) {
