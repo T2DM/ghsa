@@ -32,3 +32,8 @@
 .law-title {
     font-weight: bold;
 }
+
+/* Basic padding for views, putting it here for now, can be moved to scss files later */
+.views-row {
+    margin-bottom: 30px;
+}
