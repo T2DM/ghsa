@@ -5,7 +5,12 @@
   </div>
 
   <div class="row issues-top">
-    {{ content.top }}
+    <div class="medium-8 columns">
+      {{ content.top_left }}
+    </div>
+    <div class="medium-4 columns">
+      {{ content.top_right }}
+    </div>
   </div>
 
   <div class="row issues-middle row_stripe_grey">
@@ -18,8 +23,11 @@
   </div>
 
   <div class="row issues-bottom">
-    <div class="medium-8 columns">
+    <div class="medium-4 columns">
       {{ content.bottom_left }}
+    </div>
+    <div class="medium-4 columns">
+      {{ content.bottom_center }}
     </div>
     <div class="medium-4 columns">
       {{ content.bottom_right }}

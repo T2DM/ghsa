@@ -27,10 +27,14 @@ issues:
   regions:
     banner:
       label: banner
-    top:
-      label: top
+    top_left:
+      label: top left
+    top_right:
+      label: top right
     middle_left:
       label: middle left
+    middle_center:
+      label: middle center
     middle_right:
       label: middle right
     bottom_left:
