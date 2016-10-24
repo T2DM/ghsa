@@ -149,20 +149,20 @@ Available Browser Codes [browser]:
 	});
 
 
-	// // mobile_menu
-	// function mobile_menu()	{
-	// 	if( $('#js_yardstick').height() < 769 )	{
-	// 		$('body').addClass('mobile_menu_available');
-	// 		$('#js_mobile_menu .mobile_menu_header').after( $('#js_primary_menu') );
-	// 		$('#js_header_primary_menu_container #js_primary_menu').remove();
-	// 	}
-	// 	else	{
-	// 		$('body').removeClass('mobile_menu_available');
-	// 		$('#js_header_primary_menu_container').append( $('#js_primary_menu') );
-	// 		$('#js_mobile_menu #js_primary_menu').remove();
-	// 	}
-	// }
-	// mobile_menu();
+	// mobile_menu
+	function mobile_menu()	{
+		if( $('#js_yardstick').height() < 769 )	{
+			$('body').addClass('mobile_menu_available');
+			$('#js_mobile_menu .mobile_menu_header').after( $('#js_primary_menu') );
+			$('#js_header_primary_menu_container #js_primary_menu').remove();
+		}
+		else	{
+			$('body').removeClass('mobile_menu_available');
+			$('#js_header_primary_menu_container').append( $('#js_primary_menu') );
+			$('#js_mobile_menu #js_primary_menu').remove();
+		}
+	}
+	//mobile_menu();
 
 
 	// mobile menu hide/show
@@ -185,26 +185,26 @@ Available Browser Codes [browser]:
 	});
 
 
-	// // phone_menu
-	// function phone_menu()	{
-	// 	if( $('#js_yardstick').height() < 641 )	{
-	// 		$('body').addClass('phone_menu_available');
-	// 		$('.header_items_2 .mobile_640_column_1 ul').append( $('.secondary_menu_member_login') );
-	// 		$('.header_items_2 .mobile_640_column_2').append( $('.header_logo') );
-	// 		$('.header_items_2 .mobile_640_column_3 ul').append( $('.secondary_menu_partner_with_us') );
-	// 		$('.header_items_3 .mobile_640_column_1').append( $('.header_mobile_menu_toggle_container') );
-	// 		$('.header_items_3 .mobile_640_column_3').append( $('#js_search_desktop') );
-	// 	}
-	// 	else	{
-	// 		$('body').removeClass('phone_menu_available');
-	// 		$('.header_secondary_menu ul').append( $('.secondary_menu_member_login') );
-	// 		$('.header_logo_container').append( $('.header_logo') );
-	// 		$('.header_secondary_menu ul').append( $('.secondary_menu_partner_with_us') );
-	// 		$('.header_items').prepend( $('.header_mobile_menu_toggle_container') );
-	// 		$('.header_search_container').append( $('#js_search_desktop') );
-	// 	}
-	// }
-	// phone_menu();
+	// phone_menu
+	function phone_menu()	{
+		if( $('#js_yardstick').height() < 641 )	{
+			$('body').addClass('phone_menu_available');
+			$('.header_items_2 .mobile_640_column_1 ul').append( $('.secondary_menu_member_login') );
+			$('.header_items_2 .mobile_640_column_2').append( $('.header_logo') );
+			$('.header_items_2 .mobile_640_column_3 ul').append( $('.secondary_menu_partner_with_us') );
+			$('.header_items_3 .mobile_640_column_1').append( $('.header_mobile_menu_toggle_container') );
+			$('.header_items_3 .mobile_640_column_3').append( $('#js_search_desktop') );
+		}
+		else	{
+			$('body').removeClass('phone_menu_available');
+			$('.header_secondary_menu ul').append( $('.secondary_menu_member_login') );
+			$('.header_logo_container').append( $('.header_logo') );
+			$('.header_secondary_menu ul').append( $('.secondary_menu_partner_with_us') );
+			$('.header_items').prepend( $('.header_mobile_menu_toggle_container') );
+			$('.header_search_container').append( $('#js_search_desktop') );
+		}
+	}
+	phone_menu();
 
 
 	// phone menu hide/show

@@ -29,7 +29,14 @@ function ghsa_foundation_preprocess_html(&$variables) {
  *
  * Add template suggestions and classes
  */
-function ghsa_foundation_preprocess_node(&$variables) {
+function ghsa_foundation_preprocess_node(&$variables) { 
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  if(in_array($node->id() , array(9) )){
+   $variables['content_attributes']['class'][] = "row";
+  }
+  
 }
 
 /**
