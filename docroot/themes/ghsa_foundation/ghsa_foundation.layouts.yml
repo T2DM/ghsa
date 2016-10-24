@@ -33,11 +33,11 @@ issues:
       label: top right
     middle_left:
       label: middle left
-    middle_center:
-      label: middle center
     middle_right:
       label: middle right
     bottom_left:
       label: bottom left
+    bottom_center:
+      label: bottom center
     bottom_right:
       label: bottom right
