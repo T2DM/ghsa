@@ -2027,3 +2027,42 @@ footer .contact_email,
 		content: "";
 		background: url(../images/icon-initiative.png) 0 1px no-repeat;
 	}
+
+
+/*
+ * Card-Link CSS
+ */
+
+.paragraph--type--card-link{
+
+  // Title
+  .field-type-link{
+	.field-items{
+	  .field-item{
+	  	margin-bottom:5px;
+	    a{
+	      font-size:24px;
+	      line-height:1.2;
+	      color:#000;
+	      &:hover{
+	        color:$color-blue;
+	      }
+	    }
+	  }
+	}
+  }
+
+  // Image
+  .field-type-image{
+	.field-items{
+	  .field-item{
+	  	img{
+          width:100%;
+	    }
+	  }
+	}  	
+  }
+ 
+}
+
+
