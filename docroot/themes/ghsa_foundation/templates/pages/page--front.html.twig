@@ -1,0 +1,338 @@
+{#
+/**
+ * @file
+ * Zurb Foundations's theme implementation to display a single page.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - logo: The url of the logo image, as defined in theme settings.
+ * - linked_logo: The logo image, linked to <front>.
+ * - site_name: The name of the site. This is empty when displaying the site
+ *   name has been disabled in the theme settings.
+ * - linked_site_name: The name of the site that also links to <front>.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+ * - hide_site_name: A flag indicating if the site name has been toggled off on
+ *   the theme settings page. If hidden, the "visually-hidden" class is added
+ *   to make the site name visually hidden, but still accessible.
+ * - hide_site_slogan: A flag indicating if the site slogan has been toggled off
+ *   on the theme settings page. If hidden, the "visually-hidden" class is
+ *   added to make the site slogan visually hidden, but still accessible.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - messages: Status and error messages. Should be displayed prominently.
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.meta_header
+ * - page.header
+ * - page.help
+ * - page.highlighted
+ * - page.content
+ * - page.sidebar_first
+ * - page.sidebar_second
+ * - page.footer_first
+ * - page.footer_middle
+ * - page.footer_last
+ *
+ * @see template_preprocess_page()
+ * @see bartik_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+
+
+{% if page.header_row_1_search %}
+	{{ page.header_row_1_search }}
+{% endif %}
+
+<!-- START: header : contains logo, primary menu, secondary menu, search -->
+<header>
+
+
+	<!-- START: section.header_items -->
+	<section class="header_items row">
+
+		<div class="header_mobile_menu_toggle_container inner_column">
+			<div class="header_mobile_menu_toggle" id="js_header_mobile_menu_toggle">Mobile Menu Toggle</div>
+		</div>
+
+		<!-- START: div.header_logo -->
+		<div class="header_logo_container inner_column column_no_padding_both">
+			<div class="header_logo">
+        {% if linked_logo %}
+          {{ linked_logo }}
+        {% endif %}
+				<!-- <div class="header_logo_bug"><img src="/themes/ghsa/images/logo-ghsa-1.png" alt="GHSA: Governors Highway Safety Association" /></div> -->
+			</div>
+			<div class="header_logo_logotype">
+				<div class="header_logo_logotype_organization">Governors Highway Safety Association</div>
+				<div class="header_logo_logotype_tagline">The States’ Voice on Highway Safety</div>
+			</div>
+		</div>
+		<!-- END: div.header_logo -->
+
+		<!-- START: div.header_primary_menu_container -->
+		<div id="js_header_primary_menu_container" class="header_primary_menu_container inner_column column_no_padding_both">
+
+			<nav class="header_primary_menu" id="js_primary_menu">
+
+				{% if page.header_row_1_menu_primary %}
+					{{ page.header_row_1_menu_primary }}
+				{% endif %}
+
+			</nav>
+
+
+		</div>
+		<!-- END: div.header_primary_menu_container -->
+
+		<li class="secondary_menu_member_login" title="Member Login"><a href="http://my.ghsa.org/">Member Login</a></li>
+
+		<!-- START: div.header_secondary_menu_container -->
+		<div class="header_secondary_menu_container inner_column column_no_padding_both" style="display: none">
+			<nav class="header_secondary_menu" id="js_secondary_menu">
+
+				{% if page.header_row_1_menu_secondary %}
+					{{ page.header_row_1_menu_secondary }}
+				{% endif %}
+
+			</nav>
+		</div>
+		<!-- END: div.header_secondary_menu_container -->
+
+		{% if page.header_row_1_menu_secondary %}
+		<!-- START: header_search_container -->
+		<div class="header_search_container inner_column column_no_padding_both">
+
+			<!-- START: header_search -->
+			<div class="header_search" id="js_search_desktop">
+				<h2 class="hidden">Search</h2>
+				<div class="search_toggle js_search_toggle" title="Search">Search toggle</div>
+				<div class="search_form_container js_search_container">
+					<div class="js_close">Close</div>
+					{{ page.header_row_1_menu_secondary }}
+				</div>
+			</div>
+			<!-- END: header_search -->
+
+		</div>
+		<!-- END: header_search_container -->
+		{% endif %}
+
+	</section>
+	<!-- END: section.header_items -->
+
+
+	<!-- START: section.header_items_2 -->
+	<section class="header_items_2 row">
+
+		<div class="mobile_640_column_1 inner_column"><ul></ul></div>
+		<div class="mobile_640_column_2 inner_column"></div>
+		<div class="mobile_640_column_3 inner_column"><ul></ul></div>
+
+	</section>
+	<!-- END: section.header_items_2 -->
+
+
+	<!-- START: section.header_items_3 -->
+	<section class="header_items_3 row">
+
+		<div class="mobile_640_column_1 inner_column"></div>
+		<div class="mobile_640_column_2 inner_column"></div>
+		<div class="mobile_640_column_3 inner_column"></div>
+
+	</section>
+	<!-- END: section.header_items_2 -->
+
+
+</header>
+<!-- END: header -->
+
+
+
+
+{% if page.header %}
+  <div class="row">
+    <div class="large-12 columns">
+      {{ page.header }}
+    </div>
+  </div>
+{% endif %}
+
+<div class="row">
+  {% if show_account_info %}
+    <div class="{{ site_slogan ? 'large-6' : 'large-4 columns large-offset-8' }} columns hide-for-small">
+      <p>
+        {% if logged_in %}
+          <a href="{{ path('user.page') }}">{{ 'My Account'|t }}</a>
+          <a href="{{ path('user.logout') }}">{{ 'Logout'|t }}</a>
+        {% else %}
+          <a href="{{ path('user.login') }}">{{ 'Login'|t }}</a>
+          <a href="{{ path('user.register') }}">{{ 'Sign Up'|t }}</a>
+        {% endif %}
+      </p>
+    </div>
+  {% endif %}
+  {% if site_slogan %}
+    <div class="large-6 columns hide-for-small">
+      {{ site_slogan }}
+    </div>
+  {% endif %}
+  {% if show_account_info %}
+    <div class="show-for-small">
+      <div class="six mobile-two columns">
+        <p>
+          <a href="{{ path('user.login') }}" class="radius button">{{ 'Login'|t }}</a>
+        </p>
+      </div>
+      <div class="six mobile-two columns">
+        <p>
+          <a href="{{ path('user.register') }}" class="radius success button">{{ 'Sign Up'|t }}</a>
+        </p>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% if messages and not zurb_foundation_messages_modal %}
+  <div class="l-messages row">
+    <div class="large-12 columns">
+      {{ messages }}
+    </div>
+  </div>
+{% endif %}
+
+{% if page.help %}
+<div class="l-help row">
+  <div class="large-12 columns">
+    {{ page.help }}
+  </div>
+</div>
+{% endif %}
+
+
+<div class="row_stripe_grey">
+	<div class="row clearfix">
+		<section>
+			{{ page.home_hero }}
+		</section>
+	</div>
+</div>
+
+
+<div class="main_columns">
+	<div class="main_columns_inner clearfix">
+
+		<div class="row">
+		  <main id="main" class="{{ main_grid }} columns" role="main">
+		    {% if page.highlighted %}
+		      {% spaceless %}
+		        {{ page.highlighted }}
+		      {% endspaceless %}
+		    {% endif %}
+		    <a id="main-content"></a>
+		    
+		    <section>
+		      {{ page.content }}
+		    </section>
+		  </main>
+		</div>
+
+
+		{% if page.twitter_feed %}
+		  <div class="twitter">
+		    {{ page.twitter_feed }}
+		  </div>
+		{% endif %}
+
+
+		<!-- START: footer : contains footer elements -->
+		<footer>
+
+		  {% if page.footer_row_1_title or page.footer_row_1_column_1 or page.footer_row_1_column_2 or page.footer_row_1_column_3 %}
+		  	<!-- START: section.footer_contact_information -->
+		  	<section class="footer_contact_information">
+
+		  		<!-- START: .row -->
+		  		<div class="row footer_contact_information_data">
+
+		  			<!-- START: columns -->
+		  			<div class="columns small-10 small-offset-1 end column_no_padding_both">
+
+		  				<div class="inner_column region_contact_block_title">
+		  					{% if page.footer_row_1_title %}
+		  						{{ page.footer_row_1_title }}
+		  					{% endif %}
+		  				</div>
+		  				<div class="inner_column">
+		  					{% if page.footer_row_1_column_1 %}
+		  						{{ page.footer_row_1_column_1 }}
+		  					{% endif %}
+		  				</div>
+		  				<div class="inner_column">
+		  					{% if page.footer_row_1_column_2 %}
+		  						{{ page.footer_row_1_column_2 }}
+		  					{% endif %}
+		  				</div>
+		  				<div class="inner_column">
+		  					{% if page.footer_row_1_column_3 %}
+		  						{{ page.footer_row_1_column_3 }}
+		  					{% endif %}
+		  				</div>
+
+		  			</div>
+		  			<!-- END: columns -->
+
+		  		</div>
+		  		<!-- END: .row -->
+
+		  	</section>
+		  	<!-- END: section.footer_contact_information -->
+		  {% endif %}
+
+		  <!-- START: section.footer_primary_menu_container -->
+			<section class="footer_primary_menu_container row">
+
+				<!-- START: div.footer_primary_menu -->
+				<nav class="footer_primary_menu columns small-10 small-offset-1 end column_no_padding_both" id="js_footer_primary_menu">
+
+					{% if page.footer_row_2_menu %}
+						{{ page.footer_row_2_menu }}
+					{% endif %}
+
+				</nav>
+				<!-- END: div.footer_primary_menu -->
+
+			</section>
+			<!-- END: section.footer_primary_menu_container -->
+
+			<!-- START: section.footer_copyright -->
+			<section class="footer_copyright row">
+
+				<div class="columns small-10 small-offset-1 end column_no_padding_both">
+					{% if page.footer_row_2_copyright %}
+						{{ page.footer_row_2_copyright }}
+					{% endif %}
+				</div>
+
+			</section>
+			<!-- END: section.footer_copyright -->
+		</footer>
+
+	</div>
+</div>
