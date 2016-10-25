@@ -73,16 +73,16 @@
 
 		<!-- START: div.header_logo -->
 		<div class="header_logo_container inner_column column_no_padding_both">
-			<div class="header_logo">
-        {% if linked_logo %}
-          {{ linked_logo }}
-        {% endif %}
-				<!-- <div class="header_logo_bug"><img src="/themes/ghsa/images/logo-ghsa-1.png" alt="GHSA: Governors Highway Safety Association" /></div> -->
-			</div>
-			<div class="header_logo_logotype">
-				<div class="header_logo_logotype_organization">Governors Highway Safety Association</div>
-				<div class="header_logo_logotype_tagline">The States’ Voice on Highway Safety</div>
-			</div>
+      <a class="header_logo" href="{{ home_page_url }}">
+        <div class="header_logo_bug">
+          <img src="{{ logo_img_url }}" alt="GHSA: Governors Highway Safety Association">
+          <!-- <div class="header_logo_bug"><img src="/themes/ghsa/images/logo-ghsa-1.png" alt="GHSA: Governors Highway Safety Association" /></div> -->
+        </div>
+        <div class="header_logo_logotype">
+          <div class="header_logo_logotype_organization">Governors Highway Safety Association</div>
+          <div class="header_logo_logotype_tagline">The States’ Voice on Highway Safety</div>
+        </div>
+      </a>
 		</div>
 		<!-- END: div.header_logo -->
 
@@ -101,23 +101,42 @@
 		</div>
 		<!-- END: div.header_primary_menu_container -->
 
+
+
+        {#
 		<li class="secondary_menu_member_login" title="Member Login"><a href="http://my.ghsa.org/">Member Login</a></li>
-
-		<!-- START: div.header_secondary_menu_container -->
-		<div class="header_secondary_menu_container inner_column column_no_padding_both" style="display: none">
+		#}
+        <!--
+		<div class="header_secondary_menu_container inner_column column_no_padding_both">
 			<nav class="header_secondary_menu" id="js_secondary_menu">
-
-				{% if page.header_row_1_menu_secondary %}
-					{{ page.header_row_1_menu_secondary }}
-				{% endif %}
-
+		
+				<h2 class="hidden">Secondary Menu</h2>
+				<ul class="menu">
+					<li class="secondary_menu_member_login" title="Member Login"><a href="#">Member Login</a></li>
+					<li class="secondary_menu_partner_with_us" title="Partner with Us"><a href="#">Partner with Us</a></li>
+				</ul>
+		
 			</nav>
 		</div>
+		-->
+
+		<!-- START: div.header_secondary_menu_container -->
+		
+		<div class="header_secondary_menu_container inner_column column_no_padding_both">
+			<nav class="header_secondary_menu" id="js_secondary_menu">
+				<h2 class="hidden">Secondary Menu</h2>
+				<ul class="menu">
+					<li class="secondary_menu_member_login" title="Member Login"><a href="http://my.ghsa.org/">Member Login</a></li>
+					<li class="secondary_menu_partner_with_us" title="Partner with Us"><a href="#">Partner with Us</a></li>
+				</ul>
+			</nav>
+		</div>
+		
 		<!-- END: div.header_secondary_menu_container -->
 
 		{% if page.header_row_1_menu_secondary %}
 		<!-- START: header_search_container -->
-		<div class="header_search_container inner_column column_no_padding_both">
+		<div class="header_search_container inner_column column_no_padding_both float-right">
 
 			<!-- START: header_search -->
 			<div class="header_search" id="js_search_desktop">

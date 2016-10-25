@@ -656,8 +656,7 @@ header a:hover	{
 	}
 .header_primary_menu_container,
 .header_secondary_menu_container,
-.header_search_container,
-.secondary_menu_member_login	{
+.header_search_container{
 	margin-top: 36px;
 	display: inline-block;
 	}
@@ -667,8 +666,8 @@ header a:hover	{
 	min-width: 143px;
 	}
 .header_primary_menu_container	{
-	// width: 32%;
-	width: 40%;
+	 width: 32%;
+	//width: 40%;
 	}
 .header_secondary_menu_container	{
 	width: 23.24%;
@@ -701,10 +700,10 @@ header {
 }
 .header_logo_container	{
 	}
-.header_logo	{
-	float: left;
-	margin-top: 26px;
-	}
+	
+.header_logo {
+  float: right;
+  display: block; }
 
 .header_logo_bug,
 .header_logo_logotype	{
@@ -1076,10 +1075,6 @@ header .search_form_container .js_close	{
 .secondary_menu_member_login a	{
 	background-image: url(../images/icon-header-member-login-1.png);
 	color: #e66c1f;
-	height: 24px;
-	display: inline-block;
-	position: relative;
-	top: -8px;
 	}
 .secondary_menu_partner_with_us a	{
 	padding-left: 36px;
@@ -2027,6 +2022,71 @@ footer .contact_email,
 		content: "";
 		background: url(../images/icon-initiative.png) 0 1px no-repeat;
 	}
+
+
+/*
+ * Common CSS for All Pages
+ */
+
+//Header
+
+header{
+  padding:0px;
+  .logo{
+    margin-top:0px;
+  }
+}
+
+//Menu - Main
+.block-ghsa-foundation-main-menu{
+  > ul{
+  	  text-align: center;
+      > li{
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+        a{
+          padding:6px 6px 0px 6px;
+        }
+	  }
+  }
+}
+
+//Menu - Secondary
+.header_secondary_menu_container{
+  .header_secondary_menu{
+    ul{
+      li{
+        a{
+          display: block;
+          height: 32px;
+          top:0px;
+          padding:6px 0 0 31px;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}
+
+
+/*
+ * Footer
+ */
+
+//Footer Menu
+
+.block-ghsa-foundation-footer-main{
+  .menu {
+    > li {
+      > a{
+      	padding:10px 10px 10px 0;
+      }
+    }
+  }
+}
+
+
 
 
 /*

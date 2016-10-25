@@ -453,7 +453,7 @@ button {
   display: none !important; }
 
 .row {
-  max-width: 75rem;
+  max-width: 91.25rem;
   margin-left: auto;
   margin-right: auto; }
   .row::before, .row::after {
@@ -1308,7 +1308,7 @@ a {
     border: 0; }
 
 hr {
-  max-width: 75rem;
+  max-width: 91.25rem;
   height: 0;
   border-right: 0;
   border-top: 0;
@@ -3048,7 +3048,7 @@ html.is-reveal-open body {
   @media screen and (min-width: 40em) {
     .reveal {
       width: 600px;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   @media screen and (min-width: 40em) {
     .reveal .reveal {
       left: auto;
@@ -3059,15 +3059,15 @@ html.is-reveal-open body {
   @media screen and (min-width: 40em) {
     .reveal.tiny {
       width: 30%;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   @media screen and (min-width: 40em) {
     .reveal.small {
       width: 50%;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   @media screen and (min-width: 40em) {
     .reveal.large {
       width: 90%;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   .reveal.full {
     top: 0;
     left: 0;
@@ -4822,8 +4822,7 @@ header {
 
 .header_primary_menu_container,
 .header_secondary_menu_container,
-.header_search_container,
-.secondary_menu_member_login {
+.header_search_container {
   margin-top: 36px;
   display: inline-block; }
 
@@ -4832,7 +4831,7 @@ header {
   min-width: 143px; }
 
 .header_primary_menu_container {
-  width: 40%; }
+  width: 32%; }
 
 .header_secondary_menu_container {
   width: 23.24%; }
@@ -4856,8 +4855,8 @@ header {
   margin-top: -10px; }
 
 .header_logo {
-  float: left;
-  margin-top: 26px; }
+  float: right;
+  display: block; }
 
 .header_logo_bug,
 .header_logo_logotype {
@@ -5168,11 +5167,7 @@ header .search_form_container .js_close {
 
 .secondary_menu_member_login a {
   background-image: url(../images/icon-header-member-login-1.png);
-  color: #e66c1f;
-  height: 24px;
-  display: inline-block;
-  position: relative;
-  top: -8px; }
+  color: #e66c1f; }
 
 .secondary_menu_partner_with_us a {
   padding-left: 36px;
@@ -5835,6 +5830,36 @@ viewheader > h2 {
   width: 40px;
   content: "";
   background: url(../images/icon-initiative.png) 0 1px no-repeat; }
+
+/*
+ * Common CSS for All Pages
+ */
+header {
+  padding: 0px; }
+  header .logo {
+    margin-top: 0px; }
+
+.block-ghsa-foundation-main-menu > ul {
+  text-align: center; }
+  .block-ghsa-foundation-main-menu > ul > li {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top; }
+    .block-ghsa-foundation-main-menu > ul > li a {
+      padding: 6px 6px 0px 6px; }
+
+.header_secondary_menu_container .header_secondary_menu ul li a {
+  display: block;
+  height: 32px;
+  top: 0px;
+  padding: 6px 0 0 31px;
+  line-height: normal; }
+
+/*
+ * Footer
+ */
+.block-ghsa-foundation-footer-main .menu > li > a {
+  padding: 10px 10px 10px 0; }
 
 /*
  * Card-Link CSS

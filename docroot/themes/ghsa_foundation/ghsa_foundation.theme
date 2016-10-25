@@ -33,7 +33,7 @@ function ghsa_foundation_preprocess_node(&$variables) {
 
   $node = \Drupal::routeMatch()->getParameter('node');
 
-  if(in_array($node->id() , array(9) )){
+  if(in_array($node->id() , array(9 , 586 , 46 , 916 , 566) )){
    $variables['content_attributes']['class'][] = "row";
   }
   
