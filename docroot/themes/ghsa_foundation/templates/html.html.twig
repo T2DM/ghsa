@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Default theme implementation for the basic structure of a single Drupal page.
+ * Theme override for the basic structure of a single Drupal page.
  *
  * Variables:
  * - logged_in: A flag indicating if user is logged in.
@@ -19,36 +19,56 @@
  * - db_offline: A flag indicating if the database is offline.
  * - placeholder_token: The token for generating head, css, js and js-bottom
  *   placeholders.
+ * - html_attributes: Raw HTML attributes for the <html> tag.
+ *   Contains langcode and text direction.
  *
  * @see template_preprocess_html()
- *
- * @ingroup themeable
  */
 #}
+{%
+set body_classes = [
+logged_in ? 'user-logged-in',
+not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+node_type ? 'node--type-' ~ node_type|clean_class,
+db_offline ? 'db-offline',
+]
+%}
 <!DOCTYPE html>
-<html{{ html_attributes }}>
+<html {{ html_attributes|raw }}>
   <head>
     <head-placeholder token="{{ placeholder_token|raw }}">
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
   </head>
-  <body{{ attributes }}>
-    <a href="#main-content" class="visually-hidden focusable">
-      {{ 'Skip to main content'|t }}
-    </a>
+  <body{{ attributes.addClass(body_classes) }}>
+
+  <!-- START: div#body_wrap1 -->
+  <div id="body_wrap1"><a href="#top" class="hidden">top</a><a href="#skip_to_main_content" class="hidden" accesskey="s">Skip to main article content</a>
+
     {{ page_top }}
     {{ page }}
     {{ page_bottom }}
-    <div id="js_yardstick"></div>
-    <div id="js_mobile_menu" class="mobile_menu">
-      <div class="mobile_menu_inner">
-        <div class="mobile_menu_header">
-          <div class="js_close">Close</div>
-          <h2>Menu</h2>
-        </div>
+
+  </div>
+  <!-- END: div#body_wrap1 -->
+
+  <div id="js_yardstick"></div>
+
+  <div id="js_mobile_menu" class="mobile_menu">
+    <div class="mobile_menu_inner">
+      <div class="mobile_menu_header">
+        <div class="js_close">Close</div>
+        <h2>Menu</h2>
       </div>
     </div>
-    <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+  </div>
+
+  <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+  <script>
+    (function ($) {
+      $(document).foundation();
+    })(jQuery);
+  </script>
   </body>
 </html>
