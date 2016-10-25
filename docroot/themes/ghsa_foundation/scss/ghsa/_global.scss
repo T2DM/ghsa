@@ -656,8 +656,7 @@ header a:hover	{
 	}
 .header_primary_menu_container,
 .header_secondary_menu_container,
-.header_search_container,
-.secondary_menu_member_login	{
+.header_search_container{
 	margin-top: 36px;
 	display: inline-block;
 	}
@@ -1076,10 +1075,6 @@ header .search_form_container .js_close	{
 .secondary_menu_member_login a	{
 	background-image: url(../images/icon-header-member-login-1.png);
 	color: #e66c1f;
-	height: 24px;
-	display: inline-block;
-	position: relative;
-	top: -8px;
 	}
 .secondary_menu_partner_with_us a	{
 	padding-left: 36px;
@@ -2027,6 +2022,50 @@ footer .contact_email,
 		content: "";
 		background: url(../images/icon-initiative.png) 0 1px no-repeat;
 	}
+
+
+/*
+ * Common CSS for All Pages
+ */
+
+//Header
+
+header{
+  padding:0px;
+}
+
+//Menu - Main
+.block-ghsa-foundation-main-menu{
+  > ul{
+  	  text-align: center;
+      > li{
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+        a{
+          padding:6px 6px 0px 6px;
+        }
+	  }
+  }
+}
+
+//Menu - Secondary
+.header_secondary_menu_container{
+  .header_secondary_menu{
+    ul{
+      li{
+        a{
+          display: block;
+          height: 32px;
+          top:0px;
+          padding:6px 0 0 31px;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}
+
 
 
 /*
