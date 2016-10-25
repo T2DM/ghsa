@@ -1,18 +1,17 @@
 uuid: e42407a5-69e6-4a36-ae96-e7b3d7cf8c9b
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.products
   module:
-    - system
     - views
   theme:
     - ghsa_foundation
 id: views_block__products_featured_initiative
 theme: ghsa_foundation
-region: content
-weight: 0
+region: '-1'
+weight: -9
 provider: null
 plugin: 'views_block:products-featured_initiative'
 settings:
@@ -22,9 +21,4 @@ settings:
   label_display: visible
   views_label: ''
   items_per_page: none
-visibility:
-  request_path:
-    id: request_path
-    pages: '/issues/*'
-    negate: false
-    context_mapping: {  }
+visibility: {  }

@@ -1,0 +1,28 @@
+uuid: 00fa6401-37b3-4c16-99ff-b4c4e6d2cbd7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_award_ref
+    - node.type.award_winner
+    - taxonomy.vocabulary.ahs_awards
+id: node.award_winner.field_award_ref
+field_name: field_award_ref
+entity_type: node
+bundle: award_winner
+label: Award
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      ahs_awards: ahs_awards
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

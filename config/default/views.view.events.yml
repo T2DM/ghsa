@@ -7,8 +7,8 @@ dependencies:
     - field.storage.node.body
     - field.storage.node.field_date
     - field.storage.node.field_event_image
+    - image.style.400x300
     - image.style.eventslanding
-    - image.style.large
     - node.type.events
   module:
     - datetime
@@ -360,7 +360,12 @@ display:
             label: ''
           granularity: second
           plugin_id: datetime
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          plugin_id: text
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -1512,6 +1517,7 @@ display:
         title: false
         relationships: false
         sorts: false
+        header: false
       pager:
         type: none
         options:
@@ -1557,6 +1563,20 @@ display:
             label: ''
           entity_type: node
           plugin_id: entity_queue_position
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h1>Current Year Annual Meeting<h1>'
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -1628,7 +1648,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: large
+            image_style: 400x300
             image_link: ''
           group_column: ''
           group_columns: {  }
@@ -1894,6 +1914,7 @@ display:
         title: false
         style: false
         row: false
+        header: false
       pager:
         type: some
         options:
@@ -2006,6 +2027,20 @@ display:
           separator: ''
           hide_empty: false
           default_field_elements: true
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h1>Past Annual Meetings</h1>'
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -2077,7 +2112,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: large
+            image_style: 400x300
             image_link: ''
           group_column: ''
           group_columns: {  }
@@ -2342,6 +2377,7 @@ display:
         filter_groups: false
         style: false
         row: false
+        header: false
       pager:
         type: some
         options:
@@ -2440,6 +2476,20 @@ display:
           separator: ''
           hide_empty: false
           default_field_elements: true
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h1>Upcoming Events</h1>'
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:

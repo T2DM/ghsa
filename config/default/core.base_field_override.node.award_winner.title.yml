@@ -1,0 +1,18 @@
+uuid: 2839cd87-e7dd-4b7a-81b7-8d1f96569a99
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.award_winner
+id: node.award_winner.title
+field_name: title
+entity_type: node
+bundle: award_winner
+label: 'Winner Name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,45 @@
+uuid: 34a93d3c-d0ea-4cf7-bf60-d6b9fe695bc2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraphs
+    - node.type.issues
+    - paragraphs.paragraphs_type.infographic_with_button
+  module:
+    - entity_reference_revisions
+id: node.issues.field_paragraphs
+field_name: field_paragraphs
+entity_type: node
+bundle: issues
+label: Infographic
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      infographic_with_button: infographic_with_button
+    target_bundles_drag_drop:
+      callout_bar:
+        weight: 7
+        enabled: false
+      card_link:
+        weight: 8
+        enabled: false
+      infographic_with_button:
+        enabled: true
+        weight: 9
+      long_text_with_button:
+        weight: 10
+        enabled: false
+      three_column_callout:
+        weight: 11
+        enabled: false
+      view:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

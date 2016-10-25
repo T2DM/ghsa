@@ -3,9 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.issue.field_copy_for_state_laws
+    - field.field.taxonomy_term.issue.field_image
+    - image.style.thumbnail
     - taxonomy.vocabulary.issue
   module:
+    - image
     - path
     - text
 id: taxonomy_term.issue.default
@@ -14,19 +16,19 @@ bundle: issue
 mode: default
 content:
   description:
-    type: text_textfield
+    type: text_textarea
     weight: 0
     settings:
-      size: 60
       placeholder: ''
+      rows: 5
     third_party_settings: {  }
-  field_copy_for_state_laws:
+  field_image:
+    type: image_image
     weight: 31
     settings:
-      rows: 5
-      placeholder: ''
+      preview_image_style: thumbnail
+      progress_indicator: throbber
     third_party_settings: {  }
-    type: text_textarea
   name:
     type: string_textfield
     weight: -5

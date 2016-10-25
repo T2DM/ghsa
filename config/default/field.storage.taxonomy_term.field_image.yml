@@ -1,0 +1,30 @@
+uuid: bebbe6d2-0dbb-466c-beeb-a3f47f07b0af
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - image
+    - taxonomy
+id: taxonomy_term.field_image
+field_name: field_image
+entity_type: taxonomy_term
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    uuid: 436a46b6-0e2b-47bb-8216-c6f68d2ad348
+    alt: ''
+    title: ''
+    width: 100
+    height: 44
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

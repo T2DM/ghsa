@@ -6,57 +6,25 @@ dependencies:
     - field.field.node.issues.body
     - field.field.node.issues.field_image
     - field.field.node.issues.field_issue_ref
+    - field.field.node.issues.field_paragraphs
     - field.field.node.issues.panelizer
+    - image.style.eventslanding
     - node.type.issues
   module:
+    - entity_reference_revisions
     - image
     - panelizer
     - text
     - user
 third_party_settings:
   panelizer:
-    enable: false
+    enable: true
     custom: false
-    allow: false
+    allow: true
     default: default
     displays:
       default:
         blocks:
-          e1090214-d972-4768-821d-249cf1c96ae2:
-            id: 'entity_field:node:uid'
-            label: 'Authored by'
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: author
-              settings: {  }
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: middle
-            weight: 0
-            uuid: e1090214-d972-4768-821d-249cf1c96ae2
-          e8b7e029-d5ba-48b6-a67e-a2983aaca585:
-            id: 'entity_field:node:created'
-            label: 'Authored on'
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: timestamp
-              settings:
-                date_format: medium
-                custom_date_format: ''
-                timezone: ''
-              third_party_settings: {  }
-              weight: 0
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            region: middle
-            weight: 0
-            uuid: e8b7e029-d5ba-48b6-a67e-a2983aaca585
           7885b6dc-d00d-4651-afb1-140d81cb84e2:
             id: 'entity_field:node:body'
             label: Body
@@ -70,8 +38,8 @@ third_party_settings:
               weight: 0
             context_mapping:
               entity: '@panelizer.entity_context:entity'
-            region: middle
-            weight: 2
+            region: top_left
+            weight: 1
             uuid: 7885b6dc-d00d-4651-afb1-140d81cb84e2
           b271b4c8-c95e-4a0f-a238-334f32faf5b5:
             id: 'entity_field:node:field_image'
@@ -82,41 +50,83 @@ third_party_settings:
               label: hidden
               type: image
               settings:
-                image_style: ''
+                image_style: eventslanding
                 image_link: ''
               third_party_settings: {  }
               weight: 0
             context_mapping:
               entity: '@panelizer.entity_context:entity'
-            region: middle
-            weight: 0
+            region: banner
+            weight: 1
             uuid: b271b4c8-c95e-4a0f-a238-334f32faf5b5
-          6e60abe5-d3f2-4cc7-ab59-cfbaa3a5baf6:
-            id: 'entity_field:node:field_issue_ref'
-            label: Issue
+          ebf5b398-99a7-4251-990d-6d038ce34801:
+            id: 'views_block:products-featured_initiative'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+            region: middle_left
+            uuid: ebf5b398-99a7-4251-990d-6d038ce34801
+            weight: 1
+          90d47570-4d1a-40cb-93ea-6910aba02fd7:
+            id: 'views_block:resources-dynamic_filtered_resources'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+            region: middle_right
+            uuid: 90d47570-4d1a-40cb-93ea-6910aba02fd7
+            weight: 1
+          3fd0675c-f8fa-4c4e-946c-63c5446e2c60:
+            id: 'entity_field:node:field_paragraphs'
+            label: 'Facts & Figures'
             provider: ctools_block
-            label_display: '0'
+            label_display: visible
             formatter:
-              label: inline
-              type: entity_reference_label
+              label: hidden
+              type: entity_reference_revisions_entity_view
               settings:
-                link: true
+                view_mode: default
               third_party_settings: {  }
               weight: 0
             context_mapping:
               entity: '@panelizer.entity_context:entity'
-            region: middle
+            region: bottom_left
+            uuid: 3fd0675c-f8fa-4c4e-946c-63c5446e2c60
             weight: 1
-            uuid: 6e60abe5-d3f2-4cc7-ab59-cfbaa3a5baf6
+          671d2d67-98de-4439-bc6b-0d04537c563a:
+            id: jump_menus
+            label: Laws
+            provider: balance_helper
+            label_display: visible
+            context_mapping: {  }
+            region: bottom_center
+            uuid: 671d2d67-98de-4439-bc6b-0d04537c563a
+            weight: 1
+          14fe996b-3cc9-4be9-9a63-dd58af05981c:
+            id: 'views_block:news-dynamic_filtered_news'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+            region: top_right
+            uuid: 14fe996b-3cc9-4be9-9a63-dd58af05981c
+            weight: 1
         id: panels_variant
         label: Default
         uuid: 99ee6f86-be80-40f6-b87c-e78923c034cb
         weight: 0
-        layout: onecol
+        layout: issues
         layout_settings: {  }
         page_title: '[node:title]'
-        storage_type: ''
-        storage_id: ''
+        storage_type: panelizer_default
+        storage_id: 'node:issues:full:default'
         builder: ipe
         pattern: panelizer
 id: node.issues.default
@@ -134,7 +144,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: eventslanding
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -145,6 +155,14 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+  field_paragraphs:
+    weight: 3
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
 hidden:
   links: true
   panelizer: true

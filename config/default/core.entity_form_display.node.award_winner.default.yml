@@ -1,28 +1,25 @@
-uuid: db2d3b78-a029-4db5-9ea0-59fb71fe20e7
+uuid: b712b0ae-0797-4c07-bc3a-616b87c36ed2
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.issues.body
-    - field.field.node.issues.field_image
-    - field.field.node.issues.field_issue_ref
-    - field.field.node.issues.field_paragraphs
-    - field.field.node.issues.panelizer
-    - node.type.issues
+    - field.field.node.award_winner.body
+    - field.field.node.award_winner.field_award_ref
+    - field.field.node.award_winner.field_image
+    - node.type.award_winner
   module:
     - entity_browser
-    - paragraphs
     - path
     - text
     - workbench_moderation
-id: node.issues.default
+id: node.award_winner.default
 targetEntityType: node
-bundle: issues
+bundle: award_winner
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -30,12 +27,17 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
+  field_award_ref:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
   field_image:
     type: entity_browser_file
-    weight: 2
+    weight: 3
     settings:
       entity_browser: image_browser
       field_widget_edit: true
@@ -45,40 +47,22 @@ content:
       open: true
       selection_mode: selection_append
     third_party_settings: {  }
-  field_issue_ref:
-    weight: 1
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-  field_paragraphs:
-    weight: 26
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-    third_party_settings: {  }
-    type: entity_reference_paragraphs
   path:
     type: path
-    weight: 8
+    weight: 9
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 6
+    weight: 7
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 7
+    weight: 8
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -89,11 +73,10 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  panelizer: true
+hidden: {  }

@@ -1,0 +1,14 @@
+uuid: 4c793938-c02a-4954-876e-29f941d0e75d
+langcode: en
+status: true
+dependencies: {  }
+name: events_grid
+label: 'Events Grid'
+effects:
+  f6227829-3cf1-4668-b4f8-fbab196bc3ff:
+    uuid: f6227829-3cf1-4668-b4f8-fbab196bc3ff
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 900
+      height: 900

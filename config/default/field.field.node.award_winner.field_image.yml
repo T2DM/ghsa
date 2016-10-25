@@ -1,30 +1,30 @@
-uuid: d425827e-9d80-4597-90b3-39074542a18d
+uuid: 288fc84a-7ecc-47d4-ae6d-0a5a42617d05
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_card_bg_image
-    - paragraphs.paragraphs_type.card_link
+    - field.storage.node.field_image
+    - node.type.award_winner
   module:
     - image
-id: paragraph.card_link.field_card_bg_image
-field_name: field_card_bg_image
-entity_type: paragraph
-bundle: card_link
-label: 'Background Image'
+id: node.award_winner.field_image
+field_name: field_image
+entity_type: node
+bundle: award_winner
+label: Image
 description: ''
-required: false
-translatable: false
+required: true
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: card-bg-images
+  file_directory: award-winners
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: false
-  alt_field_required: false
+  alt_field: true
+  alt_field_required: true
   title_field: false
   title_field_required: false
   default_image:

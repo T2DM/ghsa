@@ -3,9 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.issue.field_copy_for_state_laws
+    - field.field.taxonomy_term.issue.field_image
     - taxonomy.vocabulary.issue
   module:
+    - image
     - text
 id: taxonomy_term.issue.default
 targetEntityType: taxonomy_term
@@ -18,10 +19,12 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
-  field_copy_for_state_laws:
+  field_image:
     weight: 1
     label: above
-    settings: {  }
+    settings:
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: text_default
+    type: image
 hidden: {  }

@@ -1,21 +1,25 @@
-uuid: 03656ab4-d3ab-49d6-8f51-ea6a6f7a439b
+uuid: bd4fe857-3ffa-46e8-8068-5ab129bdaa9f
 langcode: en
 status: true
 dependencies:
   config:
+    - entityqueue.entity_queue.featured_award_winners
     - field.storage.node.body
-    - field.storage.node.field_issue_ref
-    - node.type.news
-    - taxonomy.vocabulary.issue
+    - field.storage.node.field_award_ref
+    - field.storage.node.field_image
+    - image.style.400x300
+    - node.type.award_winner
   module:
+    - entityqueue
+    - image
     - node
     - taxonomy
     - text
     - user
-id: news
-label: News
+id: award_winners
+label: 'Award Winners'
 module: views
-description: ''
+description: 'Award Winners view on About page'
 tag: ''
 base_table: node_field_data
 base_field: nid
@@ -53,17 +57,12 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
-        type: full
+        type: mini
         options:
-          items_per_page: 2
+          items_per_page: 10
           offset: 0
           id: 0
           total_pages: null
-          tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
-            first: '« First'
-            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -72,15 +71,22 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          quantity: 9
+          tags:
+            previous: ‹‹
+            next: ››
       style:
         type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: 'large-4 columns'
           default_row_class: true
       row:
         type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
       fields:
         title:
           id: title
@@ -118,7 +124,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h2
+          element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -147,10 +153,74 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_issue_ref:
-          id: field_issue_ref
-          table: node__field_issue_ref
-          field: field_issue_ref
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image
+          settings:
+            image_style: 400x300
+            image_link: ''
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_award_ref:
+          id: field_award_ref
+          table: node__field_award_ref
+          field: field_award_ref
           relationship: none
           group_type: group
           admin_label: ''
@@ -198,7 +268,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -209,73 +279,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: friendly
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: node
-          entity_field: created
           plugin_id: field
         body:
           id: body
@@ -357,31 +360,35 @@ display:
           table: node_field_data
           field: type
           value:
-            news: news
+            award_winner: award_winner
           entity_type: node
           entity_field: type
           plugin_id: bundle
-      sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          exposed: false
-          expose:
-            label: ''
-          granularity: second
-      title: ''
+      sorts: {  }
       header: {  }
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        field_award_ref:
+          id: field_award_ref
+          table: node__field_award_ref
+          field: field_award_ref
+          relationship: none
+          group_type: group
+          admin_label: 'field_award_ref: Taxonomy term'
+          required: true
+          plugin_id: standard
+        entityqueue_relationship:
+          id: entityqueue_relationship
+          table: node_field_data
+          field: entityqueue_relationship
+          relationship: none
+          group_type: group
+          admin_label: 'Content queue'
+          required: true
+          limit_queue: featured_award_winners
+          entity_type: node
+          plugin_id: entity_queue
       arguments: {  }
       display_extenders: {  }
     cache_metadata:
@@ -394,68 +401,81 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_issue_ref'
-  dynamic_filtered_news:
-    display_plugin: block
-    id: dynamic_filtered_news
-    display_title: 'Dynamic Filtered News'
+        - 'config:field.storage.node.field_award_ref'
+        - 'config:field.storage.node.field_image'
+  featured_award_winners:
+    display_plugin: embed
+    id: featured_award_winners
+    display_title: 'Featured Award Winners'
     position: 1
     display_options:
       display_extenders: {  }
-      allow:
-        items_per_page: true
       display_description: ''
-      arguments:
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
+      fields:
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
           relationship: none
           group_type: group
           admin_label: ''
-          default_action: default
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: true
-          title: 'News tagged with {{ arguments.tid }}'
-          default_argument_type: taxonomy_tid
-          default_argument_options:
-            term_page: '1'
-            node: true
-            limit: true
-            vids:
-              issue: issue
-            anyall: ','
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            items_per_page: 25
-            override: false
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          break_phrase: false
-          add_table: false
-          require_value: false
-          reduce_duplicates: false
-          plugin_id: taxonomy_index_tid
-      defaults:
-        arguments: false
-        use_ajax: false
-        fields: false
-        header: false
-        pager: false
-      use_ajax: true
-      fields:
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: image
+          settings:
+            image_style: 400x300
+            image_link: ''
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -507,7 +527,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -521,73 +541,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_issue_ref:
-          id: field_issue_ref
-          table: node__field_issue_ref
-          field: field_issue_ref
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        created:
-          id: created
-          table: node_field_data
-          field: created
+        field_award_ref:
+          id: field_award_ref
+          table: node__field_award_ref
+          field: field_award_ref
           relationship: none
           group_type: group
           admin_label: ''
@@ -620,7 +577,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: h4
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -632,13 +589,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            date_format: friendly
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
+            link: false
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -648,8 +603,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: created
           plugin_id: field
         body:
           id: body
@@ -714,46 +667,57 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-      header:
-        area:
-          id: area
+        nothing:
+          id: nothing
           table: views
-          field: area
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          empty: false
-          tokenize: true
-          content:
-            value: '<img src="/themes/ghsa_foundation/images/icon-news.png" alt="icon-news" /><h2>Latest News</h2>'
-            format: full_html
-          plugin_id: text
-      pager:
-        type: some
-        options:
-          items_per_page: 2
-          offset: 0
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_issue_ref'
-  news:
-    display_plugin: block
-    id: news
-    display_title: News
-    position: 1
-    display_options:
-      display_extenders: {  }
-      allow:
-        items_per_page: true
-      display_description: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<a class="button" href="/about/safety-awards">Past Winners</a>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+      defaults:
+        fields: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -764,29 +728,46 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_issue_ref'
-  news_home:
-    display_plugin: block
-    id: news_home
-    display_title: News-Home
+        - 'config:field.storage.node.field_award_ref'
+        - 'config:field.storage.node.field_image'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: 'Safety Awards Page'
     position: 1
     display_options:
       display_extenders: {  }
-      allow:
-        items_per_page: true
       display_description: ''
-      pager:
-        type: some
-        options:
-          items_per_page: 2
-          offset: 0
+      path: about/safety-awards
+      relationships:
+        field_award_ref:
+          id: field_award_ref
+          table: node__field_award_ref
+          field: field_award_ref
+          relationship: none
+          group_type: group
+          admin_label: 'field_award_ref: Taxonomy term'
+          required: true
+          plugin_id: standard
       defaults:
-        pager: false
-        fields: false
-        header: false
-        footer: false
+        relationships: false
         style: false
         row: false
+        fields: false
+        title: false
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+      row:
+        type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
       fields:
         title:
           id: title
@@ -824,7 +805,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h3
+          element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -853,10 +834,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_issue_ref:
-          id: field_issue_ref
-          table: node__field_issue_ref
-          field: field_issue_ref
+        field_image:
+          id: field_image
+          table: node__field_image
+          field: field_image
           relationship: none
           group_type: group
           admin_label: ''
@@ -902,10 +883,11 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_label
+          type: image
           settings:
-            link: true
-          group_column: target_id
+            image_style: 400x300
+            image_link: ''
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -916,10 +898,10 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        created:
-          id: created
-          table: node_field_data
-          field: created
+        field_award_ref:
+          id: field_award_ref
+          table: node__field_award_ref
+          field: field_award_ref
           relationship: none
           group_type: group
           admin_label: ''
@@ -964,13 +946,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            date_format: friendly
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
+            link: false
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -980,8 +960,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: created
           plugin_id: field
         body:
           id: body
@@ -1046,42 +1024,16 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: "<img src=\"/themes/ghsa_foundation/images/icon-news.png\" alt=\"icon-news\" /><h2>News</h2><a href=\"/about/news\" class=\"button\">Read News</a>\n"
-            format: full_html
-          plugin_id: text
-      footer: {  }
-      style:
-        type: grid
-        options:
-          grouping: {  }
-          columns: 2
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: true
-          col_class_custom: ''
-          row_class_default: true
-          row_class_custom: ''
-      row:
-        type: fields
-        options: {  }
+      title: 'Safety Awards Past Winners'
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_issue_ref'
+        - 'config:field.storage.node.field_award_ref'
+        - 'config:field.storage.node.field_image'

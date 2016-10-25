@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_resources_image
-    - image.style.medium
+    - image.style.400x300
     - node.type.products
     - node.type.resources
     - taxonomy.vocabulary.resource_type
@@ -20,7 +20,7 @@ dependencies:
 id: tabs_program_and_initiatives
 label: 'TABS Program and Initiatives'
 module: views
-description: 'Procucts CT also called Initiatives'
+description: 'Generates the blocks for the tabbed block in home page - Procucts CT also called Initiatives'
 tag: ''
 base_table: node_field_data
 base_field: nid
@@ -118,7 +118,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: medium
+            image_style: 400x300
             image_link: content
           group_column: ''
           group_columns: {  }
@@ -319,7 +319,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"clearfix\">\n<div class=\"medium-6 columns\">{{ field_resources_image }}</div>\n<div class=\"medium-6 columns\"><h3>{{ title }}</h3>{{ body }}<br><br>{{ view_node }}</div>\n</div>"
+            text: "<div class=\"clearfix\">\n<div class=\"medium-6 columns\">{{ field_resources_image }}</div>\n<div class=\"medium-6 columns\"><h3>{{ title }}</h3>{{ body }}<br><br><a class=\"button\" href=\"/resources\">See All Campaigns</a></div>\n</div>"
             make_link: false
             path: ''
             absolute: false

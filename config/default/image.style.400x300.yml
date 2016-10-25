@@ -1,0 +1,14 @@
+uuid: 1f15be5b-9859-4870-8402-3a097def8e22
+langcode: en
+status: true
+dependencies: {  }
+name: 400x300
+label: '3 Column Grid - 400x300'
+effects:
+  1e47550c-3dd0-43f5-a3af-749a780877c7:
+    uuid: 1e47550c-3dd0-43f5-a3af-749a780877c7
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 300

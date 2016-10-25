@@ -7,7 +7,7 @@ dependencies:
     - field.storage.node.body
     - field.storage.node.field_image
     - field.storage.node.field_issue_ref
-    - image.style.medium
+    - image.style.400x300
     - node.type.products
     - taxonomy.vocabulary.issue
     - taxonomy.vocabulary.products
@@ -23,7 +23,7 @@ dependencies:
 id: products
 label: Products
 module: views
-description: ''
+description: 'Featured Initiative (Procucts CT also called Initiatives)'
 tag: ''
 base_table: node_field_data
 base_field: nid
@@ -578,7 +578,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: medium
+            image_style: 400x300
             image_link: content
           group_column: ''
           group_columns: {  }
@@ -844,7 +844,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"medium-6 columns\">{{ field_image }}</div>\n<div class=\"medium-6 columns\"><h3>{{ title }}</h3>{{ body }}<br><br>{{ view_node }}</div>\n"
+            text: "<div class=\"medium-6 columns\">{{ field_image }}</div>\n<div class=\"medium-6 columns\">\n<a><h3>{{ title }}</h3></a>\n{{ body }}<br><br>\n{{ view_node }}\n</div>\n"
             make_link: false
             path: ''
             absolute: false
@@ -893,7 +893,7 @@ display:
           empty: false
           tokenize: true
           content:
-            value: '<h3>Featured Initiative</h3>'
+            value: '<img src="/themes/ghsa_foundation/images/icon-initiative.png" alt="icon-news" /><h2>Featured Initiative</h2>'
             format: full_html
           plugin_id: text
     cache_metadata:

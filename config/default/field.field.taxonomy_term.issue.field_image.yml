@@ -1,38 +1,38 @@
-uuid: d425827e-9d80-4597-90b3-39074542a18d
+uuid: c44db18f-39ad-4a70-b05e-7698d04aa519
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_card_bg_image
-    - paragraphs.paragraphs_type.card_link
+    - field.storage.taxonomy_term.field_image
+    - taxonomy.vocabulary.issue
   module:
     - image
-id: paragraph.card_link.field_card_bg_image
-field_name: field_card_bg_image
-entity_type: paragraph
-bundle: card_link
-label: 'Background Image'
+id: taxonomy_term.issue.field_image
+field_name: field_image
+entity_type: taxonomy_term
+bundle: issue
+label: Image
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: card-bg-images
+  file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: false
-  alt_field_required: false
+  alt_field: true
+  alt_field_required: true
   title_field: false
   title_field_required: false
   default_image:
-    uuid: ''
+    uuid: 86a58409-5eec-49fe-bcf8-1374757a53ff
     alt: ''
     title: ''
-    width: null
-    height: null
+    width: 480
+    height: 166
   handler: 'default:file'
   handler_settings: {  }
 field_type: image

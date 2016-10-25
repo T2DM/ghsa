@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.card_link.field_card_bg_image
     - field.field.paragraph.card_link.field_link
-    - image.style.card_link_
+    - image.style.400x300
     - paragraphs.paragraphs_type.card_link
   module:
     - image
@@ -16,10 +16,10 @@ bundle: card_link
 mode: default
 content:
   field_card_bg_image:
-    weight: 2
+    weight: 0
     label: hidden
     settings:
-      image_style: card_link_
+      image_style: 400x300
       image_link: ''
     third_party_settings: {  }
     type: image

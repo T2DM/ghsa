@@ -1,4 +1,4 @@
-uuid: b7d75e01-de76-439c-9fea-7d734e65bbe5
+uuid: 34236bd8-e78f-4c63-9477-63704a0168b7
 langcode: en
 status: true
 dependencies:
@@ -17,9 +17,9 @@ third_party_settings:
       - draft
       - needs_review
     default_moderation_state: draft
-name: Resources
-type: resources
-description: 'Used for Resource content.'
+name: 'Award Winner'
+type: award_winner
+description: 'User to create AHS Award Winners.'
 help: ''
 new_revision: false
 preview_mode: 1

@@ -1,0 +1,49 @@
+uuid: 87d168eb-56ef-4e65-9653-efb184d8ca17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.award_winner.body
+    - field.field.node.award_winner.field_award_ref
+    - field.field.node.award_winner.field_image
+    - node.type.award_winner
+  module:
+    - image
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.award_winner.default
+targetEntityType: node
+bundle: award_winner
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+  field_award_ref:
+    weight: 2
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  links: true
+  workbench_moderation_control: true

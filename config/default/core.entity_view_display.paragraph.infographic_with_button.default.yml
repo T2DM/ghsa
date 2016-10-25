@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.infographic_with_button.field_image
     - field.field.paragraph.infographic_with_button.field_link
+    - image.style.400x300
     - paragraphs.paragraphs_type.infographic_with_button
   module:
     - image
@@ -15,15 +16,15 @@ bundle: infographic_with_button
 mode: default
 content:
   field_image:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: 400x300
       image_link: ''
     third_party_settings: {  }
     type: image
   field_link:
-    weight: 0
+    weight: 1
     label: hidden
     settings:
       trim_length: 80

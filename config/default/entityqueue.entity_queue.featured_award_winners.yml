@@ -1,0 +1,24 @@
+uuid: f79b5b09-1ab8-4daf-83a4-c1fdc34ee563
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: featured_award_winners
+label: 'Featured Award Winners'
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: node
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      award_winner: award_winner
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+queue_settings:
+  min_size: 3
+  max_size: 3
+  act_as_queue: false

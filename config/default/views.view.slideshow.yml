@@ -21,7 +21,7 @@ dependencies:
 id: slideshow
 label: Slideshow
 module: views
-description: ''
+description: 'Slideshow in home page'
 tag: ''
 base_table: node_field_data
 base_field: nid

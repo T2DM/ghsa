@@ -1,0 +1,32 @@
+uuid: aceceb60-efe2-48cd-b644-900b6efe6dd3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.award_winner.body
+    - field.field.node.award_winner.field_award_ref
+    - field.field.node.award_winner.field_image
+    - node.type.award_winner
+  module:
+    - text
+    - user
+id: node.award_winner.teaser
+targetEntityType: node
+bundle: award_winner
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  links:
+    weight: 100
+  workbench_moderation_control:
+    weight: -20
+hidden:
+  field_award_ref: true
+  field_image: true
