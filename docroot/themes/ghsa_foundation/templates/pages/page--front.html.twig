@@ -73,16 +73,16 @@
 
 		<!-- START: div.header_logo -->
 		<div class="header_logo_container inner_column column_no_padding_both">
-			<div class="header_logo">
-        {% if linked_logo %}
-          {{ linked_logo }}
-        {% endif %}
-				<!-- <div class="header_logo_bug"><img src="/themes/ghsa/images/logo-ghsa-1.png" alt="GHSA: Governors Highway Safety Association" /></div> -->
-			</div>
-			<div class="header_logo_logotype">
-				<div class="header_logo_logotype_organization">Governors Highway Safety Association</div>
-				<div class="header_logo_logotype_tagline">The States’ Voice on Highway Safety</div>
-			</div>
+      <a class="header_logo" href="{{ home_page_url }}">
+        <div class="header_logo_bug">
+          <img src="{{ logo_img_url }}" alt="GHSA: Governors Highway Safety Association">
+          <!-- <div class="header_logo_bug"><img src="/themes/ghsa/images/logo-ghsa-1.png" alt="GHSA: Governors Highway Safety Association" /></div> -->
+        </div>
+        <div class="header_logo_logotype">
+          <div class="header_logo_logotype_organization">Governors Highway Safety Association</div>
+          <div class="header_logo_logotype_tagline">The States’ Voice on Highway Safety</div>
+        </div>
+      </a>
 		</div>
 		<!-- END: div.header_logo -->
 

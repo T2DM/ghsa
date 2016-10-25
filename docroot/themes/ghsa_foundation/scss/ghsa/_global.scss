@@ -700,10 +700,10 @@ header {
 }
 .header_logo_container	{
 	}
-.header_logo	{
-	float: left;
-	margin-top: 26px;
-	}
+	
+.header_logo {
+  float: right;
+  display: block; }
 
 .header_logo_bug,
 .header_logo_logotype	{
@@ -2032,6 +2032,9 @@ footer .contact_email,
 
 header{
   padding:0px;
+  .logo{
+    margin-top:0px;
+  }
 }
 
 //Menu - Main
@@ -2065,6 +2068,24 @@ header{
     }
   }
 }
+
+
+/*
+ * Footer
+ */
+
+//Footer Menu
+
+.block-ghsa-foundation-footer-main{
+  .menu {
+    > li {
+      > a{
+      	padding:10px 10px 10px 0;
+      }
+    }
+  }
+}
+
 
 
 

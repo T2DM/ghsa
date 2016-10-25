@@ -453,7 +453,7 @@ button {
   display: none !important; }
 
 .row {
-  max-width: 75rem;
+  max-width: 91.25rem;
   margin-left: auto;
   margin-right: auto; }
   .row::before, .row::after {
@@ -1308,7 +1308,7 @@ a {
     border: 0; }
 
 hr {
-  max-width: 75rem;
+  max-width: 91.25rem;
   height: 0;
   border-right: 0;
   border-top: 0;
@@ -3048,7 +3048,7 @@ html.is-reveal-open body {
   @media screen and (min-width: 40em) {
     .reveal {
       width: 600px;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   @media screen and (min-width: 40em) {
     .reveal .reveal {
       left: auto;
@@ -3059,15 +3059,15 @@ html.is-reveal-open body {
   @media screen and (min-width: 40em) {
     .reveal.tiny {
       width: 30%;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   @media screen and (min-width: 40em) {
     .reveal.small {
       width: 50%;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   @media screen and (min-width: 40em) {
     .reveal.large {
       width: 90%;
-      max-width: 75rem; } }
+      max-width: 91.25rem; } }
   .reveal.full {
     top: 0;
     left: 0;
@@ -4855,8 +4855,8 @@ header {
   margin-top: -10px; }
 
 .header_logo {
-  float: left;
-  margin-top: 26px; }
+  float: right;
+  display: block; }
 
 .header_logo_bug,
 .header_logo_logotype {
@@ -5836,6 +5836,8 @@ viewheader > h2 {
  */
 header {
   padding: 0px; }
+  header .logo {
+    margin-top: 0px; }
 
 .block-ghsa-foundation-main-menu > ul {
   text-align: center; }
@@ -5852,6 +5854,12 @@ header {
   top: 0px;
   padding: 6px 0 0 31px;
   line-height: normal; }
+
+/*
+ * Footer
+ */
+.block-ghsa-foundation-footer-main .menu > li > a {
+  padding: 10px 10px 10px 0; }
 
 /*
  * Card-Link CSS

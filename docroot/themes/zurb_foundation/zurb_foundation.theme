@@ -263,6 +263,11 @@ function zurb_foundation_preprocess_page(&$variables) {
 
   $logo = theme_get_setting('logo.url');
 
+
+  $variables['logo_img_url'] = theme_get_setting('logo.url');
+
+  $variables['home_page_url'] =  Drupal::url('<front>');
+
   if (!empty($logo)) {
     $elements = array(
       '#theme' => 'image',
@@ -316,7 +321,8 @@ function zurb_foundation_preprocess_page(&$variables) {
     $variables['sidebar_sec_grid'] = '';
   }
   else {
-    $variables['main_grid'] = 'large-12';
+    //$variables['main_grid'] = 'large-12';
+    $variables['main_grid'] = 'small-10 small-offset-1 end column_no_padding_both';
     $variables['sidebar_first_grid'] = '';
     $variables['sidebar_sec_grid'] = '';
   }
