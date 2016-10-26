@@ -88,6 +88,10 @@
   {% endif %}
 
   {# We hide the comments and links now so that we can render them later. #}
+  <div{{ content_attributes }}>
+    {{ content.body }}
+  </div>
+
   <div class="row">
         <div class="small-12 large-8 columns">
             {{ featured_guidance }}
