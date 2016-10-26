@@ -44,8 +44,20 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 'column',
 'large-4 medium-6 small-12'
 ]
+
+%}
+{%
+set url = paragraph.field_link[0].url.toString()
 %}
 
 <div{{ attributes.addClass(classes) }}>
-    {{ content }}
+    {% if url|length %}
+    <a href="{{ paragraph.field_link[0].url.toString() }}">
+        {{ content.field_card_bg_image }}
+    </a>
+    {% else %}
+        {{ content.field_card_bg_image }}
+    {% endif %}
+        {{ content.field_link }}
+
 </div>
