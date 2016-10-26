@@ -1,0 +1,38 @@
+uuid: b5a3916b-0a36-40a9-b6f2-64752b5e273c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ahs_awards.field_award_eponym
+    - field.field.taxonomy_term.ahs_awards.field_image
+    - taxonomy.vocabulary.ahs_awards
+  module:
+    - image
+    - text
+id: taxonomy_term.ahs_awards.default
+targetEntityType: taxonomy_term
+bundle: ahs_awards
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  field_award_eponym:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden: {  }

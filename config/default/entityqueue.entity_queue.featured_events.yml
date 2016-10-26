@@ -5,7 +5,7 @@ dependencies:
   module:
     - node
 id: featured_events
-label: 'Featured Events'
+label: 'Current Annual Meeting'
 handler: simple
 handler_configuration: {  }
 entity_settings:

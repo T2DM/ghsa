@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.award_winner.body
     - field.field.node.award_winner.field_award_ref
     - field.field.node.award_winner.field_image
+    - image.style.eventslanding
     - node.type.award_winner
   module:
     - image
@@ -31,16 +32,16 @@ content:
     third_party_settings: {  }
   field_award_ref:
     weight: 2
-    label: hidden
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
   field_image:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: eventslanding
       image_link: ''
     third_party_settings: {  }
     type: image

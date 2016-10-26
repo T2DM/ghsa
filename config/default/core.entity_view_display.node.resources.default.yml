@@ -6,6 +6,8 @@ dependencies:
     - field.field.node.resources.body
     - field.field.node.resources.field_file_upload
     - field.field.node.resources.field_issues_ref
+    - field.field.node.resources.field_product
+    - field.field.node.resources.field_resource_categories_ref
     - field.field.node.resources.field_resource_type_ref
     - field.field.node.resources.field_resources_image
     - node.type.resources
@@ -40,6 +42,20 @@ content:
     type: file_default
   field_issues_ref:
     weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_product:
+    weight: 6
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_resource_categories_ref:
+    weight: 5
     label: above
     settings:
       link: true

@@ -1,22 +1,22 @@
-uuid: 1b071f8d-1f5b-4404-8694-0df8d4e311cc
+uuid: 75918c43-5797-48e0-8529-617988725330
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: resources
-label: Resources
+id: award_winners
+label: 'Award Winners'
 type: 'canonical_entities:node'
-pattern: '/resources/[node:title]'
+pattern: '/about/safety-awards/[node:title]'
 selection_criteria:
-  4a34da96-ecce-4fc5-9c1d-714021eb88e1:
+  099192aa-0804-444a-9bc2-4e83e6a3627c:
     id: node_type
     bundles:
-      resources: resources
+      award_winner: award_winner
     negate: false
     context_mapping:
       node: node
-    uuid: 4a34da96-ecce-4fc5-9c1d-714021eb88e1
+    uuid: 099192aa-0804-444a-9bc2-4e83e6a3627c
 selection_logic: and
 weight: -5
 relationships: {  }

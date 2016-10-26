@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_paragraphs
-    - field.field.node.page.field_test
     - field.field.node.page.field_view
     - field.field.node.page.panelizer
     - field.field.node.page.scheduled_update
@@ -108,13 +107,6 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-  field_test:
-    weight: 3
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
   field_view:
     weight: 1
     label: hidden

@@ -1,24 +1,24 @@
-uuid: b33674e1-862f-471c-99f9-2beac4190d0f
+uuid: 72c33ccd-5f9b-4cf0-87f2-733eeb1ee8b2
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image
-    - node.type.products
+    - field.storage.taxonomy_term.field_image
+    - taxonomy.vocabulary.ahs_awards
   module:
     - image
-id: node.products.field_image
+id: taxonomy_term.ahs_awards.field_image
 field_name: field_image
-entity_type: node
-bundle: products
+entity_type: taxonomy_term
+bundle: ahs_awards
 label: Image
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: products
+  file_directory: awards
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''

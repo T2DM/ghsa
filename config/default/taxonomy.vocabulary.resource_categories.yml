@@ -1,0 +1,9 @@
+uuid: d3cb4e41-23e9-4047-aa41-dafdb7444049
+langcode: en
+status: true
+dependencies: {  }
+name: 'Resource Categories'
+vid: resource_categories
+description: 'Resource Categories'
+hierarchy: 0
+weight: 0

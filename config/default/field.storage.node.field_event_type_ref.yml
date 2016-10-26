@@ -1,16 +1,16 @@
-uuid: d329de71-56dd-4124-93ce-686718110dd7
+uuid: 5312e01e-129c-4dad-a907-f906accb858f
 langcode: en
 status: true
 dependencies:
   module:
-    - embed
     - node
-id: node.field_test
-field_name: field_test
+    - taxonomy
+id: node.field_event_type_ref
+field_name: field_event_type_ref
 entity_type: node
 type: entity_reference
 settings:
-  target_type: embed_button
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: 1

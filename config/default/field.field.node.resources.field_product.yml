@@ -1,15 +1,15 @@
-uuid: cc6d075c-d8d5-4404-8dfd-620edd8b8c9b
+uuid: 3953dec6-0aac-42b3-afd8-58a5fbda4e19
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_product_ref
-    - node.type.products
+    - field.storage.node.field_product
+    - node.type.resources
     - taxonomy.vocabulary.products
-id: node.products.field_product_ref
-field_name: field_product_ref
+id: node.resources.field_product
+field_name: field_product
 entity_type: node
-bundle: products
+bundle: resources
 label: Product
 description: ''
 required: false

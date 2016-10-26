@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_image
-    - image.style.issues_grid
+    - image.style.400x300
     - node.type.issues
   module:
     - image
@@ -119,7 +119,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: issues_grid
+            image_style: 400x300
             image_link: content
           group_column: ''
           group_columns: {  }

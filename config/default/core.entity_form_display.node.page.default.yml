@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_meta_tags
     - field.field.node.page.field_paragraphs
-    - field.field.node.page.field_test
     - field.field.node.page.field_view
     - field.field.node.page.panelizer
     - field.field.node.page.scheduled_update
@@ -54,14 +53,6 @@ content:
       add_mode: dropdown
       form_display_mode: default
     third_party_settings: {  }
-  field_test:
-    weight: 26
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
   field_view:
     weight: 2
     settings: {  }

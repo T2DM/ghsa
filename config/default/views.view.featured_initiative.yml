@@ -1,29 +1,30 @@
-uuid: 9dcacf51-8fb5-4878-b56f-df19d704b2c2
+uuid: 1c4d5013-ceee-47b0-943c-642410842453
 langcode: en
 status: true
 dependencies:
   config:
     - entityqueue.entity_queue.featured_initiative
     - field.storage.node.body
-    - field.storage.node.field_image
     - field.storage.node.field_issue_ref
+    - field.storage.node.field_resources_image
     - image.style.400x300
-    - node.type.products
+    - node.type.resources
     - taxonomy.vocabulary.issue
-    - taxonomy.vocabulary.products
+    - taxonomy.vocabulary.resource_categories
   content:
-    - 'taxonomy_term:products:4e4ac155-550f-4a3f-af4c-f45725fcc314'
+    - 'taxonomy_term:resource_categories:596ca3d6-7c83-4c9c-a598-53119e125725'
   module:
+    - null
     - entityqueue
     - image
     - node
     - taxonomy
     - text
     - user
-id: products
-label: Products
+id: featured_initiative
+label: 'Featured Initiative'
 module: views
-description: 'Featured Initiative (Procucts CT also called Initiatives)'
+description: 'Featured Initiative block on Issues toolkit pages'
 tag: ''
 base_table: node_field_data
 base_field: nid
@@ -349,7 +350,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            products: products
+            resources: resources
           group: 1
           exposed: false
           expose:
@@ -389,7 +390,7 @@ display:
           admin_label: ''
           operator: or
           value:
-            76: 76
+            121: 121
           group: 1
           exposed: false
           expose:
@@ -420,7 +421,7 @@ display:
           reduce_duplicates: false
           type: select
           limit: true
-          vid: products
+          vid: resource_categories
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
@@ -527,10 +528,10 @@ display:
         header: false
       use_ajax: true
       fields:
-        field_image:
-          id: field_image
-          table: node__field_image
-          field: field_image
+        field_resources_image:
+          id: field_resources_image
+          table: node__field_resources_image
+          field: field_resources_image
           relationship: none
           group_type: group
           admin_label: ''
@@ -844,7 +845,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"medium-6 columns\">{{ field_image }}</div>\n<div class=\"medium-6 columns\">\n<a><h3>{{ title }}</h3></a>\n{{ body }}<br><br>\n{{ view_node }}\n</div>\n"
+            text: "<div class=\"medium-6 columns\">{{ field_resources_image }}</div>\n<div class=\"medium-6 columns\">\n<a><h3>{{ title }}</h3></a>\n{{ body }}<br><br>\n{{ view_node }}\n</div>\n"
             make_link: false
             path: ''
             absolute: false
@@ -907,5 +908,5 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.body'
-        - 'config:field.storage.node.field_image'
         - 'config:field.storage.node.field_issue_ref'
+        - 'config:field.storage.node.field_resources_image'

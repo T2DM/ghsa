@@ -399,7 +399,7 @@ display:
           group_type: group
           admin_label: ''
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -676,20 +676,7 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a href="/events/past-events" class="button">See All Past Events</a>'
-            format: full_html
-          plugin_id: text
+      footer: {  }
       filters:
         status:
           value: '1'
@@ -1255,7 +1242,7 @@ display:
           type: image
           settings:
             image_style: eventslanding
-            image_link: ''
+            image_link: content
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -1496,9 +1483,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: text_trimmed
+          type: text_summary_or_trimmed
           settings:
-            trim_length: 300
+            trim_length: 600
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1574,7 +1561,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h1>Current Year Annual Meeting<h1>'
+            value: '<h2>Current Year Annual Meeting<h2>'
             format: rich_text
           plugin_id: text
     cache_metadata:
@@ -1931,7 +1918,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<a href="/events/past-events" class="button">See All Past Events</a>'
+            value: '<a href="/events/past-events" class="button">See All Past Annual Meetings</a>'
             format: full_html
           plugin_id: text
       filters:
@@ -2038,7 +2025,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h1>Past Annual Meetings</h1>'
+            value: '<h2>Past Annual Meetings</h2>'
             format: rich_text
           plugin_id: text
     cache_metadata:
@@ -2487,7 +2474,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<h1>Upcoming Events</h1>'
+            value: '<h2>Upcoming Events</h2>'
             format: rich_text
           plugin_id: text
     cache_metadata:

@@ -59,17 +59,6 @@ third_party_settings:
             region: banner
             weight: 1
             uuid: b271b4c8-c95e-4a0f-a238-334f32faf5b5
-          ebf5b398-99a7-4251-990d-6d038ce34801:
-            id: 'views_block:products-featured_initiative'
-            label: ''
-            provider: views
-            label_display: visible
-            views_label: ''
-            items_per_page: none
-            context_mapping: {  }
-            region: middle_left
-            uuid: ebf5b398-99a7-4251-990d-6d038ce34801
-            weight: 1
           90d47570-4d1a-40cb-93ea-6910aba02fd7:
             id: 'views_block:resources-dynamic_filtered_resources'
             label: ''
@@ -117,6 +106,17 @@ third_party_settings:
             context_mapping: {  }
             region: top_right
             uuid: 14fe996b-3cc9-4be9-9a63-dd58af05981c
+            weight: 1
+          60fac776-d2a3-4255-8c6a-6371155f9d52:
+            id: 'views_block:featured_initiative-featured_initiative'
+            label: ''
+            provider: views
+            label_display: visible
+            views_label: ''
+            items_per_page: none
+            context_mapping: {  }
+            region: middle_left
+            uuid: 60fac776-d2a3-4255-8c6a-6371155f9d52
             weight: 1
         id: panels_variant
         label: Default

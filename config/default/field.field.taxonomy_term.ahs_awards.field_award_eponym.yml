@@ -1,0 +1,19 @@
+uuid: 47c562a2-49a1-4fb4-82f0-8fdb3137c59f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_award_eponym
+    - taxonomy.vocabulary.ahs_awards
+id: taxonomy_term.ahs_awards.field_award_eponym
+field_name: field_award_eponym
+entity_type: taxonomy_term
+bundle: ahs_awards
+label: Eponym
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
